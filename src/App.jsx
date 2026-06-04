@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import LandingPage from './pages/LandingPage'
 import VenueHome from './pages/VenueHome'
 import JoinPage from './pages/JoinPage'
 import CustomerDashboard from './pages/CustomerDashboard'
@@ -11,7 +12,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/venue/demo-cafe" replace />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/venue/:slug" element={<VenueHome />} />
         <Route path="/venue/:slug/join" element={<JoinPage />} />
         <Route path="/venue/:slug/customer/:customerId" element={<CustomerDashboard />} />
