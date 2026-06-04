@@ -35,13 +35,14 @@ export default function JoinPage() {
 
   return (
     <div className="min-h-screen frother-shell" style={{ '--brand-color': venue.brandColor }}>
-      <div className="frother-hero text-white px-5 pt-10 pb-8">
-        <Link to={`/venue/${slug}`} className="text-white/70 text-sm mb-5 block">← Back</Link>
+      <div className="frother-hero px-5 pt-10 pb-8">
+        <Link to={`/venue/${slug}`} className="text-gray-500 text-sm mb-5 block font-bold">← Back</Link>
         <VenueBrand venue={venue} size="md" />
-        <p className="mt-5 text-white font-black text-3xl leading-tight tracking-tight">
+        <div className="frother-sticker text-[10px] px-2.5 py-1 mt-5 rotate-[-2deg]">No app</div>
+        <p className="mt-4 text-gray-900 font-black text-3xl leading-tight tracking-tight">
           Join in 10 seconds.
         </p>
-        <p className="text-white/85 text-base font-bold mt-1">
+        <p className="text-gray-600 text-base font-bold mt-1">
           Just name and mobile. No app, no card.
         </p>
       </div>

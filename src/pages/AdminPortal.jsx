@@ -45,10 +45,10 @@ export default function AdminPortal() {
   if (!authed) {
     return (
       <div className="min-h-screen frother-shell flex flex-col">
-        <div className="px-5 pt-10 pb-6 frother-admin-hero text-white">
-          <Link to={`/venue/${venueSlug}`} className="text-white/50 text-sm mb-4 block">← Venue</Link>
+        <div className="px-5 pt-10 pb-6 frother-admin-hero">
+          <Link to={`/venue/${venueSlug}`} className="text-gray-500 text-sm mb-4 block font-bold">← Venue</Link>
           <VenueBrand venue={venue} size="md" />
-          <p className="text-white/60 text-sm mt-1">Admin Portal</p>
+          <p className="text-gray-500 text-sm mt-2 font-black uppercase tracking-wider">Admin Portal</p>
         </div>
         <div className="flex-1 flex items-center justify-center px-6">
           <div className="frother-card p-6 w-full max-w-xs">
@@ -81,13 +81,13 @@ export default function AdminPortal() {
 
   return (
     <div className="min-h-screen frother-shell">
-      <div className="frother-admin-hero text-white px-5 pt-10 pb-5">
+      <div className="frother-admin-hero px-5 pt-10 pb-5">
         <div className="flex justify-between items-start mb-3">
           <div>
             <VenueBrand venue={venue} size="sm" />
-            <p className="text-white/60 text-xs mt-1 font-bold">Admin</p>
+            <p className="text-gray-500 text-xs mt-2 font-black uppercase tracking-wider">Admin</p>
           </div>
-          <button onClick={() => setAuthed(false)} className="text-white/40 text-xs">Sign out</button>
+          <button onClick={() => setAuthed(false)} className="text-gray-500 text-xs font-bold">Sign out</button>
         </div>
         <div className="flex gap-1 overflow-x-auto pb-0.5 scrollbar-hide">
           {TABS.map(t => (
@@ -95,7 +95,7 @@ export default function AdminPortal() {
               key={t.id}
               onClick={() => setActiveTab(t.id)}
               className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                activeTab === t.id ? 'bg-white text-gray-900 shadow-[2px_2px_0_#16A34A]' : 'text-white/70'
+                activeTab === t.id ? 'bg-white text-gray-900 border-2 border-gray-900 shadow-[2px_2px_0_#16A34A]' : 'text-gray-600'
               }`}
             >
               {t.label}

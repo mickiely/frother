@@ -1,16 +1,20 @@
 export default function VenueBrand({ venue, size = 'md' }) {
-  const textSize = size === 'lg' ? 'text-3xl' : size === 'sm' ? 'text-lg' : 'text-2xl'
-  const dotSize = size === 'lg' ? 'w-14 h-14 text-3xl' : size === 'sm' ? 'w-9 h-9 text-lg' : 'w-11 h-11 text-2xl'
+  const textSize = size === 'lg' ? 'text-4xl' : size === 'sm' ? 'text-xl' : 'text-3xl'
+  const markSize = size === 'lg' ? 'w-16 h-16' : size === 'sm' ? 'w-11 h-11' : 'w-14 h-14'
 
   return (
     <div className="flex items-center gap-3">
-      <div
-        className={`${dotSize} rounded-2xl flex items-center justify-center font-black text-white border-2 border-white/70 shadow-lg rotate-[-3deg]`}
-        style={{ backgroundColor: venue.brandColor, boxShadow: '4px 4px 0 #111827' }}
-      >
-        {venue.name.charAt(0)}
+      <div className={`${markSize} frother-logo-mark`} aria-hidden="true">
+        <span className="frother-logo-letter">F</span>
       </div>
-      <span className={`${textSize} font-black tracking-tight`}>{venue.name}</span>
+      <div className="leading-none">
+        <span className={`${textSize} frother-wordmark block`}>Frother</span>
+        {venue?.name && (
+          <span className="mt-1 block text-[11px] font-black uppercase tracking-wider text-gray-500">
+            {venue.name}
+          </span>
+        )}
+      </div>
     </div>
   )
 }

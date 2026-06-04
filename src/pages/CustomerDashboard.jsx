@@ -60,11 +60,11 @@ export default function CustomerDashboard() {
 
   return (
     <div className="min-h-screen frother-shell" style={{ '--brand-color': venue.brandColor }}>
-      <div className="frother-hero text-white px-5 pt-10 pb-8">
-        <Link to={`/venue/${slug}`} className="text-white/70 text-sm mb-4 block">← Back</Link>
+      <div className="frother-hero px-5 pt-10 pb-8">
+        <Link to={`/venue/${slug}`} className="text-gray-500 text-sm mb-4 block font-bold">← Back</Link>
         <VenueBrand venue={venue} size="md" />
         <div className="mt-3 flex items-center justify-between">
-          <p className="text-white font-black text-2xl tracking-tight">Hey, {customer.name}! 👋</p>
+          <p className="text-gray-900 font-black text-2xl tracking-tight">Hey, {customer.name}! 👋</p>
           <ProfileBadge status={customer.profileStatus} />
         </div>
       </div>
@@ -114,7 +114,10 @@ export default function CustomerDashboard() {
         {/* Froffers */}
         {froffers.length > 0 && (
           <div>
-            <h2 className="font-black text-2xl mb-3 tracking-tight">Today's Froffers</h2>
+            <div className="flex items-center justify-between mb-3">
+              <h2 className="font-black text-2xl tracking-tight">Today's Froffers</h2>
+              <span className="frother-sticker frother-sticker-red text-[10px] px-2.5 py-1 rotate-[2deg]">Froffers</span>
+            </div>
             <div className="space-y-3">
               {froffers.map(f => <FrofferCard key={f.id} froffer={f} />)}
             </div>
@@ -135,13 +138,13 @@ export default function CustomerDashboard() {
 function ProfileBadge({ status }) {
   if (status === 'full') {
     return (
-      <span className="text-xs font-semibold bg-white/20 text-white px-2.5 py-1 rounded-full">
+      <span className="frother-sticker frother-sticker-blue text-[10px] px-2.5 py-1">
         ✓ Full profile
       </span>
     )
   }
   return (
-    <span className="text-xs font-medium bg-white/15 text-white/80 px-2.5 py-1 rounded-full">
+    <span className="frother-sticker text-[10px] px-2.5 py-1">
       Quick profile
     </span>
   )

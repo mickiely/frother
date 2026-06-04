@@ -120,15 +120,18 @@ export default function CompleteProfilePage() {
 
   return (
     <div className="min-h-screen frother-shell" style={{ '--brand-color': venue.brandColor }}>
-      <div className="frother-hero text-white px-5 pt-10 pb-7">
-        <Link to={`/venue/${slug}/customer/${customerId}`} className="text-white/70 text-sm mb-4 block">
+      <div className="frother-hero px-5 pt-10 pb-7">
+        <Link to={`/venue/${slug}/customer/${customerId}`} className="text-gray-500 text-sm mb-4 block font-bold">
           ← Back
         </Link>
         <VenueBrand venue={venue} size="sm" />
-        <p className="text-white font-black text-3xl mt-4 leading-tight tracking-tight">
+        <div className="frother-sticker text-[10px] px-2.5 py-1 mt-5 rotate-[-2deg]">
+          {rewardWasLocked ? 'Reward unlock' : 'Regulars Radar'}
+        </div>
+        <p className="text-gray-900 font-black text-3xl mt-4 leading-tight tracking-tight">
           {rewardWasLocked ? '🔒 Unlock your free coffee' : 'Complete your profile'}
         </p>
-        <p className="text-white/85 text-sm mt-2 font-semibold">
+        <p className="text-gray-600 text-sm mt-2 font-semibold">
           Tell us a little more so we can send better offers, not boring spam.
         </p>
       </div>

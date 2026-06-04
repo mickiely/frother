@@ -5,34 +5,42 @@
 @layer base {
   body {
     @apply text-gray-900 antialiased;
-    background-color: #F7F3EA;
+    background-color: #F8F1E4;
   }
 }
 
 @layer components {
   .frother-shell {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(247, 243, 234, 0)),
-      #F7F3EA;
+      radial-gradient(circle at 16px 16px, rgba(22, 163, 74, 0.08) 0 2px, transparent 2.5px),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(248, 241, 228, 0)),
+      #F8F1E4;
+    background-size: 34px 34px, auto, auto;
   }
 
   .frother-hero {
-    background-color: #16A34A;
-    border-bottom: 4px solid #111827;
-    box-shadow: 0 16px 0 rgba(36, 107, 75, 0.14);
+    color: #111827;
+    background:
+      linear-gradient(135deg, rgba(22, 163, 74, 0.18), rgba(244, 184, 74, 0.22)),
+      #FFF8EA;
+    border-bottom: 3px solid #111827;
+    box-shadow: 0 10px 0 rgba(17, 24, 39, 0.08);
   }
 
   .frother-admin-hero {
-    background-color: #111827;
-    border-bottom: 4px solid #16A34A;
-    box-shadow: 0 14px 0 rgba(17, 24, 39, 0.10);
+    color: #111827;
+    background:
+      linear-gradient(135deg, rgba(84, 169, 255, 0.18), rgba(22, 163, 74, 0.16)),
+      #FFF8EA;
+    border-bottom: 3px solid #111827;
+    box-shadow: 0 10px 0 rgba(17, 24, 39, 0.08);
   }
 
   .frother-card {
-    @apply bg-white border shadow-sm;
-    border-color: rgba(17, 24, 39, 0.10);
-    border-radius: 22px;
-    box-shadow: 0 10px 0 rgba(17, 24, 39, 0.04), 0 18px 44px rgba(17, 24, 39, 0.08);
+    @apply bg-white border-2 shadow-sm;
+    border-color: rgba(17, 24, 39, 0.92);
+    border-radius: 24px;
+    box-shadow: 5px 5px 0 rgba(17, 24, 39, 0.92), 0 18px 34px rgba(17, 24, 39, 0.08);
   }
 
   .frother-sticker {
@@ -45,19 +53,78 @@
     letter-spacing: 0;
   }
 
+  .frother-sticker-blue {
+    background-color: #16A34A;
+    color: #FFF8EA;
+  }
+
+  .frother-sticker-green {
+    background-color: #16A34A;
+    color: #FFF8EA;
+  }
+
+  .frother-sticker-cream {
+    background-color: #FFF8EA;
+    color: #111827;
+  }
+
+  .frother-sticker-red {
+    background-color: #F4B84A;
+    color: #111827;
+  }
+
   .frother-button {
     @apply inline-flex items-center justify-center text-center font-black transition-transform active:translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed;
     min-height: 54px;
     border-radius: 18px;
-    box-shadow: 0 5px 0 rgba(17, 24, 39, 0.22);
+    border: 2px solid #111827;
+    box-shadow: 4px 4px 0 #111827;
   }
 
   .frother-input {
     @apply w-full bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2;
-    border: 2px solid rgba(17, 24, 39, 0.12);
+    border: 2px solid rgba(17, 24, 39, 0.9);
     border-radius: 18px;
     min-height: 52px;
     --tw-ring-color: #16A34A;
+  }
+
+  .frother-logo-mark {
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #16A34A;
+    border: 3px solid #111827;
+    border-radius: 18px;
+    box-shadow: 4px 4px 0 #111827;
+  }
+
+  .frother-logo-letter {
+    position: relative;
+    z-index: 2;
+    font-weight: 1000;
+    font-size: 1.55em;
+    line-height: 1;
+    color: #FFF8EA;
+  }
+
+  .frother-wordmark {
+    font-weight: 1000;
+    letter-spacing: 0;
+    color: #111827;
+  }
+
+  .froffer-card {
+    background:
+      linear-gradient(135deg, rgba(244, 184, 74, 0.32), rgba(255, 255, 255, 0) 44%),
+      #FFFDF7;
+    transform: rotate(-0.5deg);
+  }
+
+  .froffer-card:nth-child(even) {
+    transform: rotate(0.5deg);
   }
 }
 
@@ -75,6 +142,6 @@
     --tw-ring-color: var(--brand-color, #16A34A);
   }
   .bg-gray-50 {
-    background-color: #F7F3EA;
+    background-color: #F8F1E4;
   }
 }

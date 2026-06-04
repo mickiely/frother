@@ -76,10 +76,10 @@ export default function StaffPortal() {
   if (!authed) {
     return (
       <div className="min-h-screen frother-shell flex flex-col" style={{ '--brand-color': venue.brandColor }}>
-        <div className="frother-hero text-white px-5 pt-10 pb-6">
-          <Link to={`/venue/${venueSlug}`} className="text-white/70 text-sm mb-4 block">← Venue</Link>
+        <div className="frother-hero px-5 pt-10 pb-6">
+          <Link to={`/venue/${venueSlug}`} className="text-gray-500 text-sm mb-4 block font-bold">← Venue</Link>
           <VenueBrand venue={venue} size="md" />
-          <p className="text-white/80 text-sm mt-1">Staff Portal</p>
+          <p className="text-gray-500 text-sm mt-2 font-black uppercase tracking-wider">Staff Portal</p>
         </div>
         <div className="flex-1 flex items-center justify-center px-6">
           <div className="frother-card p-6 w-full max-w-xs">
@@ -122,13 +122,13 @@ export default function StaffPortal() {
         </div>
       )}
 
-      <div className="frother-hero text-white px-5 pt-10 pb-5">
+      <div className="frother-hero px-5 pt-10 pb-5">
         <div className="flex justify-between items-start">
           <div>
             <VenueBrand venue={venue} size="sm" />
-            <p className="text-white/80 text-xs mt-1 font-bold">Staff Portal</p>
+            <p className="text-gray-500 text-xs mt-2 font-black uppercase tracking-wider">Staff Portal</p>
           </div>
-          <button onClick={() => setAuthed(false)} className="text-white/60 text-xs">Sign out</button>
+          <button onClick={() => setAuthed(false)} className="text-gray-500 text-xs font-bold">Sign out</button>
         </div>
         <div className="flex gap-2 mt-4">
           <TabBtn active={view !== 'froffers'} onClick={() => setView('search')}>
@@ -293,7 +293,7 @@ function TabBtn({ children, active, onClick }) {
     <button
       onClick={onClick}
       className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
-        active ? 'bg-white text-gray-900 shadow-[2px_2px_0_#111827]' : 'text-white/85'
+        active ? 'bg-white text-gray-900 border-2 border-gray-900 shadow-[2px_2px_0_#111827]' : 'text-gray-600'
       }`}
     >
       {children}
