@@ -30,9 +30,13 @@ export default function VenueHome() {
       {/* Header */}
       <div className="frother-hero text-white px-5 pt-12 pb-10">
         <div className="max-w-lg mx-auto">
-          <div className="frother-sticker text-xs px-3 py-1 mb-5 rotate-[-2deg]">Frother demo</div>
-          <h1 className="text-4xl font-black leading-none tracking-tight">Demo Cafe Rewards</h1>
-          <p className="mt-3 text-white/90 text-lg font-bold leading-snug">Tap in. Stack stamps. Score free coffee.</p>
+          <div className="frother-sticker text-xs px-3 py-1 mb-5 rotate-[-2deg]">Tap in. Stack stamps. Froth on.</div>
+          <p className="text-white/75 text-sm font-black uppercase tracking-wider mb-2">Demo Cafe Rewards</p>
+          <h1 className="text-4xl sm:text-5xl font-black leading-none tracking-tight">Get your regulars frothing.</h1>
+          <p className="mt-4 text-white/90 text-xl font-black leading-snug">No apps. No lost cards. No counter chaos.</p>
+          <p className="mt-4 text-white/85 text-sm font-semibold leading-relaxed">
+            Replace paper stamp cards with tap-to-join loyalty, Froffers and Regulars Radar for your venue.
+          </p>
         </div>
       </div>
 
@@ -40,11 +44,11 @@ export default function VenueHome() {
         {/* Loyalty card preview */}
         <div className="frother-card p-5">
           <div className="flex items-start justify-between gap-4 mb-2">
-            <h2 className="font-black text-2xl leading-tight">Loyalty Card</h2>
+            <h2 className="font-black text-2xl leading-tight">Tap-to-join loyalty</h2>
             <span className="frother-sticker text-xs px-3 py-1 rotate-[2deg]">No app</span>
           </div>
           <p className="text-gray-600 text-sm mb-5 font-medium">
-            Buy {venue.loyaltyRule.stampsRequired} coffees, get your {venue.loyaltyRule.rewardDescription.toLowerCase()}.
+            Customers scan a QR or tap NFC, join with name and mobile, then start collecting stamps immediately.
           </p>
           <div className="grid grid-cols-5 gap-2 mb-5">
             {Array.from({ length: venue.loyaltyRule.stampsRequired }).map((_, i) => (
@@ -62,8 +66,32 @@ export default function VenueHome() {
             Join Rewards
           </Link>
           <p className="text-xs text-gray-500 text-center mt-4 font-semibold">
-            10 seconds. No app. No card. Staff can look you up.
+            10 seconds. No app. No lost cards. Staff can look you up.
           </p>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <PitchPill title="No app" body="Runs in the browser from QR or NFC." />
+          <PitchPill title="No lost cards" body="Digital stamps replace paper cards." />
+          <PitchPill title="Staff lookup" body="Find customers by name or mobile." />
+          <PitchPill title="Fast counter" body="Customers collect before full profile." />
+        </div>
+
+        <div className="frother-card p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-xs font-black text-gray-400 uppercase tracking-wider mb-1">For cafe owners</p>
+              <h2 className="font-black text-2xl leading-tight">Get your regulars frothing.</h2>
+            </div>
+            <span className="frother-sticker text-[10px] px-2.5 py-1 rotate-[2deg]">Pilot</span>
+          </div>
+          <p className="text-sm text-gray-600 font-medium leading-relaxed mt-3">
+            Paper cards give you no data. Frother keeps loyalty simple while showing customer names, reward status, profile completion and who needs a nudge.
+          </p>
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            <MiniFeature label="Froffers" value="Specials worth coming back for." />
+            <MiniFeature label="Regulars Radar" value="Who is close, quiet or ready." />
+          </div>
         </div>
 
         {/* Returning member */}
@@ -91,12 +119,38 @@ export default function VenueHome() {
           </div>
         )}
 
+        <div className="frother-card p-5 bg-[#111827] text-white">
+          <p className="text-xs font-black text-[#F4B84A] uppercase tracking-wider mb-1">Frother Pilot Setup</p>
+          <h2 className="font-black text-2xl leading-tight">$499 setup. $99/month for pilot venues.</h2>
+          <p className="text-sm text-white/75 font-medium leading-relaxed mt-3">
+            Includes a branded rewards page, QR/NFC tap-to-join setup, staff dashboard, admin dashboard, Froffers, Regulars Radar, basic staff training and first month support.
+          </p>
+        </div>
+
         {/* Footer links */}
         <div className="flex justify-center gap-6 pt-2 pb-8 text-sm text-gray-500 font-bold">
           <Link to={`/staff/${slug}`} className="hover:text-gray-600">Staff</Link>
           <Link to={`/admin/${slug}`} className="hover:text-gray-600">Admin</Link>
         </div>
       </div>
+    </div>
+  )
+}
+
+function PitchPill({ title, body }) {
+  return (
+    <div className="frother-card p-4">
+      <p className="font-black text-gray-900 text-sm">{title}</p>
+      <p className="text-xs text-gray-500 font-semibold mt-1 leading-snug">{body}</p>
+    </div>
+  )
+}
+
+function MiniFeature({ label, value }) {
+  return (
+    <div className="bg-[#F7F3EA] border-2 border-gray-900/10 rounded-2xl p-3">
+      <p className="font-black text-gray-900 text-sm">{label}</p>
+      <p className="text-xs text-gray-600 font-semibold mt-1 leading-snug">{value}</p>
     </div>
   )
 }

@@ -87,12 +87,6 @@ export default function CustomerDashboard() {
             <p className="text-amber-800 text-sm mb-3 font-medium">
               Complete your profile to unlock it.
             </p>
-            <Link
-              to={`/venue/${slug}/customer/${customerId}/complete-profile`}
-              className="frother-button w-full bg-amber-500 text-white text-sm"
-            >
-              Complete profile → Unlock reward
-            </Link>
           </div>
         )}
 
