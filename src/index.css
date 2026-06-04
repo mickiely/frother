@@ -4,21 +4,77 @@
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-900 antialiased;
+    @apply text-gray-900 antialiased;
+    background-color: #F7F3EA;
+  }
+}
+
+@layer components {
+  .frother-shell {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.44), rgba(247, 243, 234, 0)),
+      #F7F3EA;
+  }
+
+  .frother-hero {
+    background-color: #16A34A;
+    border-bottom: 4px solid #111827;
+    box-shadow: 0 16px 0 rgba(36, 107, 75, 0.14);
+  }
+
+  .frother-admin-hero {
+    background-color: #111827;
+    border-bottom: 4px solid #16A34A;
+    box-shadow: 0 14px 0 rgba(17, 24, 39, 0.10);
+  }
+
+  .frother-card {
+    @apply bg-white border shadow-sm;
+    border-color: rgba(17, 24, 39, 0.10);
+    border-radius: 22px;
+    box-shadow: 0 10px 0 rgba(17, 24, 39, 0.04), 0 18px 44px rgba(17, 24, 39, 0.08);
+  }
+
+  .frother-sticker {
+    @apply inline-flex items-center justify-center font-black uppercase;
+    background-color: #F4B84A;
+    color: #111827;
+    border: 2px solid #111827;
+    border-radius: 999px;
+    box-shadow: 3px 3px 0 #111827;
+    letter-spacing: 0;
+  }
+
+  .frother-button {
+    @apply inline-flex items-center justify-center text-center font-black transition-transform active:translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed;
+    min-height: 54px;
+    border-radius: 18px;
+    box-shadow: 0 5px 0 rgba(17, 24, 39, 0.22);
+  }
+
+  .frother-input {
+    @apply w-full bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2;
+    border: 2px solid rgba(17, 24, 39, 0.12);
+    border-radius: 18px;
+    min-height: 52px;
+    --tw-ring-color: #16A34A;
   }
 }
 
 @layer utilities {
   .brand-bg {
-    background-color: var(--brand-color, #2D6A4F);
+    background-color: var(--brand-color, #16A34A);
   }
   .brand-text {
-    color: var(--brand-color, #2D6A4F);
+    color: var(--brand-color, #16A34A);
   }
   .brand-border {
-    border-color: var(--brand-color, #2D6A4F);
+    border-color: var(--brand-color, #16A34A);
   }
   .brand-ring {
-    --tw-ring-color: var(--brand-color, #2D6A4F);
+    --tw-ring-color: var(--brand-color, #16A34A);
+  }
+  .bg-gray-50 {
+    background-color: #F7F3EA;
   }
 }

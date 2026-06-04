@@ -28,7 +28,7 @@ export default function SegmentsTab({ venue }) {
 
   return (
     <div className="space-y-3">
-      <p className="text-sm text-gray-500 font-medium">
+      <p className="text-sm text-gray-600 font-bold">
         Tap a segment to see who's in it.
       </p>
 
@@ -37,7 +37,7 @@ export default function SegmentsTab({ venue }) {
         const isOpen = expanded === key
 
         return (
-          <div key={key} className={`rounded-2xl border ${meta.color} overflow-hidden`}>
+          <div key={key} className={`frother-card ${meta.color} overflow-hidden`}>
             <button
               onClick={() => setExpanded(isOpen ? null : key)}
               className="w-full p-4 text-left flex items-center justify-between"
@@ -45,12 +45,12 @@ export default function SegmentsTab({ venue }) {
               <div className="flex items-center gap-3">
                 <span className="text-2xl">{meta.emoji}</span>
                 <div>
-                  <p className="font-bold text-sm text-gray-900">{seg.label}</p>
+                  <p className="font-black text-sm text-gray-900">{seg.label}</p>
                   <p className="text-xs text-gray-500 mt-0.5 italic">{seg.hint}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
-                <span className="text-2xl font-bold text-gray-900">{seg.customers.length}</span>
+                <span className="text-2xl font-black text-gray-900">{seg.customers.length}</span>
                 <span className="text-gray-400 text-sm">{isOpen ? '▲' : '▼'}</span>
               </div>
             </button>
@@ -62,7 +62,7 @@ export default function SegmentsTab({ venue }) {
                   <p className="text-sm text-gray-400">No customers in this segment yet</p>
                 ) : (
                   seg.customers.map(c => (
-                    <div key={c.id} className="bg-white rounded-xl px-3 py-2.5 flex justify-between items-center shadow-sm">
+                    <div key={c.id} className="bg-white rounded-xl px-3 py-2.5 flex justify-between items-center shadow-sm border border-gray-100">
                       <div>
                         <p className="font-semibold text-sm">{c.name}{c.lastName ? ` ${c.lastName}` : ''}</p>
                         <p className="text-xs text-gray-400">{c.phone}</p>

@@ -59,17 +59,17 @@ export default function CustomerDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50" style={{ '--brand-color': venue.brandColor }}>
-      <div className="text-white px-5 pt-10 pb-6" style={{ backgroundColor: venue.brandColor }}>
+    <div className="min-h-screen frother-shell" style={{ '--brand-color': venue.brandColor }}>
+      <div className="frother-hero text-white px-5 pt-10 pb-8">
         <Link to={`/venue/${slug}`} className="text-white/70 text-sm mb-4 block">← Back</Link>
         <VenueBrand venue={venue} size="md" />
         <div className="mt-3 flex items-center justify-between">
-          <p className="text-white font-semibold text-lg">Hey, {customer.name}! 👋</p>
+          <p className="text-white font-black text-2xl tracking-tight">Hey, {customer.name}! 👋</p>
           <ProfileBadge status={customer.profileStatus} />
         </div>
       </div>
 
-      <div className="px-4 py-5 max-w-lg mx-auto space-y-4">
+      <div className="px-4 py-5 max-w-lg mx-auto space-y-4 -mt-5">
         <StampCard
           stamps={customer.stamps}
           required={required}
@@ -80,16 +80,16 @@ export default function CustomerDashboard() {
 
         {/* Reward locked — complete profile CTA */}
         {isRewardLocked && (
-          <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4">
-            <p className="font-bold text-amber-900 text-base mb-1">
+          <div className="frother-card p-4 bg-amber-50 border-amber-200">
+            <p className="font-black text-amber-900 text-base mb-1">
               ☕ You've earned your free coffee!
             </p>
-            <p className="text-amber-800 text-sm mb-3">
+            <p className="text-amber-800 text-sm mb-3 font-medium">
               Complete your profile to unlock it.
             </p>
             <Link
               to={`/venue/${slug}/customer/${customerId}/complete-profile`}
-              className="block text-center bg-amber-500 text-white font-bold py-3 rounded-xl text-sm"
+              className="frother-button w-full bg-amber-500 text-white text-sm"
             >
               Complete profile → Unlock reward
             </Link>
@@ -99,14 +99,14 @@ export default function CustomerDashboard() {
         {isRewardLocked ? (
           <Link
             to={`/venue/${slug}/customer/${customerId}/complete-profile`}
-            className="block w-full text-center bg-amber-500 text-white font-bold py-4 rounded-xl text-base"
+            className="frother-button w-full bg-amber-500 text-white text-base"
           >
             Complete profile to unlock reward
           </Link>
         ) : (
           <button
             onClick={() => setShowCardScreen(true)}
-            className={`w-full font-bold py-4 rounded-xl text-base text-white ${
+            className={`frother-button w-full text-base text-white ${
               isRewardReady ? 'shadow-lg' : ''
             }`}
             style={{
@@ -120,14 +120,14 @@ export default function CustomerDashboard() {
         {/* Froffers */}
         {froffers.length > 0 && (
           <div>
-            <h2 className="font-bold text-base mb-3">Today's Froffers</h2>
+            <h2 className="font-black text-2xl mb-3 tracking-tight">Today's Froffers</h2>
             <div className="space-y-3">
               {froffers.map(f => <FrofferCard key={f.id} froffer={f} />)}
             </div>
           </div>
         )}
 
-        <div className="text-center text-xs text-gray-400 pt-2 pb-8">
+        <div className="text-center text-xs text-gray-500 font-semibold pt-2 pb-8">
           Member since{' '}
           {new Date(customer.joinedAt).toLocaleDateString('en-AU', { month: 'long', year: 'numeric' })}
         </div>

@@ -32,7 +32,7 @@ export default function CustomersTab({ venue }) {
 
   return (
     <div className="space-y-2">
-      <p className="text-sm text-gray-400 font-medium">{customers.length} members</p>
+      <p className="text-sm text-gray-500 font-bold">{customers.length} members</p>
       {customers.map(c => {
         const isLocked = c.stamps >= required && c.profileStatus !== 'full'
         const isReady = c.stamps >= required && c.profileStatus === 'full'
@@ -40,11 +40,11 @@ export default function CustomersTab({ venue }) {
           <button
             key={c.id}
             onClick={() => setSelected(c)}
-            className="w-full bg-white rounded-xl border border-gray-100 shadow-sm px-4 py-3 flex justify-between items-center text-left"
+            className="w-full frother-card px-4 py-3.5 flex justify-between items-center text-left"
           >
             <div>
               <div className="flex items-center gap-2">
-                <p className="font-semibold text-sm">{c.name}{c.lastName ? ` ${c.lastName}` : ''}</p>
+                <p className="font-black text-sm">{c.name}{c.lastName ? ` ${c.lastName}` : ''}</p>
                 <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${
                   c.profileStatus === 'full' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'
                 }`}>
@@ -81,10 +81,10 @@ function CustomerDetail({ customer, froffers, venue, onBack }) {
       <button onClick={onBack} className="text-sm text-gray-500">← Back to members</button>
 
       {/* Header */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+      <div className="frother-card p-4">
         <div className="flex justify-between items-start">
           <div>
-            <h2 className="font-bold text-xl">{customer.name}{customer.lastName ? ` ${customer.lastName}` : ''}</h2>
+            <h2 className="font-black text-2xl tracking-tight">{customer.name}{customer.lastName ? ` ${customer.lastName}` : ''}</h2>
             <p className="text-gray-500 text-sm">{customer.phone}</p>
             {customer.email && <p className="text-gray-400 text-xs mt-0.5">{customer.email}</p>}
           </div>
@@ -104,7 +104,7 @@ function CustomerDetail({ customer, froffers, venue, onBack }) {
       <SuggestionCard suggestion={suggestion} brandColor={venue.brandColor} />
 
       {/* Loyalty summary */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+      <div className="frother-card p-4">
         <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Loyalty</p>
         <div className="grid grid-cols-3 gap-3 mb-3">
           <MiniStat label="Stamps" value={customer.stamps} />
@@ -116,7 +116,7 @@ function CustomerDetail({ customer, froffers, venue, onBack }) {
 
       {/* Preferences */}
       {customer.profileStatus === 'full' && (
-        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+        <div className="frother-card p-4">
           <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Preferences</p>
           {customer.offerCategories?.length > 0 && (
             <div className="mb-3">
@@ -150,7 +150,7 @@ function CustomerDetail({ customer, froffers, venue, onBack }) {
       )}
 
       {/* Activity feed */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+      <div className="frother-card p-4">
         <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Recent activity</p>
         <div className="space-y-2.5">
           {recentEvents.map((ev, i) => (
@@ -169,7 +169,7 @@ function CustomerDetail({ customer, froffers, venue, onBack }) {
       </div>
 
       {/* Timestamps */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+      <div className="frother-card p-4">
         <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Key dates</p>
         <div className="space-y-1.5">
           {[
@@ -205,12 +205,12 @@ function ProfileStatusBadge({ status }) {
 
 function RewardStatusBadge({ summary, rewardDescription }) {
   if (summary.isRewardLocked) return (
-    <div className="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 text-sm text-amber-800 font-medium">
+    <div className="bg-amber-50 border-2 border-amber-200 rounded-xl px-3 py-2 text-sm text-amber-800 font-bold">
       🔒 Reward earned — profile needed to unlock
     </div>
   )
   if (summary.isRewardReady) return (
-    <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-3 py-2 text-sm text-yellow-800 font-medium">
+    <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl px-3 py-2 text-sm text-yellow-800 font-bold">
       🏆 Reward ready — {rewardDescription}
     </div>
   )
@@ -234,9 +234,9 @@ function SuggestionCard({ suggestion, brandColor }) {
     ? 'text-amber-800' : suggestion.urgency === 'medium' ? 'text-blue-800' : 'text-gray-700'
 
   return (
-    <div className={`rounded-2xl border p-4 ${urgencyColor}`}>
+    <div className={`frother-card p-4 ${urgencyColor}`}>
       <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1.5">Best next offer</p>
-      <p className={`font-bold text-base ${urgencyText}`}>{suggestion.headline}</p>
+      <p className={`font-black text-base ${urgencyText}`}>{suggestion.headline}</p>
       {suggestion.detail && <p className="text-sm text-gray-500 mt-0.5">{suggestion.detail}</p>}
     </div>
   )
@@ -254,7 +254,7 @@ function Detail({ label, value }) {
 function MiniStat({ label, value }) {
   return (
     <div className="text-center">
-      <p className="text-2xl font-bold text-gray-900">{value}</p>
+      <p className="text-2xl font-black text-gray-900">{value}</p>
       <p className="text-xs text-gray-400">{label}</p>
     </div>
   )

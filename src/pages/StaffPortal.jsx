@@ -75,15 +75,15 @@ export default function StaffPortal() {
 
   if (!authed) {
     return (
-      <div className="min-h-screen bg-gray-50 flex flex-col" style={{ '--brand-color': venue.brandColor }}>
-        <div className="text-white px-5 pt-10 pb-6" style={{ backgroundColor: venue.brandColor }}>
+      <div className="min-h-screen frother-shell flex flex-col" style={{ '--brand-color': venue.brandColor }}>
+        <div className="frother-hero text-white px-5 pt-10 pb-6">
           <Link to={`/venue/${venueSlug}`} className="text-white/70 text-sm mb-4 block">← Venue</Link>
           <VenueBrand venue={venue} size="md" />
           <p className="text-white/80 text-sm mt-1">Staff Portal</p>
         </div>
         <div className="flex-1 flex items-center justify-center px-6">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 w-full max-w-xs">
-            <h2 className="font-bold text-xl mb-5 text-center">Staff PIN</h2>
+          <div className="frother-card p-6 w-full max-w-xs">
+            <h2 className="font-black text-2xl mb-5 text-center">Staff PIN</h2>
             <form onSubmit={handlePin}>
               <label htmlFor="staff-pin" className="sr-only">Staff PIN</label>
               <input
@@ -95,13 +95,13 @@ export default function StaffPortal() {
                 value={pin}
                 onChange={e => { setPin(e.target.value); setPinError('') }}
                 placeholder="Enter PIN"
-                className="w-full border border-gray-200 rounded-xl px-4 py-4 text-2xl text-center tracking-widest focus:outline-none mb-3"
+                className="frother-input px-4 py-4 text-2xl text-center tracking-widest mb-3"
                 autoFocus
               />
               {pinError && <p className="text-red-500 text-sm text-center mb-3">{pinError}</p>}
               <button
                 type="submit"
-                className="w-full text-white font-bold py-3.5 rounded-xl"
+                className="frother-button w-full text-white"
                 style={{ backgroundColor: venue.brandColor }}
               >
                 Enter
@@ -115,18 +115,18 @@ export default function StaffPortal() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50" style={{ '--brand-color': venue.brandColor }}>
+    <div className="min-h-screen frother-shell" style={{ '--brand-color': venue.brandColor }}>
       {toast && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 bg-gray-900 text-white px-4 py-2 rounded-full text-sm z-50 shadow-lg whitespace-nowrap">
           {toast}
         </div>
       )}
 
-      <div className="text-white px-5 pt-10 pb-4" style={{ backgroundColor: venue.brandColor }}>
+      <div className="frother-hero text-white px-5 pt-10 pb-5">
         <div className="flex justify-between items-start">
           <div>
             <VenueBrand venue={venue} size="sm" />
-            <p className="text-white/70 text-xs mt-0.5">Staff Portal</p>
+            <p className="text-white/80 text-xs mt-1 font-bold">Staff Portal</p>
           </div>
           <button onClick={() => setAuthed(false)} className="text-white/60 text-xs">Sign out</button>
         </div>
@@ -166,7 +166,7 @@ export default function StaffPortal() {
               placeholder="Search by name or phone..."
               value={query}
               onChange={e => handleSearch(e.target.value)}
-              className="w-full border border-gray-200 rounded-xl px-4 py-3.5 text-base focus:outline-none bg-white"
+              className="frother-input px-4 py-4 text-base"
               autoFocus
             />
             {results.length > 0 && (
@@ -178,15 +178,15 @@ export default function StaffPortal() {
                     <button
                       key={c.id}
                       onClick={() => setSelected(c)}
-                      className="w-full bg-white rounded-xl border border-gray-100 px-4 py-3.5 text-left flex justify-between items-center shadow-sm"
+                      className="w-full frother-card px-4 py-4 text-left flex justify-between items-center"
                     >
                       <div>
-                        <p className="font-semibold text-gray-900">{c.name}{c.lastName ? ` ${c.lastName}` : ''}</p>
-                        <p className="text-sm text-gray-400">{c.phone}</p>
+                        <p className="font-black text-gray-900 text-lg">{c.name}{c.lastName ? ` ${c.lastName}` : ''}</p>
+                        <p className="text-sm text-gray-500 font-medium">{c.phone}</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-bold text-lg" style={{ color: venue.brandColor }}>{c.stamps}</p>
-                        <p className="text-xs text-gray-400">
+                        <p className="font-black text-2xl" style={{ color: venue.brandColor }}>{c.stamps}</p>
+                        <p className="text-xs text-gray-500 font-bold">
                           {isLocked ? '🔒 locked' : isRewardEarned ? '🏆 ready' : 'stamps'}
                         </p>
                       </div>
@@ -224,9 +224,9 @@ function CustomerView({ customer, venue, onBack, onAddStamp, onRedeemReward }) {
         ← Back to search
       </button>
 
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex justify-between items-start">
+      <div className="frother-card p-4 flex justify-between items-start">
         <div>
-          <p className="font-bold text-xl">{customer.name}{customer.lastName ? ` ${customer.lastName}` : ''}</p>
+          <p className="font-black text-2xl tracking-tight">{customer.name}{customer.lastName ? ` ${customer.lastName}` : ''}</p>
           <p className="text-gray-500 text-sm">{customer.phone}</p>
           {customer.email && <p className="text-gray-400 text-xs mt-0.5">{customer.email}</p>}
         </div>
@@ -249,7 +249,7 @@ function CustomerView({ customer, venue, onBack, onAddStamp, onRedeemReward }) {
 
       {/* Lock notice */}
       {isRewardLocked && (
-        <div className="bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3">
+        <div className="frother-card bg-amber-50 border-amber-200 px-4 py-3">
           <p className="text-amber-900 text-sm font-semibold">
             Reward earned — profile required before redemption.
           </p>
@@ -262,7 +262,7 @@ function CustomerView({ customer, venue, onBack, onAddStamp, onRedeemReward }) {
       <div className="grid grid-cols-2 gap-3">
         <button
           onClick={onAddStamp}
-          className="text-white font-bold py-4 rounded-xl text-base"
+          className="frother-button text-white text-base"
           style={{ backgroundColor: venue.brandColor }}
         >
           ☕ Add stamp
@@ -271,10 +271,10 @@ function CustomerView({ customer, venue, onBack, onAddStamp, onRedeemReward }) {
           onClick={onRedeemReward}
           disabled={!isRewardReady}
           aria-disabled={!isRewardReady}
-          className={`font-bold py-4 rounded-xl text-base transition-all ${
+          className={`frother-button text-base transition-all ${
             isRewardReady
               ? 'bg-yellow-400 text-yellow-900'
-              : 'bg-gray-100 text-gray-300 cursor-not-allowed'
+              : 'bg-gray-100 text-gray-300 cursor-not-allowed shadow-none'
           }`}
         >
           🏆 Redeem
@@ -293,7 +293,7 @@ function TabBtn({ children, active, onClick }) {
     <button
       onClick={onClick}
       className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
-        active ? 'bg-white text-gray-900' : 'text-white/80'
+        active ? 'bg-white text-gray-900 shadow-[2px_2px_0_#111827]' : 'text-white/85'
       }`}
     >
       {children}

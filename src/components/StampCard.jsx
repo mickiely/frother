@@ -5,24 +5,24 @@ export default function StampCard({ stamps, required, brandColor, rewardDescript
   let statusEl = null
   if (isRewardLocked) {
     statusEl = (
-      <div className="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1.5 rounded-full">
+      <div className="frother-sticker text-[11px] px-3 py-1.5 rotate-[-1deg]">
         🔒 Unlock required
       </div>
     )
   } else if (isEarned) {
     statusEl = (
-      <div className="bg-yellow-400 text-yellow-900 text-xs font-bold px-3 py-1.5 rounded-full animate-bounce">
+      <div className="frother-sticker text-[11px] px-3 py-1.5 rotate-[-1deg]">
         🎉 Ready to redeem!
       </div>
     )
   }
 
   return (
-    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+    <div className="frother-card p-5">
       <div className="flex justify-between items-center mb-4">
         <div>
-          <p className="text-sm text-gray-500 font-medium">Your stamps</p>
-          <p className="text-2xl font-bold">
+          <p className="text-sm text-gray-500 font-bold">Your stamps</p>
+          <p className="text-3xl font-black tracking-tight">
             {Math.min(stamps, required)}
             <span className="text-gray-400 text-lg font-normal"> / {required}</span>
           </p>
@@ -34,12 +34,12 @@ export default function StampCard({ stamps, required, brandColor, rewardDescript
         {dots.map((filled, i) => (
           <div
             key={i}
-            className={`aspect-square rounded-full flex items-center justify-center text-lg transition-all ${
-              filled ? 'scale-105' : 'bg-gray-100'
+            className={`aspect-square rounded-full flex items-center justify-center text-lg transition-all border-2 ${
+              filled ? 'scale-105' : 'bg-[#F7F3EA] border-gray-200'
             }`}
             style={
               filled
-                ? { backgroundColor: brandColor + '22', border: `2px solid ${brandColor}` }
+                ? { backgroundColor: brandColor + '22', borderColor: '#111827', boxShadow: '2px 2px 0 #111827' }
                 : {}
             }
           >
@@ -48,7 +48,7 @@ export default function StampCard({ stamps, required, brandColor, rewardDescript
         ))}
       </div>
 
-      <p className="text-sm text-gray-500 text-center">
+      <p className="text-sm text-gray-600 text-center font-medium">
         {isRewardLocked ? (
           <span className="font-semibold text-amber-700">
             Complete your profile to unlock your free coffee

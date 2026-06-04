@@ -44,15 +44,15 @@ export default function AdminPortal() {
 
   if (!authed) {
     return (
-      <div className="min-h-screen bg-gray-50 flex flex-col">
-        <div className="px-5 pt-10 pb-6 bg-gray-900 text-white">
+      <div className="min-h-screen frother-shell flex flex-col">
+        <div className="px-5 pt-10 pb-6 frother-admin-hero text-white">
           <Link to={`/venue/${venueSlug}`} className="text-white/50 text-sm mb-4 block">← Venue</Link>
           <VenueBrand venue={venue} size="md" />
           <p className="text-white/60 text-sm mt-1">Admin Portal</p>
         </div>
         <div className="flex-1 flex items-center justify-center px-6">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 w-full max-w-xs">
-            <h2 className="font-bold text-xl mb-5 text-center">Admin PIN</h2>
+          <div className="frother-card p-6 w-full max-w-xs">
+            <h2 className="font-black text-2xl mb-5 text-center">Admin PIN</h2>
             <form onSubmit={handlePin}>
               <label htmlFor="admin-pin" className="sr-only">Admin PIN</label>
               <input
@@ -64,11 +64,11 @@ export default function AdminPortal() {
                 value={pin}
                 onChange={e => { setPin(e.target.value); setPinError('') }}
                 placeholder="Enter PIN"
-                className="w-full border border-gray-200 rounded-xl px-4 py-4 text-2xl text-center tracking-widest focus:outline-none mb-3"
+                className="frother-input px-4 py-4 text-2xl text-center tracking-widest mb-3"
                 autoFocus
               />
               {pinError && <p className="text-red-500 text-sm text-center mb-3">{pinError}</p>}
-              <button type="submit" className="w-full bg-gray-900 text-white font-bold py-3.5 rounded-xl">
+              <button type="submit" className="frother-button w-full bg-gray-900 text-white">
                 Enter
               </button>
             </form>
@@ -80,12 +80,12 @@ export default function AdminPortal() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-gray-900 text-white px-5 pt-10 pb-4">
+    <div className="min-h-screen frother-shell">
+      <div className="frother-admin-hero text-white px-5 pt-10 pb-5">
         <div className="flex justify-between items-start mb-3">
           <div>
             <VenueBrand venue={venue} size="sm" />
-            <p className="text-white/50 text-xs mt-0.5">Admin</p>
+            <p className="text-white/60 text-xs mt-1 font-bold">Admin</p>
           </div>
           <button onClick={() => setAuthed(false)} className="text-white/40 text-xs">Sign out</button>
         </div>
@@ -95,7 +95,7 @@ export default function AdminPortal() {
               key={t.id}
               onClick={() => setActiveTab(t.id)}
               className={`flex-shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                activeTab === t.id ? 'bg-white text-gray-900' : 'text-white/60'
+                activeTab === t.id ? 'bg-white text-gray-900 shadow-[2px_2px_0_#16A34A]' : 'text-white/70'
               }`}
             >
               {t.label}
@@ -151,7 +151,7 @@ function SettingsTab({ venue, onSave }) {
       <label htmlFor={`settings-${key}`} className="text-sm font-semibold text-gray-700 mb-1.5 block">{label}</label>
       <input id={`settings-${key}`} type={type} placeholder={placeholder} value={form[key]}
         onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
-        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none" />
+        className="frother-input px-4 py-3 text-sm" />
     </div>
   )
 
@@ -165,21 +165,21 @@ function SettingsTab({ venue, onSave }) {
         <div className="flex items-center gap-3">
           <input id="settings-brand-color" type="color" value={form.brandColor}
             onChange={e => setForm(f => ({ ...f, brandColor: e.target.value }))}
-            className="w-12 h-12 rounded-xl border border-gray-200 cursor-pointer" />
+            className="w-12 h-12 rounded-xl border-2 border-gray-900 cursor-pointer" />
           <label htmlFor="settings-brand-color-text" className="sr-only">Brand colour hex value</label>
           <input id="settings-brand-color-text" type="text" value={form.brandColor}
             onChange={e => setForm(f => ({ ...f, brandColor: e.target.value }))}
-            className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none font-mono" />
+            className="frother-input flex-1 px-4 py-3 text-sm font-mono" />
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl border border-gray-100 p-4 space-y-3">
-        <p className="font-semibold text-sm text-gray-700">Loyalty rule</p>
+      <div className="frother-card p-4 space-y-3">
+        <p className="font-black text-sm text-gray-700">Loyalty rule</p>
         {field('stampsRequired', 'Stamps required', '9', 'number')}
         {field('rewardDescription', 'Reward description', 'Free coffee of your choice')}
       </div>
 
-      <button type="submit" className="w-full bg-gray-900 text-white font-bold py-3.5 rounded-xl">
+      <button type="submit" className="frother-button w-full bg-gray-900 text-white">
         {saved ? '✓ Saved!' : 'Save changes'}
       </button>
     </form>

@@ -8,7 +8,7 @@ export const venues = {
     name: 'Demo Cafe',
     slug: 'demo-cafe',
     description: 'Your neighbourhood coffee spot',
-    brandColor: '#2D6A4F',
+    brandColor: '#16A34A',
     staffPin: '1234',
     adminPin: '9999',
     loyaltyRule: {

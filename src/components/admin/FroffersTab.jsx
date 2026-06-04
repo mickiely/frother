@@ -36,16 +36,16 @@ export default function FroffersTab({ venue }) {
     <div className="space-y-3">
       <button
         onClick={() => setEditing('new')}
-        className="w-full text-white font-bold py-3.5 rounded-xl text-sm"
+        className="frother-button w-full text-white text-sm"
         style={{ backgroundColor: venue.brandColor }}
       >
         + New Froffer
       </button>
       {froffers.map(f => (
-        <div key={f.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 flex items-center gap-3">
-          <span className="text-2xl">{f.emoji || '🎁'}</span>
+        <div key={f.id} className="frother-card p-4 flex items-center gap-3">
+          <span className="text-2xl w-11 h-11 rounded-2xl bg-[#F7F3EA] border-2 border-gray-900 flex items-center justify-center shadow-[2px_2px_0_#111827]">{f.emoji || '🎁'}</span>
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-sm truncate">{f.title}</p>
+            <p className="font-black text-sm truncate">{f.title}</p>
             <p className="text-xs text-gray-400 truncate">{f.description}</p>
             <span className={`text-xs font-medium ${f.active ? 'text-green-600' : 'text-gray-400'}`}>
               {f.active ? 'Active' : 'Inactive'}
@@ -73,8 +73,8 @@ function FrofferForm({ initial, onSave, onCancel, brandColor }) {
   })
 
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 space-y-4">
-      <h3 className="font-bold text-lg">{form.id ? 'Edit Froffer' : 'New Froffer'}</h3>
+    <div className="frother-card p-5 space-y-4">
+      <h3 className="font-black text-2xl tracking-tight">{form.id ? 'Edit Froffer' : 'New Froffer'}</h3>
       {[
         { key: 'emoji', label: 'Emoji', placeholder: '🎁' },
         { key: 'title', label: 'Title', placeholder: '2-for-1 Steak Night' },
@@ -89,7 +89,7 @@ function FrofferForm({ initial, onSave, onCancel, brandColor }) {
             placeholder={placeholder}
             value={form[key]}
             onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
-            className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none"
+            className="frother-input px-4 py-3 text-sm"
           />
         </div>
       ))}
@@ -100,10 +100,10 @@ function FrofferForm({ initial, onSave, onCancel, brandColor }) {
         <span className="text-sm font-semibold text-gray-700">Active</span>
       </label>
       <div className="flex gap-3">
-        <button onClick={onCancel} className="flex-1 py-3 rounded-xl border border-gray-200 text-sm font-semibold text-gray-600">
+        <button onClick={onCancel} className="flex-1 py-3 rounded-xl border-2 border-gray-200 text-sm font-bold text-gray-600">
           Cancel
         </button>
-        <button onClick={() => onSave(form)} className="flex-1 py-3 rounded-xl text-white text-sm font-semibold"
+        <button onClick={() => onSave(form)} className="frother-button flex-1 text-white text-sm"
           style={{ backgroundColor: brandColor }}>
           Save
         </button>

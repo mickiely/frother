@@ -74,10 +74,10 @@ function Section({ label, children }) {
 
 export function StatCard({ label, value, emoji, small = false }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+    <div className="frother-card p-4">
       <p className={small ? 'text-xl mb-0.5' : 'text-2xl mb-1'}>{emoji}</p>
-      <p className={small ? 'text-2xl font-bold text-gray-900' : 'text-3xl font-bold text-gray-900'}>{value ?? 0}</p>
-      <p className="text-sm text-gray-400 mt-0.5 leading-tight">{label}</p>
+      <p className={small ? 'text-2xl font-black text-gray-900' : 'text-3xl font-black text-gray-900'}>{value ?? 0}</p>
+      <p className="text-sm text-gray-500 font-semibold mt-0.5 leading-tight">{label}</p>
     </div>
   )
 }
@@ -86,13 +86,13 @@ export function FreqSection({ title, data, color = '#6B7280' }) {
   const sorted = Object.entries(data).sort((a, b) => b[1] - a[1])
   const max = sorted[0]?.[1] || 1
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
+    <div className="frother-card p-4">
       <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">{title}</p>
       <div className="space-y-2">
         {sorted.map(([label, count]) => (
           <div key={label} className="flex items-center gap-3">
             <p className="text-sm text-gray-700 w-32 flex-shrink-0 truncate">{label}</p>
-            <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+            <div className="flex-1 h-2.5 bg-[#F7F3EA] rounded-full overflow-hidden border border-gray-100">
               <div className="h-2 rounded-full" style={{ width: `${(count / max) * 100}%`, backgroundColor: color }} />
             </div>
             <p className="text-sm font-semibold text-gray-600 w-5 text-right">{count}</p>

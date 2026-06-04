@@ -34,21 +34,21 @@ export default function JoinPage() {
   if (!venue) return null
 
   return (
-    <div className="min-h-screen bg-gray-50" style={{ '--brand-color': venue.brandColor }}>
-      <div className="text-white px-5 pt-10 pb-8" style={{ backgroundColor: venue.brandColor }}>
+    <div className="min-h-screen frother-shell" style={{ '--brand-color': venue.brandColor }}>
+      <div className="frother-hero text-white px-5 pt-10 pb-8">
         <Link to={`/venue/${slug}`} className="text-white/70 text-sm mb-5 block">← Back</Link>
         <VenueBrand venue={venue} size="md" />
-        <p className="mt-4 text-white font-bold text-xl leading-snug">
+        <p className="mt-5 text-white font-black text-3xl leading-tight tracking-tight">
           Join in 10 seconds.
         </p>
-        <p className="text-white/80 text-base">
+        <p className="text-white/85 text-base font-bold mt-1">
           Just name and mobile. No app, no card.
         </p>
       </div>
 
-      <div className="px-4 py-6 max-w-lg mx-auto">
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
-          <p className="text-sm text-gray-500 mb-5">
+      <div className="px-4 py-6 max-w-lg mx-auto -mt-5">
+        <div className="frother-card p-5">
+          <p className="text-sm text-gray-600 mb-5 font-medium">
             Buy {venue.loyaltyRule.stampsRequired} coffees, get your{' '}
             {venue.loyaltyRule.rewardDescription.toLowerCase()}.
           </p>
@@ -89,14 +89,14 @@ export default function JoinPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full text-white font-bold py-4 rounded-xl text-base disabled:opacity-50 mt-2"
+              className="frother-button w-full text-white text-base mt-2"
               style={{ backgroundColor: venue.brandColor }}
             >
               {submitting ? 'Joining...' : "Join — it's free"}
             </button>
           </form>
 
-          <p className="text-xs text-gray-400 text-center mt-4">
+          <p className="text-xs text-gray-500 text-center mt-4 font-medium">
             We only use your details for this loyalty program.
           </p>
         </div>
@@ -121,7 +121,7 @@ function Field({ id, label, type, placeholder, value, onChange, required, autoFo
         onChange={e => onChange(e.target.value)}
         required={required}
         autoFocus={autoFocus}
-        className="w-full border border-gray-200 rounded-xl px-4 py-3.5 text-base focus:outline-none focus:ring-2 focus:ring-offset-1"
+        className="frother-input px-4 py-3.5 text-base"
       />
     </div>
   )

@@ -119,21 +119,21 @@ export default function CompleteProfilePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50" style={{ '--brand-color': venue.brandColor }}>
-      <div className="text-white px-5 pt-10 pb-6" style={{ backgroundColor: venue.brandColor }}>
+    <div className="min-h-screen frother-shell" style={{ '--brand-color': venue.brandColor }}>
+      <div className="frother-hero text-white px-5 pt-10 pb-7">
         <Link to={`/venue/${slug}/customer/${customerId}`} className="text-white/70 text-sm mb-4 block">
           ← Back
         </Link>
         <VenueBrand venue={venue} size="sm" />
-        <p className="text-white font-bold text-xl mt-3 leading-snug">
+        <p className="text-white font-black text-3xl mt-4 leading-tight tracking-tight">
           {rewardWasLocked ? '🔒 Unlock your free coffee' : 'Complete your profile'}
         </p>
-        <p className="text-white/80 text-sm mt-1">
+        <p className="text-white/85 text-sm mt-2 font-semibold">
           Tell us a little more so we can send better offers, not boring spam.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="px-4 py-5 max-w-lg mx-auto space-y-5 pb-12">
+      <form onSubmit={handleSubmit} className="px-4 py-5 max-w-lg mx-auto space-y-5 pb-12 -mt-5">
 
         {/* Name */}
         <Section title="About you">
@@ -222,7 +222,7 @@ export default function CompleteProfilePage() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full text-white font-bold py-4 rounded-xl text-base disabled:opacity-50"
+          className="frother-button w-full text-white text-base"
           style={{ backgroundColor: venue.brandColor }}
         >
           {submitting
@@ -240,7 +240,7 @@ export default function CompleteProfilePage() {
 
 function Section({ title, children }) {
   return (
-    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 space-y-3">
+    <div className="frother-card p-4 space-y-3">
       <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">{title}</p>
       {children}
     </div>
@@ -263,7 +263,7 @@ function Field({ id, label, type, placeholder, value, onChange, required, inputM
         onChange={e => onChange(e.target.value)}
         required={required}
         inputMode={inputMode}
-        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none"
+        className="frother-input px-4 py-3 text-sm"
       />
     </div>
   )
@@ -279,8 +279,8 @@ function ChipSelect({ options, selected, onToggle, brandColor, single = false })
             key={opt}
             type="button"
             onClick={() => onToggle(opt)}
-            className={`px-3 py-1.5 rounded-full text-sm font-medium border transition-all ${
-              active ? 'text-white border-transparent' : 'bg-gray-50 border-gray-200 text-gray-600'
+            className={`px-3 py-2 rounded-full text-sm font-bold border-2 transition-all ${
+              active ? 'text-white border-transparent shadow-[2px_2px_0_#111827]' : 'bg-white border-gray-200 text-gray-700'
             }`}
             style={active ? { backgroundColor: brandColor, borderColor: brandColor } : {}}
           >

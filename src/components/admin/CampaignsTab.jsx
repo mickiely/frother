@@ -87,8 +87,8 @@ export default function CampaignsTab({ venue }) {
 
   return (
     <div className="space-y-4">
-      <div className="bg-amber-50 border border-amber-200 rounded-2xl px-4 py-3">
-        <p className="text-sm font-semibold text-amber-900">Draft only — no SMS/email sent yet.</p>
+      <div className="frother-card bg-amber-50 border-amber-200 px-4 py-3">
+        <p className="text-sm font-black text-amber-900">Draft only — no SMS/email sent yet.</p>
         <p className="text-xs text-amber-700 mt-0.5">
           Use this to plan future campaigns, preview targeting, and shape copy. It is not connected to live sending.
         </p>
@@ -98,15 +98,15 @@ export default function CampaignsTab({ venue }) {
         const count = segments?.[c.segmentKey]?.customers?.length ?? '—'
         const urgencyRing = c.urgency === 'high' ? 'ring-1 ring-amber-300' : ''
         return (
-          <div key={c.id} className={`bg-white rounded-2xl border border-gray-100 shadow-sm p-4 ${urgencyRing}`}>
+          <div key={c.id} className={`frother-card p-4 ${urgencyRing}`}>
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-start gap-3">
                 <span className="text-2xl flex-shrink-0">{c.emoji}</span>
                 <div>
-                  <p className="font-bold text-sm text-gray-900">{c.title}</p>
+                  <p className="font-black text-sm text-gray-900">{c.title}</p>
                   <p className="text-xs text-gray-500 mt-0.5">{c.desc}</p>
                   <div className="flex items-center gap-2 mt-2">
-                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${c.channelColor}`}>
+                    <span className={`text-xs font-black px-2 py-1 rounded-full border border-gray-900/10 ${c.channelColor}`}>
                       {c.channel}
                     </span>
                     <span className="text-xs text-gray-500">
@@ -121,7 +121,7 @@ export default function CampaignsTab({ venue }) {
             <button
               onClick={() => setPreview(c)}
               disabled={typeof count === 'number' && count === 0}
-              className="mt-3 w-full py-2.5 rounded-xl text-sm font-semibold border border-gray-200 text-gray-700 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors"
+              className="frother-button mt-3 w-full text-sm border-2 border-gray-200 text-gray-800 bg-white disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50 transition-colors shadow-none"
             >
               {count === 0 ? 'No customers in segment' : 'Preview campaign →'}
             </button>
@@ -141,13 +141,13 @@ function CampaignPreview({ campaign, targetCount, onClose }) {
     <div className="space-y-4 pb-10">
       <button onClick={onClose} className="text-sm text-gray-500">← Back to campaigns</button>
 
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
+      <div className="frother-card p-5">
         <div className="flex items-center gap-3 mb-4">
           <span className="text-3xl">{campaign.emoji}</span>
           <div>
-            <h2 className="font-bold text-lg">{campaign.title}</h2>
+            <h2 className="font-black text-lg">{campaign.title}</h2>
             <div className="flex items-center gap-2 mt-0.5">
-              <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${campaign.channelColor}`}>
+              <span className={`text-xs font-black px-2 py-1 rounded-full border border-gray-900/10 ${campaign.channelColor}`}>
                 {campaign.channel}
               </span>
               <span className="text-xs text-gray-500">{targetCount} recipients</span>
@@ -182,7 +182,7 @@ function CampaignPreview({ campaign, targetCount, onClose }) {
           <div className="space-y-2">
             <button
               onClick={() => setSent(true)}
-              className="w-full bg-gray-900 text-white font-bold py-3.5 rounded-xl"
+              className="frother-button w-full bg-gray-900 text-white"
             >
               Mark draft reviewed
             </button>
