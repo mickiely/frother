@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import PilotLeadForm from '../components/PilotLeadForm'
 
 export default function LandingPage() {
   return (
@@ -65,12 +66,12 @@ export default function LandingPage() {
             No apps. No lost cards. No counter chaos.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
-            <Link
-              to="/venue/demo-cafe/join"
+            <a
+              href="#pilot-lead"
               className="frother-button bg-[#16A34A] text-[#FFF8EA] px-7 text-base"
             >
               Start a pilot
-            </Link>
+            </a>
             <Link
               to="/venue/demo-cafe"
               className="frother-button bg-[#FFF8EA] text-gray-900 px-7 text-base"
@@ -80,6 +81,8 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      <PilotLeadForm />
 
       {/* Feature cards */}
       <section className="px-4 py-12 max-w-5xl mx-auto" id="features">
