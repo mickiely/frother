@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 364 72" width="364" height="72" role="img" aria-label="FROTHER wordmark">
+  <title>FROTHER</title>
+
+  <!-- ─── F ─── x=0, w=44 -->
+  <rect x="0"   y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="0"   y="0"  width="44" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="0"   y="29" width="37" height="14" rx="2" fill="#1A1A1A"/>
+
+  <!-- ─── R ─── x=50, w=48 -->
+  <rect x="50"  y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="50"  y="0"  width="48" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="84"  y="0"  width="14" height="44" rx="2" fill="#1A1A1A"/>
+  <rect x="50"  y="30" width="48" height="14" rx="2" fill="#1A1A1A"/>
+  <polygon points="64,44 78,44 98,72 84,72" fill="#1A1A1A"/>
+
+  <!-- ─── O ─── x=104, w=48 -->
+  <path fill-rule="evenodd" fill="#1A1A1A"
+        d="M104,0 H152 V72 H104 Z  M117,13 H139 V59 H117 Z"/>
+
+  <!-- ─── T ─── x=158, w=48 -->
+  <rect x="158" y="0"  width="48" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="175" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+
+  <!-- ─── H ─── x=212, w=48 -->
+  <rect x="212" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="246" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="212" y="29" width="48" height="14" rx="2" fill="#1A1A1A"/>
+
+  <!-- ─── E ─── x=266, w=44 -->
+  <rect x="266" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="266" y="0"  width="44" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="266" y="29" width="38" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="266" y="58" width="44" height="14" rx="2" fill="#1A1A1A"/>
+
+  <!-- ─── R ─── x=316, w=48 -->
+  <rect x="316" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="316" y="0"  width="48" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="350" y="0"  width="14" height="44" rx="2" fill="#1A1A1A"/>
+  <rect x="316" y="30" width="48" height="14" rx="2" fill="#1A1A1A"/>
+  <polygon points="330,44 344,44 364,72 350,72" fill="#1A1A1A"/>
+</svg>

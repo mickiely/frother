@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456 72" width="456" height="72" role="img" aria-label="Frother logo">
+  <title>Frother</title>
+
+  <!-- ── F icon mark (72 × 72) ───────────────────────────────────────────── -->
+  <!-- Green rounded square -->
+  <rect x="0" y="0" width="72" height="72" rx="16" fill="#16A34A"/>
+  <!-- Dark border -->
+  <rect x="1.5" y="1.5" width="69" height="69" rx="15" fill="none"
+        stroke="#111827" stroke-width="3"/>
+  <!-- F letterform: bounding box 34×54, centred → left=19, top=9, stroke=11 -->
+  <rect x="19" y="9"  width="11" height="54" rx="2" fill="#FFF8EA"/>
+  <rect x="19" y="9"  width="34" height="11" rx="2" fill="#FFF8EA"/>
+  <rect x="19" y="30" width="28" height="11" rx="2" fill="#FFF8EA"/>
+
+  <!-- ── Gap: 20px → wordmark starts at x=92 ─────────────────────────────── -->
+
+  <!-- ── FROTHER wordmark (364 × 72), offset x=92 ─────────────────────────── -->
+
+  <!-- F -->
+  <rect x="92"  y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="92"  y="0"  width="44" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="92"  y="29" width="37" height="14" rx="2" fill="#1A1A1A"/>
+
+  <!-- R -->
+  <rect x="142" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="142" y="0"  width="48" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="176" y="0"  width="14" height="44" rx="2" fill="#1A1A1A"/>
+  <rect x="142" y="30" width="48" height="14" rx="2" fill="#1A1A1A"/>
+  <polygon points="156,44 170,44 190,72 176,72" fill="#1A1A1A"/>
+
+  <!-- O -->
+  <path fill-rule="evenodd" fill="#1A1A1A"
+        d="M196,0 H244 V72 H196 Z  M209,13 H231 V59 H209 Z"/>
+
+  <!-- T -->
+  <rect x="250" y="0"  width="48" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="267" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+
+  <!-- H -->
+  <rect x="304" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="338" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="304" y="29" width="48" height="14" rx="2" fill="#1A1A1A"/>
+
+  <!-- E -->
+  <rect x="358" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="358" y="0"  width="44" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="358" y="29" width="38" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="358" y="58" width="44" height="14" rx="2" fill="#1A1A1A"/>
+
+  <!-- R -->
+  <rect x="408" y="0"  width="14" height="72" rx="2" fill="#1A1A1A"/>
+  <rect x="408" y="0"  width="48" height="14" rx="2" fill="#1A1A1A"/>
+  <rect x="442" y="0"  width="14" height="44" rx="2" fill="#1A1A1A"/>
+  <rect x="408" y="30" width="48" height="14" rx="2" fill="#1A1A1A"/>
+  <polygon points="422,44 436,44 456,72 442,72" fill="#1A1A1A"/>
+</svg>

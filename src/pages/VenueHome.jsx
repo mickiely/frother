@@ -28,25 +28,47 @@ export default function VenueHome() {
   return (
     <div className="min-h-screen frother-shell" style={{ '--brand-color': venue.brandColor }}>
       {/* Header */}
-      <div className="frother-hero px-5 pt-10 pb-9">
-        <div className="max-w-lg mx-auto">
+      <div className="frother-public-hero">
+        <img
+          src="/frother-hero.jpg"
+          alt=""
+          aria-hidden="true"
+          className="frother-public-hero-image"
+        />
+        <div className="frother-public-hero-shade" aria-hidden="true" />
+        <div className="frother-public-hero-content px-5">
           <VenueBrand venue={venue} size="lg" />
-          <div className="frother-sticker text-xs px-3 py-1 mt-7 mb-4 rotate-[-2deg]">Tap in. Stack stamps. Froth on.</div>
-          <p className="text-gray-500 text-sm font-black uppercase tracking-wider mb-2">Demo Cafe Rewards</p>
-          <h1 className="text-4xl sm:text-5xl font-black leading-none tracking-tight">Get your regulars frothing.</h1>
-          <p className="mt-4 text-gray-900 text-xl font-black leading-snug">No apps. No lost cards. No counter chaos.</p>
-          <p className="mt-4 text-gray-600 text-sm font-semibold leading-relaxed">
-            Replace paper stamp cards with tap-to-join loyalty, Froffers and Regulars Radar for your venue.
+          <p className="frother-public-kicker mt-7">Tap in. Stack stamps. Froth on.</p>
+          <h1 className="text-4xl sm:text-5xl font-black leading-none tracking-tight mt-3">
+            Get your regulars frothing.
+          </h1>
+          <p className="mt-4 text-gray-900 text-xl font-black leading-snug">
+            No apps. No lost cards. No counter chaos.
           </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <Link
+              to={`/venue/${slug}/join`}
+              className="frother-button text-white text-base px-5"
+              style={{ backgroundColor: venue.brandColor }}
+            >
+              Start rewarding regulars
+            </Link>
+            <a
+              href="#how-it-works"
+              className="frother-button bg-[#FFF8EA] text-gray-900 text-base px-5"
+            >
+              See how it works
+            </a>
+          </div>
         </div>
       </div>
 
       <div className="px-4 py-6 max-w-lg mx-auto space-y-6 -mt-4">
         {/* Loyalty card preview */}
-        <div className="frother-card p-5">
+        <div id="how-it-works" className="frother-card p-5 scroll-mt-6">
           <div className="flex items-start justify-between gap-4 mb-2">
             <h2 className="font-black text-2xl leading-tight">Tap-to-join loyalty</h2>
-            <span className="frother-sticker text-xs px-3 py-1 rotate-[2deg]">No app</span>
+            <span className="frother-sticker text-xs px-3 py-1">No app</span>
           </div>
           <p className="text-gray-600 text-sm mb-5 font-medium">
             Customers scan a QR or tap NFC, join with name and mobile, then start collecting stamps immediately.
@@ -84,7 +106,7 @@ export default function VenueHome() {
               <p className="text-xs font-black text-gray-400 uppercase tracking-wider mb-1">For cafe owners</p>
               <h2 className="font-black text-2xl leading-tight">Get your regulars frothing.</h2>
             </div>
-            <span className="frother-sticker frother-sticker-blue text-[10px] px-2.5 py-1 rotate-[2deg]">Pilot</span>
+            <span className="frother-sticker frother-sticker-green text-[10px] px-2.5 py-1">Pilot</span>
           </div>
           <p className="text-sm text-gray-600 font-medium leading-relaxed mt-3">
             Paper cards give you no data. Frother keeps loyalty simple while showing customer names, reward status, profile completion and who needs a nudge.
@@ -110,7 +132,7 @@ export default function VenueHome() {
           <div>
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-black text-2xl tracking-tight">Today's Froffers</h2>
-              <span className="frother-sticker frother-sticker-red text-[10px] px-2.5 py-1 rotate-[2deg]">Froffers</span>
+              <span className="frother-sticker text-[10px] px-2.5 py-1">Froffers</span>
             </div>
             <div className="space-y-3">
               {froffers.map(f => (

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Frother">
+  <title>Frother</title>
+  <!-- Green rounded square -->
+  <rect width="32" height="32" rx="7" fill="#16A34A"/>
+  <!-- Border (visible at larger sizes) -->
+  <rect x="1" y="1" width="30" height="30" rx="6.5" fill="none"
+        stroke="#0D7A38" stroke-width="1.5"/>
+  <!-- F letterform: bounding box 15×24, centred → left=8.5, top=4, stroke=5 -->
+  <rect x="8"  y="4"  width="5" height="24" rx="1" fill="#FFF8EA"/>
+  <rect x="8"  y="4"  width="15" height="5" rx="1" fill="#FFF8EA"/>
+  <rect x="8"  y="13" width="12" height="5" rx="1" fill="#FFF8EA"/>
+</svg>

@@ -12,10 +12,9 @@
 @layer components {
   .frother-shell {
     background:
-      radial-gradient(circle at 16px 16px, rgba(22, 163, 74, 0.08) 0 2px, transparent 2.5px),
       linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(248, 241, 228, 0)),
       #F8F1E4;
-    background-size: 34px 34px, auto, auto;
+    background-size: auto, auto;
   }
 
   .frother-hero {
@@ -30,10 +29,65 @@
   .frother-admin-hero {
     color: #111827;
     background:
-      linear-gradient(135deg, rgba(84, 169, 255, 0.18), rgba(22, 163, 74, 0.16)),
+      linear-gradient(135deg, rgba(22, 163, 74, 0.16), rgba(244, 184, 74, 0.18)),
       #FFF8EA;
     border-bottom: 3px solid #111827;
     box-shadow: 0 10px 0 rgba(17, 24, 39, 0.08);
+  }
+
+  .frother-public-hero {
+    position: relative;
+    min-height: 680px;
+    overflow: hidden;
+    color: #111827;
+    background: #FFF8EA;
+    border-bottom: 3px solid #111827;
+  }
+
+  .frother-public-hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    opacity: 0.82;
+  }
+
+  .frother-public-hero-shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(255, 248, 234, 0.16), rgba(255, 248, 234, 0.96) 35%, rgba(255, 248, 234, 0.96) 65%, rgba(255, 248, 234, 0.16)),
+      linear-gradient(180deg, rgba(255, 248, 234, 0.5), rgba(255, 248, 234, 0.26));
+  }
+
+  .frother-public-hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-height: 680px;
+    max-width: 600px;
+    margin: 0 auto;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+  }
+
+  .frother-public-kicker {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #111827;
+    border-radius: 999px;
+    background: #F4B84A;
+    padding: 0.35rem 0.85rem;
+    color: #111827;
+    font-size: 0.78rem;
+    font-weight: 1000;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0 #111827;
   }
 
   .frother-card {
@@ -53,11 +107,6 @@
     letter-spacing: 0;
   }
 
-  .frother-sticker-blue {
-    background-color: #16A34A;
-    color: #FFF8EA;
-  }
-
   .frother-sticker-green {
     background-color: #16A34A;
     color: #FFF8EA;
@@ -65,11 +114,6 @@
 
   .frother-sticker-cream {
     background-color: #FFF8EA;
-    color: #111827;
-  }
-
-  .frother-sticker-red {
-    background-color: #F4B84A;
     color: #111827;
   }
 
@@ -125,6 +169,27 @@
 
   .froffer-card:nth-child(even) {
     transform: rotate(0.5deg);
+  }
+
+  @media (max-width: 640px) {
+    .frother-public-hero,
+    .frother-public-hero-content {
+      min-height: 680px;
+    }
+
+    .frother-public-hero-image {
+      object-position: center center;
+    }
+
+    .frother-public-hero-shade {
+      background: linear-gradient(180deg, rgba(255, 248, 234, 0.9), rgba(255, 248, 234, 0.76) 48%, rgba(255, 248, 234, 0.66));
+    }
+
+    .frother-public-hero-content {
+      justify-content: flex-start;
+      padding-top: 2.5rem;
+      padding-bottom: 2rem;
+    }
   }
 }
 

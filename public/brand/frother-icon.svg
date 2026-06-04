@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Frother icon">
+  <title>Frother</title>
+
+  <!-- Green rounded square background -->
+  <rect width="64" height="64" rx="14" fill="#16A34A"/>
+
+  <!-- Dark border (matches frother-logo-mark CSS: border: 3px solid #111827) -->
+  <rect x="1.5" y="1.5" width="61" height="61" rx="13" fill="none"
+        stroke="#111827" stroke-width="3"/>
+
+  <!-- F letterform in cream-white
+       F bounding box: 30 × 48, centred in 64×64 → left=17, top=8
+       Stroke weight: 10px (proportional to wordmark's 14/72 ratio)         -->
+  <rect x="17" y="8"  width="10" height="48" rx="1.5" fill="#FFF8EA"/>
+  <rect x="17" y="8"  width="30" height="10" rx="1.5" fill="#FFF8EA"/>
+  <rect x="17" y="28" width="25" height="10" rx="1.5" fill="#FFF8EA"/>
+</svg>

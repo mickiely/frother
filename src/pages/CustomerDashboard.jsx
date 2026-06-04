@@ -116,7 +116,7 @@ export default function CustomerDashboard() {
           <div>
             <div className="flex items-center justify-between mb-3">
               <h2 className="font-black text-2xl tracking-tight">Today's Froffers</h2>
-              <span className="frother-sticker frother-sticker-red text-[10px] px-2.5 py-1 rotate-[2deg]">Froffers</span>
+              <span className="frother-sticker text-[10px] px-2.5 py-1">Froffers</span>
             </div>
             <div className="space-y-3">
               {froffers.map(f => <FrofferCard key={f.id} froffer={f} />)}
@@ -138,7 +138,7 @@ export default function CustomerDashboard() {
 function ProfileBadge({ status }) {
   if (status === 'full') {
     return (
-      <span className="frother-sticker frother-sticker-blue text-[10px] px-2.5 py-1">
+      <span className="frother-sticker frother-sticker-green text-[10px] px-2.5 py-1">
         ✓ Full profile
       </span>
     )

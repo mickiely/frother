@@ -4,12 +4,11 @@ export default function FrofferCard({ froffer, onRedeem, showRedeem = false }) {
   return (
     <div className="frother-card froffer-card p-4 flex gap-4 items-start relative overflow-hidden">
       <div className="absolute right-4 top-0 h-3 w-24 rounded-b-full bg-[#F4B84A] border-x-2 border-b-2 border-gray-900" />
-      <div className="absolute -right-3 bottom-4 h-8 w-8 rounded-full bg-[#54A9FF] border-2 border-gray-900" />
       <div className="text-3xl flex-shrink-0 w-14 h-14 bg-[#F8F1E4] rounded-2xl border-2 border-gray-900 flex items-center justify-center rotate-[-4deg] shadow-[3px_3px_0_#111827]">
         {froffer.emoji || '🎁'}
       </div>
       <div className="flex-1 min-w-0">
-        <span className="frother-sticker frother-sticker-red text-[9px] px-2 py-0.5 mb-2 rotate-[2deg]">Froffer</span>
+        <span className="frother-sticker text-[9px] px-2 py-0.5 mb-2">Froffer</span>
         <h3 className="font-black text-gray-900 text-base leading-tight">{froffer.title}</h3>
         <p className="text-sm text-gray-600 mt-1">{froffer.description}</p>
         {froffer.expiresAt && (
