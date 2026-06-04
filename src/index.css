@@ -37,7 +37,7 @@
 
   .frother-public-hero {
     position: relative;
-    min-height: 680px;
+    min-height: 720px;
     overflow: hidden;
     color: #111827;
     background: #FFF8EA;
@@ -51,27 +51,57 @@
     height: 100%;
     object-fit: cover;
     object-position: center center;
-    opacity: 0.82;
+    opacity: 0.98;
   }
 
   .frother-public-hero-shade {
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(90deg, rgba(255, 248, 234, 0.16), rgba(255, 248, 234, 0.96) 35%, rgba(255, 248, 234, 0.96) 65%, rgba(255, 248, 234, 0.16)),
-      linear-gradient(180deg, rgba(255, 248, 234, 0.5), rgba(255, 248, 234, 0.26));
+      linear-gradient(90deg, rgba(255, 248, 234, 0.04), rgba(255, 248, 234, 0.68) 38%, rgba(255, 248, 234, 0.68) 62%, rgba(255, 248, 234, 0.04)),
+      linear-gradient(180deg, rgba(255, 248, 234, 0.16), rgba(255, 248, 234, 0.04));
+  }
+
+  .frother-public-nav {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: min(100%, 980px);
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.5rem;
+  }
+
+  .frother-public-nav-button {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #111827;
+    border-radius: 999px;
+    background: #F4B84A;
+    padding: 0 1rem;
+    color: #111827;
+    font-size: 0.9rem;
+    font-weight: 1000;
+    box-shadow: 3px 3px 0 #111827;
   }
 
   .frother-public-hero-content {
     position: relative;
     z-index: 1;
     display: flex;
-    min-height: 680px;
-    max-width: 600px;
+    min-height: 600px;
+    max-width: 620px;
     margin: 0 auto;
     flex-direction: column;
     justify-content: center;
     text-align: left;
+    border-radius: 28px;
+    background: rgba(255, 248, 234, 0.82);
+    box-shadow: 0 0 48px 44px rgba(255, 248, 234, 0.72);
   }
 
   .frother-public-kicker {
@@ -182,13 +212,19 @@
     }
 
     .frother-public-hero-shade {
-      background: linear-gradient(180deg, rgba(255, 248, 234, 0.9), rgba(255, 248, 234, 0.76) 48%, rgba(255, 248, 234, 0.66));
+      background: linear-gradient(180deg, rgba(255, 248, 234, 0.62), rgba(255, 248, 234, 0.34) 48%, rgba(255, 248, 234, 0.22));
+    }
+
+    .frother-public-nav {
+      padding-top: 1rem;
     }
 
     .frother-public-hero-content {
       justify-content: flex-start;
       padding-top: 2.5rem;
       padding-bottom: 2rem;
+      background: rgba(255, 248, 234, 0.9);
+      box-shadow: 0 0 36px 30px rgba(255, 248, 234, 0.78);
     }
   }
 }

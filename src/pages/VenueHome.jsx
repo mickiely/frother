@@ -36,28 +36,36 @@ export default function VenueHome() {
           className="frother-public-hero-image"
         />
         <div className="frother-public-hero-shade" aria-hidden="true" />
+        <div className="frother-public-nav px-5">
+          <VenueBrand venue={venue} size="md" />
+          <a href="#how-it-works" className="frother-public-nav-button">
+            See demo
+          </a>
+        </div>
         <div className="frother-public-hero-content px-5">
-          <VenueBrand venue={venue} size="lg" />
-          <p className="frother-public-kicker mt-7">Tap in. Stack stamps. Froth on.</p>
-          <h1 className="text-4xl sm:text-5xl font-black leading-none tracking-tight mt-3">
-            Get your regulars frothing.
+          <p className="text-gray-500 text-sm font-black uppercase tracking-wider mb-3">Frother</p>
+          <h1 className="text-5xl sm:text-6xl font-black leading-none tracking-tight">
+            Tap in.<br />
+            Stack stamps.<br />
+            Froth on.
           </h1>
-          <p className="mt-4 text-gray-900 text-xl font-black leading-snug">
+          <p className="mt-5 text-gray-900 text-xl font-black leading-snug">
+            Froffers worth coming back for.<br />
             No apps. No lost cards. No counter chaos.
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <Link
-              to={`/venue/${slug}/join`}
+            <a
+              href="#pilot-offer"
               className="frother-button text-white text-base px-5"
               style={{ backgroundColor: venue.brandColor }}
             >
-              Start rewarding regulars
-            </Link>
+              Start a pilot
+            </a>
             <a
               href="#how-it-works"
               className="frother-button bg-[#FFF8EA] text-gray-900 text-base px-5"
             >
-              See how it works
+              See demo
             </a>
           </div>
         </div>
@@ -142,7 +150,7 @@ export default function VenueHome() {
           </div>
         )}
 
-        <div className="frother-card p-5 bg-[#111827] text-white">
+        <div id="pilot-offer" className="frother-card p-5 bg-[#111827] text-white scroll-mt-6">
           <p className="text-xs font-black text-[#F4B84A] uppercase tracking-wider mb-1">Frother Pilot Setup</p>
           <h2 className="font-black text-2xl leading-tight">$499 setup. $99/month for pilot venues.</h2>
           <p className="text-sm text-white/75 font-medium leading-relaxed mt-3">
