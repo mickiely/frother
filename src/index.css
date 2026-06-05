@@ -201,6 +201,82 @@
     transform: rotate(0.5deg);
   }
 
+  .reward-ready-card {
+    box-shadow: 5px 5px 0 rgba(17, 24, 39, 0.92), 0 0 0 5px rgba(244, 184, 74, 0.28), 0 18px 34px rgba(17, 24, 39, 0.08);
+  }
+
+  .reward-celebration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .reward-celebration span {
+    position: absolute;
+    top: 0.75rem;
+    width: 0.55rem;
+    height: 0.9rem;
+    border: 2px solid #111827;
+    border-radius: 999px;
+    background: #F4B84A;
+    animation: reward-pop 1.35s ease-in-out infinite;
+  }
+
+  .reward-celebration span:nth-child(1) {
+    left: 13%;
+  }
+
+  .reward-celebration span:nth-child(2) {
+    left: 31%;
+    background: #16A34A;
+    animation-delay: 0.14s;
+  }
+
+  .reward-celebration span:nth-child(3) {
+    left: 52%;
+    animation-delay: 0.28s;
+  }
+
+  .reward-celebration span:nth-child(4) {
+    left: 70%;
+    background: #16A34A;
+    animation-delay: 0.42s;
+  }
+
+  .reward-celebration span:nth-child(5) {
+    left: 86%;
+    animation-delay: 0.56s;
+  }
+
+  @keyframes reward-pop {
+    0%, 100% {
+      transform: translateY(-1.25rem) rotate(0deg);
+      opacity: 0;
+    }
+    35% {
+      opacity: 1;
+    }
+    70% {
+      transform: translateY(2.25rem) rotate(18deg);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reward-celebration span {
+      animation: none;
+      opacity: 0.45;
+      transform: translateY(0);
+    }
+
+    .frother-input,
+    .frother-button,
+    .reward-ready-card * {
+      transition-duration: 0.01ms !important;
+    }
+  }
+
   @media (max-width: 640px) {
     .frother-public-hero,
     .frother-public-hero-content {

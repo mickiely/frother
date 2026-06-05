@@ -289,6 +289,60 @@ export default function LandingPage() {
         </div>
       </section>
 
+      <section className="px-4 pb-12 max-w-5xl mx-auto">
+        <div className="frother-card p-6 sm:p-8 bg-white">
+          <span className="frother-public-kicker text-[10px] px-3 py-1">For venues</span>
+          <div className="mt-5 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
+                See what paper stamp cards can&apos;t show you.
+              </h2>
+              <div className="mt-5 space-y-4 text-base font-semibold text-gray-700 leading-relaxed">
+                <p>
+                  Frother gives your venue a simple way to reward regulars and bring people back.
+                </p>
+                <p>
+                  Customers still get the familiar stamp card experience. Staff can quickly find a customer, add a stamp, and redeem a reward.
+                </p>
+                <p>
+                  It is made for cafes, pubs, restaurants, takeaway shops, and local venues that want regulars back without making the counter messy.
+                </p>
+              </div>
+              <div className="mt-6 grid gap-2 text-base font-black text-gray-900">
+                <p>No app for customers.</p>
+                <p>No paper cards to print.</p>
+                <p>No guessing who has gone quiet.</p>
+              </div>
+              <Link
+                to="/admin/demo-cafe"
+                className="frother-button bg-[#16A34A] text-[#FFF8EA] mt-7 px-7 text-base w-full sm:w-auto"
+              >
+                View business demo
+              </Link>
+            </div>
+
+            <div className="rounded-3xl border-2 border-gray-900 bg-[#FFF8EA] p-5 shadow-[4px_4px_0_#111827]">
+              <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-4">
+                Owners can see
+              </p>
+              <ul className="space-y-3">
+                {[
+                  'who is collecting stamps',
+                  'who has not been back lately',
+                  'which rewards are being used',
+                  'which offers are worth running again',
+                ].map(item => (
+                  <li key={item} className="flex items-start gap-3 text-base font-black text-gray-900 leading-snug">
+                    <span className="mt-0.5 text-[#16A34A] font-black shrink-0">✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <PilotLeadForm />
 
       {/* Feature cards */}

@@ -76,6 +76,7 @@ export default function CustomerDashboard() {
           brandColor={venue.brandColor}
           rewardDescription={venue.loyaltyRule.rewardDescription}
           isRewardLocked={isRewardLocked}
+          rewardsRedeemed={customer.rewardsRedeemed}
         />
 
         {/* Reward locked — complete profile CTA */}

@@ -245,6 +245,7 @@ function CustomerView({ customer, venue, onBack, onAddStamp, onRedeemReward }) {
         brandColor={venue.brandColor}
         rewardDescription={venue.loyaltyRule.rewardDescription}
         isRewardLocked={isRewardLocked}
+        rewardsRedeemed={customer.rewardsRedeemed}
       />
 
       {/* Lock notice */}
