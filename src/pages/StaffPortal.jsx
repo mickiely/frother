@@ -316,7 +316,7 @@ function CustomerView({ customer, venue, onBack, onAddStamps, onRedeemReward }) 
           )}
 
           <p className="text-xs text-gray-400 font-medium">
-            Bought more than one coffee? Add the matching number of stamps.
+            Bought 3 coffees? Tap Add 3 or stamp three times from the staff side.
           </p>
         </div>
       )}
@@ -345,6 +345,17 @@ function CustomerView({ customer, venue, onBack, onAddStamps, onRedeemReward }) 
         >
           Redeem reward
         </button>
+      </div>
+
+      {/* Counter stamper concept note */}
+      <div className="frother-card p-4 bg-gray-50 border-gray-200">
+        <p className="text-xs font-black text-gray-400 uppercase tracking-wide mb-1.5">Counter stamper idea</p>
+        <p className="text-sm font-semibold text-gray-600 leading-snug">
+          Staff tap once per coffee. Three coffees = three taps.
+        </p>
+        <p className="text-xs text-gray-400 font-medium mt-1.5">
+          This is staff-side only. Customers cannot add their own stamps.
+        </p>
       </div>
 
       <p className="text-xs text-gray-400 text-center">

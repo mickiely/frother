@@ -18,7 +18,7 @@ export default function LandingPage() {
               className="frother-button bg-[#F4B84A] text-gray-900 px-5 text-sm"
               style={{ minHeight: '42px' }}
             >
-              Open stamp card
+              See customer demo
             </Link>
             <Link
               to="/admin/demo-cafe"
@@ -77,20 +77,92 @@ export default function LandingPage() {
               to="/venue/demo-cafe"
               className="frother-button bg-[#F4B84A] text-gray-900 px-7 text-base"
             >
-              Open stamp card
+              See customer demo
             </Link>
             <Link
-              to="/admin/demo-cafe"
+              to="/staff/demo-cafe"
               className="frother-button bg-[#FFF8EA] text-gray-900 px-7 text-base"
             >
-              For venues
+              See staff demo
             </Link>
           </div>
         </div>
       </section>
 
+      {/* ── TWO TAPS. TWO JOBS. ──────────────────────────────── */}
+      <section className="px-4 pt-14 pb-2 max-w-5xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">
+            Two taps. Two jobs.
+          </h2>
+        </div>
+
+        <div className="grid gap-5 sm:grid-cols-2">
+
+          {/* Customer tap */}
+          <div
+            className="frother-card p-7 flex flex-col"
+            style={{ backgroundColor: '#FFFBF0' }}
+          >
+            <span className="frother-public-kicker self-start" style={{ fontSize: '0.7rem' }}>
+              Customer tap
+            </span>
+            <h3 className="mt-4 text-2xl font-black text-gray-900 leading-tight">
+              Customer tap
+            </h3>
+            <p className="mt-3 text-base font-medium text-gray-600 leading-relaxed">
+              Customers tap the front counter sign. Their stamp card opens on their phone. No app. No paper card.
+            </p>
+            <div className="mt-auto pt-6">
+              <Link
+                to="/venue/demo-cafe"
+                className="frother-button bg-[#F4B84A] text-gray-900 px-6 text-base w-full"
+              >
+                See customer demo
+              </Link>
+            </div>
+          </div>
+
+          {/* Staff tap */}
+          <div
+            className="frother-card p-7 flex flex-col"
+            style={{ backgroundColor: '#111827' }}
+          >
+            <span
+              className="frother-public-kicker self-start"
+              style={{ backgroundColor: '#F4B84A', color: '#111827', fontSize: '0.7rem' }}
+            >
+              Staff tap
+            </span>
+            <h3 className="mt-4 text-2xl font-black leading-tight" style={{ color: '#FFF8EA' }}>
+              Staff tap
+            </h3>
+            <p className="mt-3 text-base font-medium leading-relaxed" style={{ color: 'rgba(255,248,234,0.7)' }}>
+              Staff add stamps from the counter side. One coffee, one stamp. Three coffees, three stamps.
+            </p>
+            <p className="mt-3 text-xs font-semibold" style={{ color: 'rgba(255,248,234,0.45)' }}>
+              Staff stamping is protected so customers cannot add their own stamps.
+            </p>
+            <div className="mt-auto pt-6">
+              <Link
+                to="/staff/demo-cafe"
+                className="frother-button text-gray-900 px-6 text-base w-full"
+                style={{ backgroundColor: '#F4B84A' }}
+              >
+                See staff demo
+              </Link>
+            </div>
+          </div>
+
+        </div>
+
+        <p className="text-center text-sm font-medium text-gray-400 mt-5">
+          POS connection can come later. The pilot works without it.
+        </p>
+      </section>
+
       {/* ── TWO ENTRY POINT CARDS ──────────────────────────── */}
-      <section className="px-4 pt-12 pb-6 max-w-5xl mx-auto">
+      <section className="px-4 pt-10 pb-6 max-w-5xl mx-auto">
         <div className="grid gap-5 lg:grid-cols-[3fr_2fr]">
 
           {/* Customer card — big, warm, simple */}
@@ -116,7 +188,7 @@ export default function LandingPage() {
                 to="/venue/demo-cafe"
                 className="frother-button bg-[#F4B84A] text-gray-900 px-8 text-lg w-full sm:w-auto"
               >
-                Open stamp card
+                See customer demo
               </Link>
             </div>
           </div>
@@ -149,10 +221,10 @@ export default function LandingPage() {
             </ul>
             <div className="mt-auto pt-7 flex flex-col gap-2.5">
               <Link
-                to="/admin/demo-cafe"
+                to="/staff/demo-cafe"
                 className="frother-button bg-[#111827] text-[#FFF8EA] px-6 text-base w-full"
               >
-                View venue demo
+                See staff demo
               </Link>
               <a
                 href="#pilot-lead"
@@ -216,10 +288,10 @@ export default function LandingPage() {
               to="/venue/demo-cafe"
               className="frother-button bg-[#F4B84A] text-gray-900 px-8 text-base"
             >
-              Open stamp card
+              See customer demo
             </Link>
             <Link
-              to="/admin/demo-cafe"
+              to="/staff/demo-cafe"
               className="frother-button px-8 text-base"
               style={{
                 backgroundColor: 'transparent',
@@ -228,8 +300,14 @@ export default function LandingPage() {
                 color: '#FFF8EA',
               }}
             >
-              View venue demo
+              See staff demo
             </Link>
+            <a
+              href="#pilot-lead"
+              className="frother-button bg-[#16A34A] text-[#FFF8EA] px-8 text-base"
+            >
+              Start a pilot
+            </a>
           </div>
         </div>
       </section>
