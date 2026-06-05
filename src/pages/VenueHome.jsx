@@ -36,7 +36,7 @@ export default function VenueHome() {
             Buy {required}, get 1 free.
           </p>
           <p className="text-gray-600 text-base font-semibold mt-1">
-            No app. No paper card. Staff can help.
+            Tap the sign to open this page. Join once, then tap again next time. No app needed.
           </p>
         </div>
       </div>

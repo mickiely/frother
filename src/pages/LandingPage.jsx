@@ -67,7 +67,7 @@ export default function LandingPage() {
             Froth on.
           </h1>
           <p className="mt-5 text-lg sm:text-xl font-black text-gray-900 leading-snug max-w-sm">
-            Your stamp card, on your phone.
+            Tap your phone on the counter sign. Your stamp card opens.
           </p>
           <p className="mt-2 text-base font-semibold text-gray-600">
             No app. No paper card. Staff can help.
@@ -133,7 +133,7 @@ export default function LandingPage() {
               For cafes, pubs and restaurants
             </h2>
             <p className="mt-2 text-base font-medium text-gray-600 leading-relaxed">
-              Staff add stamps. Owners can see rewards, regulars and quiet days.
+              Each venue gets a branded tap sign. Customers tap their phone, join once, and keep collecting stamps.
             </p>
             <ul className="mt-5 flex flex-col gap-2.5">
               {[

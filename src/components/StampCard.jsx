@@ -116,7 +116,7 @@ export default function StampCard({
       )}
 
       <p className="mt-3 text-xs text-gray-500 text-center font-bold">
-        No app needed. Staff can look you up.
+        Next time, tap the counter sign again or ask staff to look you up.
       </p>
     </div>
   )

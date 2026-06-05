@@ -23,7 +23,7 @@ export default function StaffPortal() {
 
   function showToast(msg) {
     setToast(msg)
-    setTimeout(() => setToast(''), 2500)
+    setTimeout(() => setToast(''), 3000)
   }
 
   async function handleSearch(q) {
@@ -33,22 +33,26 @@ export default function StaffPortal() {
     setResults(r)
   }
 
-  async function handleAddStamp() {
-    const updated = await addStamp(selected.id, STAFF_ID, venue.loyaltyRule.stampsRequired)
+  async function handleAddStamps(count) {
+    let updated = selected
+    for (let i = 0; i < count; i++) {
+      updated = await addStamp(updated.id, STAFF_ID, venue.loyaltyRule.stampsRequired)
+    }
     setSelected(updated)
-    const justEarned = updated.stamps >= venue.loyaltyRule.stampsRequired &&
-      selected.stamps < venue.loyaltyRule.stampsRequired
-    if (justEarned && updated.profileStatus !== 'full') {
-      showToast('☕ Stamp added — reward earned but profile required')
+    const rewardReady = updated.stamps >= venue.loyaltyRule.stampsRequired &&
+      updated.profileStatus === 'full'
+    if (rewardReady) {
+      showToast(`Reward ready. Tell ${updated.name} their free one is ready.`)
     } else {
-      showToast('✅ Stamp added!')
+      const label = count === 1 ? 'stamp' : 'stamps'
+      showToast(`Added ${count} ${label} for ${updated.name}.`)
     }
   }
 
   async function handleRedeemReward() {
     const updated = await redeemReward(selected.id, STAFF_ID)
     setSelected(updated)
-    showToast('🏆 Reward redeemed!')
+    showToast('Reward redeemed!')
   }
 
   function handlePin(e) {
@@ -68,7 +72,7 @@ export default function StaffPortal() {
     return (
       <div className="min-h-screen frother-shell flex flex-col" style={{ '--brand-color': venue.brandColor }}>
         <div className="frother-hero px-5 pt-10 pb-6">
-          <Link to={`/venue/${venueSlug}`} className="text-gray-500 text-sm mb-4 block font-bold">← Venue</Link>
+          <Link to={`/venue/${venueSlug}`} className="text-gray-500 text-sm mb-4 block font-bold">Back</Link>
           <VenueBrand venue={venue} size="md" />
           <p className="text-gray-900 font-black text-xl mt-3">Staff counter</p>
           <p className="text-gray-500 text-sm font-medium mt-1">Find a customer, add a stamp, or mark a reward used.</p>
@@ -137,7 +141,7 @@ export default function StaffPortal() {
             customer={selected}
             venue={venue}
             onBack={() => { setSelected(null); setQuery(''); setResults([]) }}
-            onAddStamp={handleAddStamp}
+            onAddStamps={handleAddStamps}
             onRedeemReward={handleRedeemReward}
           />
         ) : (
@@ -170,7 +174,7 @@ export default function StaffPortal() {
                       <div className="text-right">
                         <p className="font-black text-2xl" style={{ color: venue.brandColor }}>{c.stamps}</p>
                         <p className="text-xs text-gray-500 font-bold">
-                          {isLocked ? '🔒 locked' : isRewardEarned ? '🏆 ready' : 'stamps'}
+                          {isLocked ? 'locked' : isRewardEarned ? 'ready' : 'stamps'}
                         </p>
                       </div>
                     </button>
@@ -195,16 +199,34 @@ export default function StaffPortal() {
 
 // ── Customer detail view ──────────────────────────────────────────────────────
 
-function CustomerView({ customer, venue, onBack, onAddStamp, onRedeemReward }) {
+function CustomerView({ customer, venue, onBack, onAddStamps, onRedeemReward }) {
   const required = venue.loyaltyRule.stampsRequired
   const isRewardEarned = customer.stamps >= required
   const isRewardLocked = isRewardEarned && customer.profileStatus !== 'full'
   const isRewardReady = isRewardEarned && customer.profileStatus === 'full'
 
+  const [showCustom, setShowCustom] = useState(false)
+  const [customCount, setCustomCount] = useState('')
+  const [adding, setAdding] = useState(false)
+
+  async function doAdd(count) {
+    setAdding(true)
+    setShowCustom(false)
+    setCustomCount('')
+    await onAddStamps(count)
+    setAdding(false)
+  }
+
+  function handleCustomSave() {
+    const n = parseInt(customCount, 10)
+    if (!n || n < 1 || n > 20) return
+    doAdd(n)
+  }
+
   return (
     <div className="space-y-4">
       <button onClick={onBack} className="text-sm text-gray-500 flex items-center gap-1">
-        ← Back to search
+        Back to search
       </button>
 
       <div className="frother-card p-4 flex justify-between items-start">
@@ -218,7 +240,7 @@ function CustomerView({ customer, venue, onBack, onAddStamp, onRedeemReward }) {
             ? 'bg-green-100 text-green-700'
             : 'bg-gray-100 text-gray-500'
         }`}>
-          {customer.profileStatus === 'full' ? '✓ Full profile' : 'Quick profile'}
+          {customer.profileStatus === 'full' ? 'Full profile' : 'Quick profile'}
         </span>
       </div>
 
@@ -243,17 +265,77 @@ function CustomerView({ customer, venue, onBack, onAddStamp, onRedeemReward }) {
         </div>
       )}
 
-      <div className="grid grid-cols-2 gap-3">
-        <button
-          onClick={onAddStamp}
-          className="frother-button text-white text-base"
-          style={{ backgroundColor: venue.brandColor }}
-        >
-          ☕ Add stamp
-        </button>
+      {/* Multi-stamp quick buttons */}
+      {!isRewardEarned && (
+        <div className="frother-card p-4 space-y-3">
+          <p className="text-xs font-black text-gray-500 uppercase tracking-wide">Add stamps</p>
+          <div className="grid grid-cols-4 gap-2">
+            {[1, 2, 3].map(n => (
+              <button
+                key={n}
+                onClick={() => doAdd(n)}
+                disabled={adding}
+                className="frother-button text-white text-sm py-3 disabled:opacity-50"
+                style={{ backgroundColor: venue.brandColor }}
+              >
+                Add {n}
+              </button>
+            ))}
+            <button
+              onClick={() => setShowCustom(v => !v)}
+              disabled={adding}
+              className="frother-button bg-gray-100 text-gray-900 text-sm py-3 disabled:opacity-50"
+            >
+              Custom
+            </button>
+          </div>
+
+          {showCustom && (
+            <div className="flex gap-2 items-center pt-1">
+              <label htmlFor="custom-stamp-count" className="sr-only">Number of stamps</label>
+              <input
+                id="custom-stamp-count"
+                type="number"
+                min={1}
+                max={20}
+                value={customCount}
+                onChange={e => setCustomCount(e.target.value)}
+                placeholder="1-20"
+                className="frother-input px-3 py-2.5 text-base w-24 text-center"
+                autoFocus
+              />
+              <button
+                onClick={handleCustomSave}
+                disabled={adding || !customCount || parseInt(customCount, 10) < 1}
+                className="frother-button text-white text-sm flex-1 disabled:opacity-50"
+                style={{ backgroundColor: venue.brandColor }}
+              >
+                Save stamps
+              </button>
+            </div>
+          )}
+
+          <p className="text-xs text-gray-400 font-medium">
+            Bought more than one coffee? Add the matching number of stamps.
+          </p>
+        </div>
+      )}
+
+      {/* Redeem row — always visible */}
+      <div className={`grid gap-3 ${isRewardEarned ? 'grid-cols-2' : 'grid-cols-1'}`}>
+        {isRewardEarned && (
+          <button
+            onClick={() => doAdd(1)}
+            disabled={adding}
+            className="frother-button text-white text-base disabled:opacity-50"
+            style={{ backgroundColor: venue.brandColor }}
+          >
+            Add stamp
+          </button>
+        )}
         <button
           onClick={onRedeemReward}
-          disabled={!isRewardReady}
+          disabled={!isRewardReady || adding}
           aria-disabled={!isRewardReady}
           className={`frother-button text-base transition-all ${
             isRewardReady
@@ -261,12 +343,12 @@ function CustomerView({ customer, venue, onBack, onAddStamp, onRedeemReward }) {
               : 'bg-gray-100 text-gray-300 cursor-not-allowed shadow-none'
           }`}
         >
-          🏆 Redeem
+          Redeem reward
         </button>
       </div>
 
       <p className="text-xs text-gray-400 text-center">
-        Total stamps earned: {customer.totalStampsEarned} · Rewards redeemed: {customer.rewardsRedeemed}
+        Total stamps earned: {customer.totalStampsEarned} &middot; Rewards redeemed: {customer.rewardsRedeemed}
       </p>
     </div>
   )

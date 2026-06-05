@@ -45,7 +45,7 @@ export default function JoinPage() {
           Buy {venue.loyaltyRule.stampsRequired}, get 1 free.
         </p>
         <p className="text-gray-600 text-base font-bold mt-2">
-          No app. No paper card. Staff can help.
+          Tap the counter sign and enter your name and mobile. That's it.
         </p>
       </div>
 
@@ -91,7 +91,7 @@ export default function JoinPage() {
           </form>
 
           <p className="text-sm text-gray-500 text-center mt-5 font-semibold">
-            We only use your mobile to save your stamps. Staff can help if you get stuck.
+            No app needed. QR code is only there as a backup.
           </p>
         </div>
       </div>
