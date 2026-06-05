@@ -23,14 +23,12 @@ export default function LandingPage() {
 
       {/* Hero */}
       <section className="frother-public-hero">
-        {/* Illustrated background */}
         <img
           src="/frother-hero.jpg"
           alt=""
           aria-hidden="true"
           className="frother-public-hero-image"
         />
-        {/* Cream centre overlay — wider than the venue page so illustration shows at edges */}
         <div
           aria-hidden="true"
           className="absolute inset-0"
@@ -49,7 +47,6 @@ export default function LandingPage() {
             ].join(' '),
           }}
         />
-        {/* Content */}
         <div className="frother-public-hero-content px-5">
           <span className="frother-public-kicker">
             Cafes · Pubs · Restaurants · Takeaways
@@ -60,13 +57,10 @@ export default function LandingPage() {
             Froth on.
           </h1>
           <p className="mt-5 text-lg sm:text-xl font-black text-gray-900 leading-snug max-w-sm">
-            Customers tap the counter sign and get a simple stamp card on their phone.
+            Your stamp card, on your phone.
           </p>
-          <p className="mt-3 text-base font-semibold text-gray-700 leading-relaxed max-w-md">
-            Venues keep the old-school reward, but finally see who&apos;s coming back.
-          </p>
-          <p className="mt-3 text-base font-black text-gray-900">
-            Buy 9. Get 1 free. No app. No lost cards.
+          <p className="mt-2 text-base font-semibold text-gray-600">
+            No app. No paper card. Staff can help.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <a
@@ -85,260 +79,161 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Who sees what */}
-      <section className="px-4 pt-14 pb-10 max-w-6xl mx-auto">
-        <h2 className="text-3xl sm:text-4xl font-black text-gray-900 text-center mb-2">
-          Who sees what?
+      {/* ── CUSTOMER SECTION ─────────────────────────────── */}
+      <section className="px-4 pt-16 pb-4 max-w-5xl mx-auto">
+        <span
+          className="frother-public-kicker"
+          style={{ fontSize: '0.7rem' }}
+        >
+          Customer
+        </span>
+        <h2 className="mt-4 text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
+          What customers see
         </h2>
-        <p className="text-center text-base font-medium text-gray-600 mb-10">
-          Same old-school reward. Three simple views.
+        <p className="mt-2 text-base font-semibold text-gray-600 max-w-xl leading-relaxed">
+          It works like the paper card they already know — just harder to lose.
         </p>
 
-        <div className="grid gap-5 lg:grid-cols-3">
-          <div
-            className="frother-card p-6 flex flex-col"
-            style={{ backgroundColor: '#FFFBF0' }}
-          >
-            <span className="frother-public-kicker text-[10px] px-3 py-1 self-start">Customer</span>
-            <h3 className="font-black text-2xl text-gray-900 mt-4 leading-tight">
-              They see a stamp card
-            </h3>
-
-            <div className="mt-5 rounded-3xl border-2 border-gray-900 bg-[#FFF8EA] p-5 text-center shadow-[4px_4px_0_#111827]">
-              <p className="text-2xl font-black text-gray-900 leading-none">BUY 9, GET 1 FREE</p>
-              <div className="mt-4 grid grid-cols-5 gap-1.5">
-                {Array.from({ length: 10 }).map((_, i) => (
-                  <span
-                    key={i}
-                    className={`aspect-square rounded-full border-2 border-gray-900 ${i < 6 ? 'bg-[#F4B84A]' : 'bg-white'}`}
-                  />
-                ))}
-              </div>
-              <div className="mt-4 mx-auto grid h-20 w-20 place-items-center rounded-2xl border-2 border-dashed border-gray-900 bg-white">
-                <span className="text-2xl font-black text-[#16A34A]">Tap</span>
-              </div>
-              <p className="mt-4 text-sm font-black text-gray-900">NO APP REQUIRED</p>
-              <p className="mt-1 text-xs font-bold text-gray-500">Staff can help</p>
-            </div>
-
-            <ul className="mt-5 flex flex-col gap-3 flex-1">
-              {[
-                'Tap the counter sign',
-                'Enter name + mobile once',
-                'See their stamps',
-                'Redeem when full',
-              ].map((item, index) => (
-                <li key={item} className="flex items-start gap-3 text-base font-black text-gray-900 leading-snug">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-gray-900 bg-[#F4B84A] text-xs">
-                    {index + 1}
-                  </span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 text-sm font-black text-gray-600">
-              No app. No password. Staff can look them up.
-            </p>
-            <Link
-              to="/venue/demo-cafe/join"
-              className="frother-button bg-[#F4B84A] text-gray-900 mt-8 text-sm w-full"
-            >
-              Try customer view
-            </Link>
-          </div>
-
-          <div className="frother-card p-6 bg-white flex flex-col">
-            <span
-              className="frother-public-kicker text-[10px] px-3 py-1 self-start"
-              style={{ backgroundColor: '#16A34A', color: '#FFF8EA', borderColor: '#111827' }}
-            >
-              Staff
-            </span>
-            <h3 className="font-black text-2xl text-gray-900 mt-4 leading-tight">
-              They add the stamps
-            </h3>
-            <div className="mt-5 rounded-3xl border-2 border-gray-900 bg-[#F8F1E4] p-4 shadow-[4px_4px_0_#111827]">
-              <p className="text-xs font-black text-gray-500 uppercase tracking-widest">Counter tool</p>
-              <div className="mt-3 rounded-2xl border-2 border-gray-900 bg-white px-3 py-2 text-sm font-black text-gray-500">
-                Search name or mobile
-              </div>
-              <button type="button" className="mt-3 frother-button w-full bg-[#16A34A] text-[#FFF8EA] text-sm">
-                Add stamp
-              </button>
-            </div>
-            <ul className="mt-5 flex flex-col gap-3 flex-1">
-              {[
-                'Search by name or mobile',
-                'Add a stamp',
-                'Redeem a full card',
-                'Keep the line moving',
-              ].map(item => (
-                <li key={item} className="flex items-start gap-3 text-sm font-bold text-gray-800 leading-snug">
-                  <span className="mt-0.5 text-[#16A34A] font-black shrink-0">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 text-sm font-black text-gray-600">
-              Built for busy counters, not computer nerds.
-            </p>
-            <Link
-              to="/staff/demo-cafe"
-              className="frother-button bg-[#16A34A] text-[#FFF8EA] mt-8 text-sm w-full"
-            >
-              Try staff view
-            </Link>
-          </div>
-
-          <div className="frother-card p-6 bg-white flex flex-col">
-            <span
-              className="frother-public-kicker text-[10px] px-3 py-1 self-start"
-              style={{ backgroundColor: '#111827', color: '#FFF8EA', borderColor: '#111827' }}
-            >
-              Venue owner
-            </span>
-            <h3 className="font-black text-2xl text-gray-900 mt-4 leading-tight">
-              They see the useful stuff
-            </h3>
-            <div className="mt-5 rounded-3xl border-2 border-gray-900 bg-[#111827] p-4 text-[#FFF8EA] shadow-[4px_4px_0_#16A34A]">
-              <p className="text-xs font-black uppercase tracking-widest text-[#F4B84A]">Venue view</p>
-              <div className="mt-3 grid grid-cols-2 gap-2">
-                <div className="rounded-2xl bg-[#FFF8EA] p-3 text-gray-900">
-                  <p className="text-2xl font-black">12</p>
-                  <p className="text-[10px] font-black uppercase">Close</p>
-                </div>
-                <div className="rounded-2xl bg-[#FFF8EA] p-3 text-gray-900">
-                  <p className="text-2xl font-black">7</p>
-                  <p className="text-[10px] font-black uppercase">Quiet</p>
-                </div>
-              </div>
-              <div className="mt-2 rounded-2xl border-2 border-[#FFF8EA]/30 px-3 py-2 text-xs font-bold">
-                Froffers worth sending
-              </div>
-            </div>
-            <ul className="mt-5 flex flex-col gap-3 flex-1">
-              {[
-                'Who is close to a reward',
-                'Who has gone quiet',
-                'Which offers are working',
-                'Which regulars need a nudge',
-              ].map(item => (
-                <li key={item} className="flex items-start gap-3 text-sm font-bold text-gray-800 leading-snug">
-                  <span className="mt-0.5 text-[#16A34A] font-black shrink-0">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 text-sm font-black text-gray-600">
-              The customer gets simple. The venue gets smarter.
-            </p>
-            <Link
-              to="/admin/demo-cafe"
-              className="frother-button bg-[#16A34A] text-[#FFF8EA] mt-8 text-sm w-full"
-            >
-              View venue admin
-            </Link>
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        {/* 4 steps */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            ['Customer', 'Tap. Stamp. Redeem.'],
-            ['Staff', 'Look up. Add stamp. Done.'],
-            ['Venue', 'See regulars. Spot quiet days. Send better offers.'],
-          ].map(([label, text]) => (
-            <div key={label} className="rounded-3xl border-2 border-gray-900 bg-[#FFF8EA] p-4 shadow-[3px_3px_0_#111827]">
-              <p className="text-xs font-black uppercase tracking-widest text-gray-500">{label}</p>
-              <p className="mt-1 text-lg font-black leading-tight text-gray-900">{text}</p>
+            {
+              step: '1',
+              title: 'Tap the sign',
+              body: 'Tap your phone on the counter sign, or scan the QR code.',
+            },
+            {
+              step: '2',
+              title: 'Enter your name and mobile',
+              body: 'Just enough so staff can find your card next time.',
+            },
+            {
+              step: '3',
+              title: 'See your stamp card',
+              body: 'Your stamps show on your phone. No app to download.',
+            },
+            {
+              step: '4',
+              title: 'Get your reward',
+              body: 'When the card is full, staff can help you claim it.',
+            },
+          ].map(({ step, title, body }) => (
+            <div
+              key={step}
+              className="frother-card p-5 flex flex-col gap-3"
+              style={{ backgroundColor: '#FFFBF0' }}
+            >
+              <span
+                className="w-10 h-10 rounded-full flex items-center justify-center font-black text-gray-900 text-base border-2 border-gray-900 shrink-0"
+                style={{ backgroundColor: '#F4B84A', boxShadow: '3px 3px 0 #111827' }}
+              >
+                {step}
+              </span>
+              <h3 className="font-black text-lg text-gray-900 leading-snug">{title}</h3>
+              <p className="text-sm font-medium text-gray-700 leading-relaxed">{body}</p>
             </div>
           ))}
         </div>
 
-        {/* How it works strip */}
-        <div className="mt-6 frother-card p-6 bg-white">
-          <p className="text-center text-xs font-black text-gray-500 uppercase tracking-widest mb-6">
-            How it works
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center">
-            {[
-              ['1', 'Customer taps'],
-              ['2', 'Staff stamps'],
-              ['3', 'Reward gets earned'],
-              ['4', 'Venue knows who to nudge'],
-            ].map(([num, label], i, arr) => (
-              <div key={num} className="flex flex-col sm:flex-row items-center">
-                <div className="flex flex-col items-center px-5 py-2">
-                  <span
-                    className="w-10 h-10 rounded-full flex items-center justify-center font-black text-gray-900 text-sm border-2 border-gray-900"
-                    style={{ backgroundColor: '#F4B84A', boxShadow: '3px 3px 0 #111827' }}
-                  >
-                    {num}
-                  </span>
-                  <span className="mt-2 text-sm font-bold text-gray-800 text-center leading-tight max-w-[90px]">
-                    {label}
-                  </span>
-                </div>
-                {i < arr.length - 1 && (
-                  <span className="text-gray-300 font-black text-2xl sm:mb-5 rotate-90 sm:rotate-0">
-                    →
-                  </span>
-                )}
-              </div>
-            ))}
+        {/* Reassurance box */}
+        <div
+          className="mt-6 frother-card p-6 sm:p-8 flex flex-col sm:flex-row sm:items-start sm:gap-10"
+          style={{ backgroundColor: '#FFFBF0' }}
+        >
+          <div className="flex-1">
+            <h3 className="text-xl sm:text-2xl font-black text-gray-900 leading-tight">
+              Not good with phones?
+            </h3>
+            <p className="mt-2 text-base font-medium text-gray-700 leading-relaxed max-w-md">
+              No worries. Ask the staff member at the counter. They can look
+              you up by name or mobile and help you get your stamps.
+            </p>
+          </div>
+          <div className="mt-5 sm:mt-0 sm:shrink-0">
+            <Link
+              to="/venue/demo-cafe/join"
+              className="frother-button bg-[#F4B84A] text-gray-900 px-7 text-base"
+            >
+              Try customer view
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="px-4 pb-12 max-w-5xl mx-auto">
+      {/* ── STAFF SECTION ────────────────────────────────── */}
+      <section className="px-4 pt-12 pb-4 max-w-5xl mx-auto">
         <div className="frother-card p-6 sm:p-8 bg-white">
-          <span className="frother-public-kicker text-[10px] px-3 py-1">For venues</span>
-          <div className="mt-5 grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
-                See what paper stamp cards can&apos;t show you.
-              </h2>
-              <div className="mt-5 space-y-4 text-base font-semibold text-gray-700 leading-relaxed">
-                <p>
-                  Frother gives your venue a simple way to reward regulars and bring people back.
-                </p>
-                <p>
-                  Customers still get the familiar stamp card experience. Staff can quickly find a customer, add a stamp, and redeem a reward.
-                </p>
-                <p>
-                  It is made for cafes, pubs, restaurants, takeaway shops, and local venues that want regulars back without making the counter messy.
-                </p>
-              </div>
-              <div className="mt-6 grid gap-2 text-base font-black text-gray-900">
-                <p>No app for customers.</p>
-                <p>No paper cards to print.</p>
-                <p>No guessing who has gone quiet.</p>
-              </div>
-              <Link
-                to="/admin/demo-cafe"
-                className="frother-button bg-[#16A34A] text-[#FFF8EA] mt-7 px-7 text-base w-full sm:w-auto"
-              >
-                View business demo
-              </Link>
-            </div>
+          <span
+            className="frother-public-kicker"
+            style={{ backgroundColor: '#16A34A', color: '#FFF8EA', fontSize: '0.7rem' }}
+          >
+            Staff
+          </span>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-black text-gray-900 leading-tight">
+            What staff see
+          </h2>
+          <p className="mt-1.5 text-base font-semibold text-gray-600 leading-relaxed">
+            The counter stays simple.
+          </p>
+          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+            {[
+              'Find a customer by name or mobile',
+              'Add a stamp',
+              'See when a reward is ready',
+              'Help customers who get stuck',
+            ].map(item => (
+              <li key={item} className="flex items-start gap-2.5 text-base font-medium text-gray-800 leading-snug">
+                <span className="mt-0.5 text-[#16A34A] font-black shrink-0 text-lg">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-7">
+            <Link
+              to="/staff/demo-cafe"
+              className="frother-button bg-[#16A34A] text-[#FFF8EA] px-7 text-base"
+            >
+              View staff demo
+            </Link>
+          </div>
+        </div>
+      </section>
 
-            <div className="rounded-3xl border-2 border-gray-900 bg-[#FFF8EA] p-5 shadow-[4px_4px_0_#111827]">
-              <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-4">
-                Owners can see
-              </p>
-              <ul className="space-y-3">
-                {[
-                  'who is collecting stamps',
-                  'who has not been back lately',
-                  'which rewards are being used',
-                  'which offers are worth running again',
-                ].map(item => (
-                  <li key={item} className="flex items-start gap-3 text-base font-black text-gray-900 leading-snug">
-                    <span className="mt-0.5 text-[#16A34A] font-black shrink-0">✓</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {/* ── VENUE SECTION ────────────────────────────────── */}
+      <section className="px-4 pt-6 pb-14 max-w-5xl mx-auto">
+        <div className="frother-card p-6 sm:p-8 bg-white">
+          <span
+            className="frother-public-kicker"
+            style={{ backgroundColor: '#111827', color: '#FFF8EA', fontSize: '0.7rem' }}
+          >
+            Venue
+          </span>
+          <h2 className="mt-4 text-2xl sm:text-3xl font-black text-gray-900 leading-tight">
+            What the venue sees
+          </h2>
+          <p className="mt-1.5 text-base font-semibold text-gray-600 leading-relaxed max-w-xl">
+            The business gets the useful bits without making customers do extra work.
+          </p>
+          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
+            {[
+              'See regulars at a glance',
+              'See who has not been back',
+              'Create simple offers',
+              'Keep loyalty running without paper cards',
+            ].map(item => (
+              <li key={item} className="flex items-start gap-2.5 text-base font-medium text-gray-800 leading-snug">
+                <span className="mt-0.5 text-[#16A34A] font-black shrink-0 text-lg">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-7">
+            <Link
+              to="/admin/demo-cafe"
+              className="frother-button bg-[#111827] text-[#FFF8EA] px-7 text-base"
+            >
+              View business demo
+            </Link>
           </div>
         </div>
       </section>
@@ -383,8 +278,8 @@ export default function LandingPage() {
             className="mt-3 text-sm font-medium leading-relaxed max-w-md mx-auto"
             style={{ color: 'rgba(255,248,234,0.65)' }}
           >
-            Includes a branded rewards page, QR/NFC tap-to-join setup, staff dashboard,
-            admin dashboard, Froffers, Regulars Radar, basic staff training and first
+            Includes a branded rewards page, QR/NFC tap-to-join setup, staff view,
+            venue admin view, Froffers, Regulars Radar, basic staff training and first
             month support.
           </p>
           <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
