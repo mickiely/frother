@@ -123,10 +123,9 @@ export default function LandingPage() {
 
             <ul className="mt-5 flex flex-col gap-3 flex-1">
               {[
-                'Tap the sign',
-                'Enter name + mobile',
-                'See stamp card',
-                'Staff add stamps',
+                'Tap the counter sign',
+                'Enter name + mobile once',
+                'See their stamps',
                 'Redeem when full',
               ].map((item, index) => (
                 <li key={item} className="flex items-start gap-3 text-base font-black text-gray-900 leading-snug">
