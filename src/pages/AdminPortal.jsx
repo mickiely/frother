@@ -10,7 +10,7 @@ import CampaignsTab from '../components/admin/CampaignsTab'
 
 const TABS = [
   { id: 'stats',     label: 'Stats' },
-  { id: 'members',   label: 'Members' },
+  { id: 'members',   label: 'Customers' },
   { id: 'segments',  label: 'Regulars Radar' },
   { id: 'campaigns', label: 'Campaigns' },
   { id: 'froffers',  label: 'Froffers' },
@@ -48,7 +48,8 @@ export default function AdminPortal() {
         <div className="px-5 pt-10 pb-6 frother-admin-hero">
           <Link to={`/venue/${venueSlug}`} className="text-gray-500 text-sm mb-4 block font-bold">← Venue</Link>
           <VenueBrand venue={venue} size="md" />
-          <p className="text-gray-500 text-sm mt-2 font-black uppercase tracking-wider">Admin Portal</p>
+          <p className="text-gray-900 font-black text-xl mt-3">Venue view</p>
+          <p className="text-gray-500 text-sm font-medium mt-1">See what is happening behind the counter.</p>
         </div>
         <div className="flex-1 flex items-center justify-center px-6">
           <div className="frother-card p-6 w-full max-w-xs">
@@ -85,7 +86,7 @@ export default function AdminPortal() {
         <div className="flex justify-between items-start mb-3">
           <div>
             <VenueBrand venue={venue} size="sm" />
-            <p className="text-gray-500 text-xs mt-2 font-black uppercase tracking-wider">Admin</p>
+            <p className="text-gray-900 font-black text-base mt-1.5">Venue view</p>
           </div>
           <button onClick={() => setAuthed(false)} className="text-gray-500 text-xs font-bold">Sign out</button>
         </div>

@@ -79,7 +79,8 @@ export default function StaffPortal() {
         <div className="frother-hero px-5 pt-10 pb-6">
           <Link to={`/venue/${venueSlug}`} className="text-gray-500 text-sm mb-4 block font-bold">← Venue</Link>
           <VenueBrand venue={venue} size="md" />
-          <p className="text-gray-500 text-sm mt-2 font-black uppercase tracking-wider">Staff Portal</p>
+          <p className="text-gray-900 font-black text-xl mt-3">Staff counter</p>
+          <p className="text-gray-500 text-sm font-medium mt-1">Find the customer, add a stamp, or redeem a reward.</p>
         </div>
         <div className="flex-1 flex items-center justify-center px-6">
           <div className="frother-card p-6 w-full max-w-xs">
@@ -126,7 +127,7 @@ export default function StaffPortal() {
         <div className="flex justify-between items-start">
           <div>
             <VenueBrand venue={venue} size="sm" />
-            <p className="text-gray-500 text-xs mt-2 font-black uppercase tracking-wider">Staff Portal</p>
+            <p className="text-gray-900 font-black text-base mt-1.5">Staff counter</p>
           </div>
           <button onClick={() => setAuthed(false)} className="text-gray-500 text-xs font-bold">Sign out</button>
         </div>

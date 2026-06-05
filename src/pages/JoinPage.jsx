@@ -38,22 +38,16 @@ export default function JoinPage() {
       <div className="frother-hero px-5 pt-10 pb-8">
         <Link to={`/venue/${slug}`} className="text-gray-500 text-sm mb-5 block font-bold">← Back</Link>
         <VenueBrand venue={venue} size="md" />
-        <div className="frother-sticker text-[10px] px-2.5 py-1 mt-5 rotate-[-2deg]">No app</div>
-        <p className="mt-4 text-gray-900 font-black text-3xl leading-tight tracking-tight">
-          Join in 10 seconds.
+        <p className="mt-5 text-gray-900 font-black text-3xl leading-tight tracking-tight">
+          Join rewards
         </p>
         <p className="text-gray-600 text-base font-bold mt-1">
-          Just name and mobile. No app, no card.
+          Buy {venue.loyaltyRule.stampsRequired}, get 1 free. No app required.
         </p>
       </div>
 
       <div className="px-4 py-6 max-w-lg mx-auto -mt-5">
         <div className="frother-card p-5">
-          <p className="text-sm text-gray-600 mb-5 font-medium">
-            Buy {venue.loyaltyRule.stampsRequired} coffees, get your{' '}
-            {venue.loyaltyRule.rewardDescription.toLowerCase()}.
-          </p>
-
           <form onSubmit={handleSubmit} className="space-y-4">
             <Field
               id="quick-join-first-name"
@@ -74,14 +68,6 @@ export default function JoinPage() {
               onChange={v => setForm(f => ({ ...f, phone: v }))}
               required
             />
-            <Field
-              id="quick-join-email"
-              label="Email (optional)"
-              type="email"
-              placeholder="you@email.com"
-              value={form.email}
-              onChange={v => setForm(f => ({ ...f, email: v }))}
-            />
 
             {error && (
               <p className="text-red-500 text-sm bg-red-50 px-3 py-2 rounded-lg">{error}</p>
@@ -93,12 +79,12 @@ export default function JoinPage() {
               className="frother-button w-full text-white text-base mt-2"
               style={{ backgroundColor: venue.brandColor }}
             >
-              {submitting ? 'Joining...' : "Join — it's free"}
+              {submitting ? 'Joining...' : 'Join rewards'}
             </button>
           </form>
 
-          <p className="text-xs text-gray-500 text-center mt-4 font-medium">
-            We only use your details for this loyalty program.
+          <p className="text-sm text-gray-500 text-center mt-5 font-semibold">
+            Need help? Ask staff.
           </p>
         </div>
       </div>

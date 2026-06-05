@@ -51,9 +51,8 @@ export default function StampCard({
       <div className="flex justify-between items-center mb-4">
         <div>
           <p className="text-sm text-gray-500 font-bold">Your stamp card</p>
-          <p className="text-3xl font-black tracking-tight">
-            {visibleStamps}
-            <span className="text-gray-400 text-lg font-normal"> / {required}</span>
+          <p className="text-lg font-black tracking-tight text-gray-900">
+            You have {visibleStamps} of {required} stamps.
           </p>
         </div>
         {statusEl}
@@ -101,19 +100,16 @@ export default function StampCard({
       )}
 
       <p className="mt-3 text-xs text-gray-500 text-center font-bold">
-        Staff can help if you get stuck.
+        No app needed. Staff can look you up.
       </p>
     </div>
   )
 }
 
 function getProgressMessage({ stamps, required, isRewardLocked, isRewardReady, isRedeemedFreshCard }) {
-  if (isRewardReady) return 'Reward ready. Show this to staff.'
-  if (isRewardLocked) return 'Reward ready. Complete profile to unlock it.'
-  if (isRedeemedFreshCard) return 'Reward used. New card started.'
-  if (stamps === 0) return 'You’re in. Staff can add your first stamp.'
-  if (stamps >= 1 && stamps <= 3) return 'Nice start. Keep tapping when you visit.'
-  if (stamps >= 4 && stamps <= 6) return 'You’re over halfway. Your free one is getting closer.'
-  if (stamps >= 7 && stamps < required) return 'Nearly there. One more visit could unlock your reward.'
-  return 'Keep tapping when you visit.'
+  if (isRewardReady) return 'Your free one is ready. Show this to staff.'
+  if (isRewardLocked) return 'Your reward is ready. Ask staff to help you unlock it.'
+  if (isRedeemedFreshCard) return 'Reward used. New card started — keep going!'
+  if (stamps === 0) return 'All set. Staff will add your first stamp next visit.'
+  return 'Keep going. Staff will add your next stamp.'
 }
