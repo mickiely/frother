@@ -263,7 +263,27 @@
     }
   }
 
+  /* Next-stamp pulse — draws the eye to the stamp they are about to earn */
+  .stamp-next {
+    animation: stamp-next-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes stamp-next-pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 rgba(244, 184, 74, 0);
+      border-color: rgb(209, 213, 219);
+    }
+    50% {
+      box-shadow: 0 0 0 5px rgba(244, 184, 74, 0.45);
+      border-color: rgba(244, 184, 74, 0.85);
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    .stamp-next {
+      animation: none;
+    }
+
     .reward-celebration span {
       animation: none;
       opacity: 0.45;

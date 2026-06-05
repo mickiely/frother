@@ -71,7 +71,7 @@ export default function StaffPortal() {
           <Link to={`/venue/${venueSlug}`} className="text-gray-500 text-sm mb-4 block font-bold">← Venue</Link>
           <VenueBrand venue={venue} size="md" />
           <p className="text-gray-900 font-black text-xl mt-3">Staff counter</p>
-          <p className="text-gray-500 text-sm font-medium mt-1">Find the customer, add a stamp, or redeem a reward.</p>
+          <p className="text-gray-500 text-sm font-medium mt-1">Find a customer, add a stamp, or mark a reward used.</p>
         </div>
         <div className="flex-1 flex items-center justify-center px-6">
           <div className="frother-card p-6 w-full max-w-xs">

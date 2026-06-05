@@ -11,8 +11,7 @@ export default function VenueHome() {
   useEffect(() => {
     async function load() {
       const v = await getVenue(slug)
-      if (!v) { setLoading(false); return }
-      setVenue(v)
+      setVenue(v || null)
       setLoading(false)
     }
     load()
@@ -21,32 +20,54 @@ export default function VenueHome() {
   if (loading) return <LoadingScreen />
   if (!venue) return <NotFoundMsg />
 
+  const required = venue.loyaltyRule.stampsRequired
+
   return (
     <div className="min-h-screen frother-shell" style={{ '--brand-color': venue.brandColor }}>
+
+      {/* Venue-branded header */}
       <div className="frother-hero px-5 pt-10 pb-8">
         <div className="max-w-lg mx-auto">
           <VenueBrand venue={venue} size="md" />
-          <p className="mt-6 text-gray-900 font-black text-4xl leading-tight tracking-tight">
-            Join rewards
+          <p className="mt-5 text-gray-900 font-black text-3xl leading-tight tracking-tight">
+            Your stamp card, on your phone.
           </p>
           <p className="text-gray-700 text-xl font-black mt-2">
-            Buy {venue.loyaltyRule.stampsRequired}, get 1 free.
+            Buy {required}, get 1 free.
           </p>
-          <p className="text-gray-600 text-base font-bold mt-2">
+          <p className="text-gray-600 text-base font-semibold mt-1">
             No app. No paper card. Staff can help.
           </p>
         </div>
       </div>
 
-      <div className="px-4 py-6 max-w-lg mx-auto space-y-5 -mt-5">
-        <div className="frother-card p-5">
-          <p className="text-sm text-gray-500 font-black uppercase tracking-wide mb-2">
+      <div className="px-4 py-6 max-w-lg mx-auto space-y-4 -mt-5">
+
+        {/* Stamp card preview */}
+        <div className="frother-card p-6 bg-[#FFFBF0]">
+          <p className="text-xs font-black text-gray-500 uppercase tracking-wide mb-1">
             Stamp card
           </p>
-          <h1 className="font-black text-3xl leading-tight text-gray-900">
-            Buy {venue.loyaltyRule.stampsRequired}, get 1 free.
-          </h1>
-          <SimpleStampPreview total={venue.loyaltyRule.stampsRequired} />
+          <p className="font-black text-2xl text-gray-900 mb-4">
+            Buy {required}, get 1 free
+          </p>
+
+          {/* Empty stamp circles */}
+          <div
+            className="grid gap-2 mb-5"
+            style={{ gridTemplateColumns: `repeat(${Math.min(required, 5)}, 1fr)` }}
+            aria-label={`${required} stamp slots`}
+          >
+            {Array.from({ length: required }).map((_, i) => (
+              <div
+                key={i}
+                className="aspect-square rounded-full bg-white border-2 border-gray-300 flex items-center justify-center text-gray-300 font-black text-sm"
+              >
+                {i + 1}
+              </div>
+            ))}
+          </div>
+
           <Link
             to={`/venue/${slug}/join`}
             className="frother-button w-full text-white text-lg"
@@ -54,40 +75,17 @@ export default function VenueHome() {
           >
             Join rewards
           </Link>
-          <p className="text-xs text-gray-500 text-center mt-4 font-semibold">
-            We only use your mobile to save your stamps.
+          <p className="text-sm text-gray-500 text-center mt-4 font-semibold">
+            Ask staff if you need help.
           </p>
         </div>
 
-        <div className="frother-card p-5 bg-[#FFF8EA]">
-          <p className="font-black text-xl text-gray-900">How it works</p>
-          <ol className="mt-4 space-y-3">
-            {['Tap the sign', 'Enter your first name and mobile', 'See your stamp card', 'Staff add stamps when you visit'].map((step, i) => (
-              <li key={step} className="flex items-center gap-3 text-base font-bold text-gray-800">
-                <span className="w-8 h-8 rounded-full border-2 border-gray-900 bg-white flex items-center justify-center font-black">
-                  {i + 1}
-                </span>
-                {step}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-    </div>
-  )
-}
+        {/* Privacy note */}
+        <p className="text-xs text-gray-400 text-center font-medium leading-relaxed px-2">
+          Frother only saves your name and mobile so staff can find your card.
+        </p>
 
-function SimpleStampPreview({ total }) {
-  return (
-    <div className="grid grid-cols-5 gap-2 my-5" aria-hidden="true">
-      {Array.from({ length: total }).map((_, i) => (
-        <div
-          key={i}
-          className="aspect-square rounded-full bg-[#F8F1E4] border-2 border-gray-300 flex items-center justify-center text-gray-300 font-black"
-        >
-          {i + 1}
-        </div>
-      ))}
+      </div>
     </div>
   )
 }

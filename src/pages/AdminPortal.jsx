@@ -85,6 +85,7 @@ export default function AdminPortal() {
           <div>
             <VenueBrand venue={venue} size="sm" />
             <p className="text-gray-900 font-black text-base mt-1.5">Venue view</p>
+            <p className="text-gray-500 text-xs font-medium mt-0.5">See customers, rewards ready, recent stamps, quiet regulars, and offers.</p>
           </div>
           <button onClick={() => setAuthed(false)} className="text-gray-500 text-xs font-bold">Sign out</button>
         </div>

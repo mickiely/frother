@@ -18,15 +18,15 @@ export default function JoinPage() {
   async function handleSubmit(e) {
     e.preventDefault()
     setError('')
-    if (!form.name.trim()) return setError('First name is required')
-    if (!form.phone.trim()) return setError('Mobile number is required')
+    if (!form.name.trim()) return setError('Please enter your name.')
+    if (!form.phone.trim()) return setError('Please enter a valid mobile number.')
 
     setSubmitting(true)
     try {
       const customer = await joinVenue(venue.id, form)
       navigate(`/venue/${slug}/customer/${customer.id}`)
     } catch {
-      setError('Something went wrong. Please try again.')
+      setError('Something went wrong. Ask staff for help.')
       setSubmitting(false)
     }
   }
@@ -91,7 +91,7 @@ export default function JoinPage() {
           </form>
 
           <p className="text-sm text-gray-500 text-center mt-5 font-semibold">
-            We only use your mobile to save your stamps.
+            We only use your mobile to save your stamps. Staff can help if you get stuck.
           </p>
         </div>
       </div>

@@ -12,6 +12,8 @@ export default function StampCard({
   const isRewardReady = isEarned && !isRewardLocked
   const isRedeemedFreshCard = stamps === 0 && rewardsRedeemed > 0
   const progressPercent = required > 0 ? Math.min(100, (visibleStamps / required) * 100) : 0
+  // Index of the next stamp the customer will earn (used for pulse animation)
+  const nextStampIndex = isEarned ? -1 : visibleStamps
 
   const progressMessage = getProgressMessage({
     stamps: visibleStamps,
@@ -60,7 +62,7 @@ export default function StampCard({
 
       <div className="mb-4">
         <div className="flex items-center justify-between text-xs font-black text-gray-500 mb-2">
-          <span>Current stamps</span>
+          <span>Your progress</span>
           <span>{visibleStamps} of {required}</span>
         </div>
         <div className="h-4 rounded-full border-2 border-gray-900 bg-[#FFF8EA] overflow-hidden shadow-[2px_2px_0_#111827]">
@@ -71,22 +73,36 @@ export default function StampCard({
         </div>
       </div>
 
-      <div className="grid grid-cols-5 gap-2 mb-4" aria-label={`${visibleStamps} of ${required} stamps collected`}>
-        {dots.map((filled, i) => (
-          <div
-            key={i}
-            className={`aspect-square rounded-full flex items-center justify-center text-lg transition-all border-2 font-black ${
-              filled ? 'scale-105' : 'bg-[#F8F1E4] border-gray-300 text-gray-300'
-            }`}
-            style={
-              filled
-                ? { backgroundColor: brandColor + '22', borderColor: '#111827', boxShadow: '2px 2px 0 #111827' }
-                : {}
-            }
-          >
-            {filled ? <span style={{ color: brandColor }}>{i + 1}</span> : <span>{i + 1}</span>}
-          </div>
-        ))}
+      <div
+        className="grid grid-cols-5 gap-2 mb-4"
+        aria-label={`${visibleStamps} of ${required} stamps collected`}
+      >
+        {dots.map((filled, i) => {
+          const isNext = i === nextStampIndex
+          return (
+            <div
+              key={i}
+              className={[
+                'aspect-square rounded-full flex items-center justify-center text-lg transition-all border-2 font-black',
+                filled
+                  ? 'scale-105'
+                  : isNext
+                    ? 'stamp-next bg-[#F8F1E4] text-gray-400'
+                    : 'bg-[#F8F1E4] border-gray-300 text-gray-300',
+              ].join(' ')}
+              style={
+                filled
+                  ? { backgroundColor: brandColor + '22', borderColor: '#111827', boxShadow: '2px 2px 0 #111827' }
+                  : {}
+              }
+            >
+              {filled
+                ? <span style={{ color: brandColor }}>{i + 1}</span>
+                : <span>{i + 1}</span>
+              }
+            </div>
+          )
+        })}
       </div>
 
       <p className={`text-base text-center font-black ${isRewardLocked ? 'text-amber-700' : 'text-gray-900'}`}>
@@ -108,7 +124,11 @@ export default function StampCard({
 
 function getProgressMessage({ stamps, required, isRewardLocked, isRewardReady, isRedeemedFreshCard }) {
   if (isRewardReady) return 'Your free one is ready. Show this to staff.'
-  if (isRewardLocked) return 'Your free one is ready. Add a few details to use it.'
+  if (isRewardLocked) return 'Your reward is ready. Ask staff to help you use it.'
   if (isRedeemedFreshCard) return 'Reward used. New card started.'
-  return 'Keep going. Staff will add your next stamp.'
+  if (stamps === 0) return 'Start here.'
+  if (stamps <= 3) return 'Nice start.'
+  if (stamps <= 6) return "You're getting close."
+  if (stamps < required) return 'Almost there.'
+  return 'Reward ready.'
 }
