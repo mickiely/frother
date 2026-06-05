@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { getVenue, searchCustomers, addStamp, redeemReward, getFroffers } from '../lib/dataService'
+import { getVenue, searchCustomers, addStamp, redeemReward } from '../lib/dataService'
 import VenueBrand from '../components/VenueBrand'
 import StampCard from '../components/StampCard'
-import FrofferCard from '../components/FrofferCard'
 
 const STAFF_ID = 'staff-1'
 
@@ -13,11 +12,9 @@ export default function StaffPortal() {
   const [authed, setAuthed] = useState(false)
   const [pin, setPin] = useState('')
   const [pinError, setPinError] = useState('')
-  const [view, setView] = useState('search') // 'search' | 'froffers'
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
   const [selected, setSelected] = useState(null)
-  const [froffers, setFroffers] = useState([])
   const [toast, setToast] = useState('')
 
   useEffect(() => {
@@ -52,12 +49,6 @@ export default function StaffPortal() {
     const updated = await redeemReward(selected.id, STAFF_ID)
     setSelected(updated)
     showToast('🏆 Reward redeemed!')
-  }
-
-  async function loadFroffers() {
-    const f = await getFroffers(venue.id)
-    setFroffers(f)
-    setView('froffers')
   }
 
   function handlePin(e) {
@@ -131,26 +122,17 @@ export default function StaffPortal() {
           </div>
           <button onClick={() => setAuthed(false)} className="text-gray-500 text-xs font-bold">Sign out</button>
         </div>
-        <div className="flex gap-2 mt-4">
-          <TabBtn active={view !== 'froffers'} onClick={() => setView('search')}>
-            Customers
-          </TabBtn>
-          <TabBtn active={view === 'froffers'} onClick={loadFroffers}>
-            Froffers
-          </TabBtn>
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          {['Find customer', 'Add stamp', 'Redeem reward'].map(item => (
+            <div key={item} className="bg-white/75 border-2 border-gray-900 rounded-xl px-2 py-2 text-center text-xs font-black text-gray-900">
+              {item}
+            </div>
+          ))}
         </div>
       </div>
 
       <div className="px-4 py-4 max-w-lg mx-auto">
-        {view === 'froffers' ? (
-          <div className="space-y-3">
-            <p className="text-sm text-gray-500 font-medium">Active today</p>
-            {froffers.map(f => <FrofferCard key={f.id} froffer={f} showRedeem />)}
-            {froffers.length === 0 && (
-              <p className="text-gray-400 text-sm text-center py-8">No active Froffers</p>
-            )}
-          </div>
-        ) : selected ? (
+        {selected ? (
           <CustomerView
             customer={selected}
             venue={venue}
@@ -287,18 +269,5 @@ function CustomerView({ customer, venue, onBack, onAddStamp, onRedeemReward }) {
         Total stamps earned: {customer.totalStampsEarned} · Rewards redeemed: {customer.rewardsRedeemed}
       </p>
     </div>
-  )
-}
-
-function TabBtn({ children, active, onClick }) {
-  return (
-    <button
-      onClick={onClick}
-      className={`flex-1 py-2 rounded-lg text-sm font-semibold transition-all ${
-        active ? 'bg-white text-gray-900 border-2 border-gray-900 shadow-[2px_2px_0_#111827]' : 'text-gray-600'
-      }`}
-    >
-      {children}
-    </button>
   )
 }

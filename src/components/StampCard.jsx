@@ -50,7 +50,7 @@ export default function StampCard({
 
       <div className="flex justify-between items-center mb-4">
         <div>
-          <p className="text-sm text-gray-500 font-bold">Your stamp card</p>
+          <p className="text-sm text-gray-500 font-bold">Buy {required}, get 1 free</p>
           <p className="text-lg font-black tracking-tight text-gray-900">
             You have {visibleStamps} of {required} stamps.
           </p>
@@ -108,8 +108,7 @@ export default function StampCard({
 
 function getProgressMessage({ stamps, required, isRewardLocked, isRewardReady, isRedeemedFreshCard }) {
   if (isRewardReady) return 'Your free one is ready. Show this to staff.'
-  if (isRewardLocked) return 'Your reward is ready. Ask staff to help you unlock it.'
-  if (isRedeemedFreshCard) return 'Reward used. New card started — keep going!'
-  if (stamps === 0) return 'All set. Staff will add your first stamp next visit.'
+  if (isRewardLocked) return 'Your free one is ready. Add a few details to use it.'
+  if (isRedeemedFreshCard) return 'Reward used. New card started.'
   return 'Keep going. Staff will add your next stamp.'
 }

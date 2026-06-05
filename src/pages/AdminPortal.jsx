@@ -1,20 +1,18 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { getVenue, saveVenue } from '../lib/dataService'
+import { getVenue } from '../lib/dataService'
 import VenueBrand from '../components/VenueBrand'
 import StatsTab from '../components/admin/StatsTab'
 import FroffersTab from '../components/admin/FroffersTab'
 import CustomersTab from '../components/admin/CustomersTab'
 import SegmentsTab from '../components/admin/SegmentsTab'
-import CampaignsTab from '../components/admin/CampaignsTab'
 
 const TABS = [
-  { id: 'stats',     label: 'Stats' },
   { id: 'members',   label: 'Customers' },
-  { id: 'segments',  label: 'Regulars Radar' },
-  { id: 'campaigns', label: 'Campaigns' },
-  { id: 'froffers',  label: 'Froffers' },
-  { id: 'settings',  label: 'Settings' },
+  { id: 'rewards',   label: 'Rewards ready' },
+  { id: 'stats',     label: 'Recent stamps' },
+  { id: 'segments',  label: 'Quiet regulars' },
+  { id: 'froffers',  label: 'Offers' },
 ]
 
 export default function AdminPortal() {
@@ -23,7 +21,7 @@ export default function AdminPortal() {
   const [authed, setAuthed] = useState(false)
   const [pin, setPin] = useState('')
   const [pinError, setPinError] = useState('')
-  const [activeTab, setActiveTab] = useState('stats')
+  const [activeTab, setActiveTab] = useState('members')
 
   useEffect(() => {
     getVenue(venueSlug).then(setVenue)
@@ -108,81 +106,10 @@ export default function AdminPortal() {
       <div className="px-4 py-5 max-w-lg mx-auto">
         {activeTab === 'stats'     && <StatsTab venue={venue} />}
         {activeTab === 'members'   && <CustomersTab venue={venue} />}
+        {activeTab === 'rewards'   && <SegmentsTab venue={venue} />}
         {activeTab === 'segments'  && <SegmentsTab venue={venue} />}
-        {activeTab === 'campaigns' && <CampaignsTab venue={venue} />}
         {activeTab === 'froffers'  && <FroffersTab venue={venue} />}
-        {activeTab === 'settings'  && <SettingsTab venue={venue} onSave={setVenue} />}
       </div>
     </div>
-  )
-}
-
-// ── Settings (small enough to stay in the shell) ───────────────────────────────
-
-function SettingsTab({ venue, onSave }) {
-  const [form, setForm] = useState({
-    name: venue.name,
-    description: venue.description,
-    brandColor: venue.brandColor,
-    stampsRequired: venue.loyaltyRule.stampsRequired,
-    rewardDescription: venue.loyaltyRule.rewardDescription,
-  })
-  const [saved, setSaved] = useState(false)
-
-  async function handleSave(e) {
-    e.preventDefault()
-    const updated = {
-      ...venue,
-      name: form.name,
-      description: form.description,
-      brandColor: form.brandColor,
-      loyaltyRule: {
-        stampsRequired: Number(form.stampsRequired),
-        rewardDescription: form.rewardDescription,
-      },
-    }
-    await saveVenue(venue.id, updated)
-    onSave(updated)
-    setSaved(true)
-    setTimeout(() => setSaved(false), 2000)
-  }
-
-  const field = (key, label, placeholder, type = 'text') => (
-    <div key={key}>
-      <label htmlFor={`settings-${key}`} className="text-sm font-semibold text-gray-700 mb-1.5 block">{label}</label>
-      <input id={`settings-${key}`} type={type} placeholder={placeholder} value={form[key]}
-        onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
-        className="frother-input px-4 py-3 text-sm" />
-    </div>
-  )
-
-  return (
-    <form onSubmit={handleSave} className="space-y-4">
-      {field('name', 'Venue name', 'Demo Cafe')}
-      {field('description', 'Tagline', 'Your neighbourhood coffee spot')}
-
-      <div>
-        <label htmlFor="settings-brand-color" className="text-sm font-semibold text-gray-700 mb-1.5 block">Brand colour</label>
-        <div className="flex items-center gap-3">
-          <input id="settings-brand-color" type="color" value={form.brandColor}
-            onChange={e => setForm(f => ({ ...f, brandColor: e.target.value }))}
-            className="w-12 h-12 rounded-xl border-2 border-gray-900 cursor-pointer" />
-          <label htmlFor="settings-brand-color-text" className="sr-only">Brand colour hex value</label>
-          <input id="settings-brand-color-text" type="text" value={form.brandColor}
-            onChange={e => setForm(f => ({ ...f, brandColor: e.target.value }))}
-            className="frother-input flex-1 px-4 py-3 text-sm font-mono" />
-        </div>
-      </div>
-
-      <div className="frother-card p-4 space-y-3">
-        <p className="font-black text-sm text-gray-700">Loyalty rule</p>
-        {field('stampsRequired', 'Stamps required', '9', 'number')}
-        {field('rewardDescription', 'Reward description', 'Free coffee of your choice')}
-      </div>
-
-      <button type="submit" className="frother-button w-full bg-gray-900 text-white">
-        {saved ? '✓ Saved!' : 'Save changes'}
-      </button>
-    </form>
   )
 }

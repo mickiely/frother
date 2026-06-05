@@ -90,14 +90,20 @@ export default function LandingPage() {
 
       {/* ── FOR CUSTOMERS ──────────────────────────────────── */}
       <section className="px-4 pt-16 pb-6 max-w-5xl mx-auto">
+        <p className="text-sm font-black text-gray-500 uppercase tracking-wide">
+          Who sees what?
+        </p>
+        <p className="mt-1 text-base font-bold text-gray-600">
+          Customer side first. Staff and venue owner screens stay separate.
+        </p>
         <span
-          className="frother-public-kicker"
+          className="frother-public-kicker mt-7"
           style={{ fontSize: '0.7rem' }}
         >
-          For customers
+          Customer side
         </span>
         <h2 className="mt-4 text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
-          For customers
+          Customer side
         </h2>
         <p className="mt-2 text-base font-semibold text-gray-600 max-w-lg leading-relaxed">
           Like a paper stamp card, but harder to lose.
@@ -146,10 +152,10 @@ export default function LandingPage() {
             className="frother-public-kicker"
             style={{ backgroundColor: '#16A34A', color: '#FFF8EA', fontSize: '0.7rem' }}
           >
-            For staff
+            Staff side
           </span>
           <h2 className="mt-4 text-2xl sm:text-3xl font-black text-gray-900 leading-tight">
-            For staff
+            Staff side
           </h2>
           <p className="mt-1.5 text-base font-semibold text-gray-600 leading-relaxed">
             The counter stays simple.
@@ -185,13 +191,13 @@ export default function LandingPage() {
             className="frother-public-kicker"
             style={{ backgroundColor: '#111827', color: '#FFF8EA', fontSize: '0.7rem' }}
           >
-            For venues
+            Venue side
           </span>
           <h2 className="mt-4 text-2xl sm:text-3xl font-black text-gray-900 leading-tight">
-            For venues
+            Venue side
           </h2>
           <p className="mt-1.5 text-base font-semibold text-gray-600 leading-relaxed max-w-xl">
-            The business sees the useful bits without making customers do extra work.
+            The venue owner sees the useful bits without making customers do extra work.
           </p>
           <ul className="mt-5 grid gap-3 sm:grid-cols-2">
             {[
@@ -212,7 +218,7 @@ export default function LandingPage() {
               to="/admin/demo-cafe"
               className="frother-button bg-[#111827] text-[#FFF8EA] px-7 text-base"
             >
-              View business demo
+              View venue admin
             </Link>
           </div>
         </div>
