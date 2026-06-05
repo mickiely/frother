@@ -41,13 +41,20 @@ export default function JoinPage() {
         <p className="mt-5 text-gray-900 font-black text-3xl leading-tight tracking-tight">
           Join rewards
         </p>
-        <p className="text-gray-600 text-base font-bold mt-1">
-          Buy {venue.loyaltyRule.stampsRequired}, get 1 free. No app required.
+        <p className="text-gray-900 text-xl font-black mt-1">
+          Buy {venue.loyaltyRule.stampsRequired}, get 1 free.
+        </p>
+        <p className="text-gray-600 text-base font-bold mt-2">
+          No app. No paper card. Staff can help.
         </p>
       </div>
 
       <div className="px-4 py-6 max-w-lg mx-auto -mt-5">
         <div className="frother-card p-5">
+          <div className="bg-[#FFF8EA] border-2 border-gray-900 rounded-3xl p-4 mb-5 text-center shadow-[3px_3px_0_#111827]">
+            <p className="text-xs font-black text-gray-500 uppercase tracking-wide">Stamp card</p>
+            <p className="text-2xl font-black text-gray-900 mt-1">Buy {venue.loyaltyRule.stampsRequired}, get 1 free</p>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Field
               id="quick-join-first-name"
@@ -84,7 +91,7 @@ export default function JoinPage() {
           </form>
 
           <p className="text-sm text-gray-500 text-center mt-5 font-semibold">
-            Need help? Ask staff.
+            We only use your mobile to save your stamps.
           </p>
         </div>
       </div>

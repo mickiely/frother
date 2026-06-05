@@ -1,22 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { getVenue, getFroffers } from '../lib/dataService'
+import { getVenue } from '../lib/dataService'
 import VenueBrand from '../components/VenueBrand'
-import FrofferCard from '../components/FrofferCard'
 
 export default function VenueHome() {
   const { slug } = useParams()
   const [venue, setVenue] = useState(null)
-  const [froffers, setFroffers] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function load() {
       const v = await getVenue(slug)
       if (!v) { setLoading(false); return }
-      const f = await getFroffers(v.id)
       setVenue(v)
-      setFroffers(f)
       setLoading(false)
     }
     load()
@@ -27,161 +23,71 @@ export default function VenueHome() {
 
   return (
     <div className="min-h-screen frother-shell" style={{ '--brand-color': venue.brandColor }}>
-      {/* Header */}
-      <div className="frother-public-hero">
-        <img
-          src="/frother-hero.jpg"
-          alt=""
-          aria-hidden="true"
-          className="frother-public-hero-image"
-        />
-        <div className="frother-public-hero-shade" aria-hidden="true" />
-        <div className="frother-public-nav px-5">
+      <div className="frother-hero px-5 pt-10 pb-8">
+        <div className="max-w-lg mx-auto">
           <VenueBrand venue={venue} size="md" />
-          <a href="#how-it-works" className="frother-public-nav-button">
-            See demo
-          </a>
-        </div>
-        <div className="frother-public-hero-content px-5">
-          <p className="text-gray-500 text-sm font-black uppercase tracking-wider mb-3">Frother</p>
-          <h1 className="text-5xl sm:text-6xl font-black leading-none tracking-tight">
-            Tap in.<br />
-            Stack stamps.<br />
-            Froth on.
-          </h1>
-          <p className="mt-5 text-gray-900 text-xl font-black leading-snug">
-            Froffers worth coming back for.<br />
-            No apps. No lost cards. No counter chaos.
+          <p className="mt-6 text-gray-900 font-black text-4xl leading-tight tracking-tight">
+            Join rewards
           </p>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <a
-              href="#pilot-offer"
-              className="frother-button text-white text-base px-5"
-              style={{ backgroundColor: venue.brandColor }}
-            >
-              Start a pilot
-            </a>
-            <a
-              href="#how-it-works"
-              className="frother-button bg-[#FFF8EA] text-gray-900 text-base px-5"
-            >
-              See demo
-            </a>
-          </div>
+          <p className="text-gray-700 text-xl font-black mt-2">
+            Buy {venue.loyaltyRule.stampsRequired}, get 1 free.
+          </p>
+          <p className="text-gray-600 text-base font-bold mt-2">
+            No app. No paper card. Staff can help.
+          </p>
         </div>
       </div>
 
-      <div className="px-4 py-6 max-w-lg mx-auto space-y-6 -mt-4">
-        {/* Loyalty card preview */}
-        <div id="how-it-works" className="frother-card p-5 scroll-mt-6">
-          <div className="flex items-start justify-between gap-4 mb-2">
-            <h2 className="font-black text-2xl leading-tight">Tap-to-join loyalty</h2>
-            <span className="frother-sticker text-xs px-3 py-1">No app</span>
-          </div>
-          <p className="text-gray-600 text-sm mb-5 font-medium">
-            Customers scan a QR or tap NFC, join with name and mobile, then start collecting stamps immediately.
+      <div className="px-4 py-6 max-w-lg mx-auto space-y-5 -mt-5">
+        <div className="frother-card p-5">
+          <p className="text-sm text-gray-500 font-black uppercase tracking-wide mb-2">
+            Stamp card
           </p>
-          <div className="grid grid-cols-5 gap-2 mb-5">
-            {Array.from({ length: venue.loyaltyRule.stampsRequired }).map((_, i) => (
-              <div
-                key={i}
-                className="aspect-square rounded-full bg-[#F7F3EA] border-2 border-gray-200 flex items-center justify-center"
-              />
-            ))}
-          </div>
+          <h1 className="font-black text-3xl leading-tight text-gray-900">
+            Buy {venue.loyaltyRule.stampsRequired}, get 1 free.
+          </h1>
+          <SimpleStampPreview total={venue.loyaltyRule.stampsRequired} />
           <Link
             to={`/venue/${slug}/join`}
             className="frother-button w-full text-white text-lg"
             style={{ backgroundColor: venue.brandColor }}
           >
-            Join Rewards
+            Join rewards
           </Link>
           <p className="text-xs text-gray-500 text-center mt-4 font-semibold">
-            10 seconds. No app. No lost cards. Staff can look you up.
+            We only use your mobile to save your stamps.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
-          <PitchPill title="No app" body="Runs in the browser from QR or NFC." />
-          <PitchPill title="No lost cards" body="Digital stamps replace paper cards." />
-          <PitchPill title="Staff lookup" body="Find customers by name or mobile." />
-          <PitchPill title="Fast counter" body="Customers collect before full profile." />
-        </div>
-
-        <div className="frother-card p-5">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="text-xs font-black text-gray-400 uppercase tracking-wider mb-1">For cafe owners</p>
-              <h2 className="font-black text-2xl leading-tight">Get your regulars frothing.</h2>
-            </div>
-            <span className="frother-sticker frother-sticker-green text-[10px] px-2.5 py-1">Pilot</span>
-          </div>
-          <p className="text-sm text-gray-600 font-medium leading-relaxed mt-3">
-            Paper cards give you no data. Frother keeps loyalty simple while showing customer names, reward status, profile completion and who needs a nudge.
-          </p>
-          <div className="mt-4 grid grid-cols-2 gap-3">
-            <MiniFeature label="Froffers" value="Specials worth coming back for." />
-            <MiniFeature label="Regulars Radar" value="Who is close, quiet or ready." />
-          </div>
-        </div>
-
-        {/* Returning member */}
-        <div className="text-center">
-          <p className="text-sm text-gray-500 font-medium">
-            Already a member?{' '}
-            <Link to={`/staff/${slug}`} className="brand-text font-black" style={{ color: venue.brandColor }}>
-              Ask staff to look you up
-            </Link>
-          </p>
-        </div>
-
-        {/* Froffers */}
-        {froffers.length > 0 && (
-          <div>
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="font-black text-2xl tracking-tight">Today's Froffers</h2>
-              <span className="frother-sticker text-[10px] px-2.5 py-1">Froffers</span>
-            </div>
-            <div className="space-y-3">
-              {froffers.map(f => (
-                <FrofferCard key={f.id} froffer={f} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div id="pilot-offer" className="frother-card p-5 bg-[#111827] text-white scroll-mt-6">
-          <p className="text-xs font-black text-[#F4B84A] uppercase tracking-wider mb-1">Frother Pilot Setup</p>
-          <h2 className="font-black text-2xl leading-tight">$499 setup. $99/month for pilot venues.</h2>
-          <p className="text-sm text-white/75 font-medium leading-relaxed mt-3">
-            Includes a branded rewards page, QR/NFC tap-to-join setup, staff dashboard, admin dashboard, Froffers, Regulars Radar, basic staff training and first month support.
-          </p>
-        </div>
-
-        {/* Footer links */}
-        <div className="flex justify-center gap-6 pt-2 pb-8 text-sm text-gray-500 font-bold">
-          <Link to={`/staff/${slug}`} className="hover:text-gray-600">Staff</Link>
-          <Link to={`/admin/${slug}`} className="hover:text-gray-600">Admin</Link>
+        <div className="frother-card p-5 bg-[#FFF8EA]">
+          <p className="font-black text-xl text-gray-900">How it works</p>
+          <ol className="mt-4 space-y-3">
+            {['Tap the sign', 'Enter your first name and mobile', 'See your stamp card', 'Staff add stamps when you visit'].map((step, i) => (
+              <li key={step} className="flex items-center gap-3 text-base font-bold text-gray-800">
+                <span className="w-8 h-8 rounded-full border-2 border-gray-900 bg-white flex items-center justify-center font-black">
+                  {i + 1}
+                </span>
+                {step}
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </div>
   )
 }
 
-function PitchPill({ title, body }) {
+function SimpleStampPreview({ total }) {
   return (
-    <div className="frother-card p-4">
-      <p className="font-black text-gray-900 text-sm">{title}</p>
-      <p className="text-xs text-gray-500 font-semibold mt-1 leading-snug">{body}</p>
-    </div>
-  )
-}
-
-function MiniFeature({ label, value }) {
-  return (
-    <div className="bg-[#F7F3EA] border-2 border-gray-900/10 rounded-2xl p-3">
-      <p className="font-black text-gray-900 text-sm">{label}</p>
-      <p className="text-xs text-gray-600 font-semibold mt-1 leading-snug">{value}</p>
+    <div className="grid grid-cols-5 gap-2 my-5" aria-hidden="true">
+      {Array.from({ length: total }).map((_, i) => (
+        <div
+          key={i}
+          className="aspect-square rounded-full bg-[#F8F1E4] border-2 border-gray-300 flex items-center justify-center text-gray-300 font-black"
+        >
+          {i + 1}
+        </div>
+      ))}
     </div>
   )
 }

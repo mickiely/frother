@@ -126,13 +126,13 @@ export default function CompleteProfilePage() {
         </Link>
         <VenueBrand venue={venue} size="sm" />
         <div className="frother-sticker text-[10px] px-2.5 py-1 mt-5 rotate-[-2deg]">
-          {rewardWasLocked ? 'Reward unlock' : 'Regulars Radar'}
+          {rewardWasLocked ? 'Reward unlock' : 'Your details'}
         </div>
         <p className="text-gray-900 font-black text-3xl mt-4 leading-tight tracking-tight">
-          {rewardWasLocked ? '🔒 Unlock your free coffee' : 'Complete your profile'}
+          {rewardWasLocked ? 'Unlock your free one' : 'Add your details'}
         </p>
         <p className="text-gray-600 text-sm mt-2 font-semibold">
-          Tell us a little more so we can send better offers, not boring spam.
+          This helps keep your stamps safe and easy to find.
         </p>
       </div>
 
