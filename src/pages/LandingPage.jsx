@@ -60,10 +60,13 @@ export default function LandingPage() {
             Froth on.
           </h1>
           <p className="mt-5 text-lg sm:text-xl font-black text-gray-900 leading-snug max-w-sm">
-            Froffers worth coming back for.
+            Customers tap the counter sign and get a simple stamp card on their phone.
           </p>
-          <p className="mt-2 text-base font-semibold text-gray-600">
-            No apps. No lost cards. No counter chaos.
+          <p className="mt-3 text-base font-semibold text-gray-700 leading-relaxed max-w-md">
+            Venues keep the old-school reward, but finally see who&apos;s coming back.
+          </p>
+          <p className="mt-3 text-base font-black text-gray-900">
+            Buy 9. Get 1 free. No app. No lost cards.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <a
@@ -88,7 +91,7 @@ export default function LandingPage() {
           Two sides. One simple system.
         </h2>
         <p className="text-center text-base font-medium text-gray-600 mb-10">
-          Frother works for the customer walking in and the venue running the place.
+          One counter sign. One old-school reward. Two very plain views.
         </p>
 
         <div className="grid gap-5 sm:grid-cols-2">
@@ -97,29 +100,48 @@ export default function LandingPage() {
             className="frother-card p-8 flex flex-col"
             style={{ backgroundColor: '#FFFBF0' }}
           >
-            <span className="frother-public-kicker text-[10px] px-3 py-1 self-start">
-              Customer
-            </span>
+            <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
+              What the customer sees
+            </p>
+            <span className="frother-public-kicker text-[10px] px-3 py-1 self-start">Customer side</span>
             <h3 className="font-black text-2xl text-gray-900 mt-4 leading-tight">
               Customer side
             </h3>
             <p className="mt-1.5 text-sm font-semibold text-gray-500 leading-snug">
-              Like a paper stamp card, but on their phone.
+              A stamp card on their phone.
             </p>
+            <p className="mt-4 text-3xl font-black text-gray-900 leading-none">
+              Buy 9. Get 1 free.
+            </p>
+
+            <div className="mt-5 rounded-3xl border-2 border-gray-900 bg-[#FFF8EA] p-5 text-center shadow-[4px_4px_0_#111827]">
+              <p className="text-2xl font-black text-gray-900 leading-none">BUY 9, GET 1 FREE</p>
+              <div className="mt-4 mx-auto grid h-24 w-24 place-items-center rounded-2xl border-2 border-dashed border-gray-900 bg-white">
+                <span className="text-3xl font-black text-[#16A34A]">Tap</span>
+              </div>
+              <p className="mt-4 text-sm font-black text-gray-900">NO APP REQUIRED</p>
+              <p className="mt-1 text-xs font-bold text-gray-500">Staff can help</p>
+            </div>
+
             <ul className="mt-5 flex flex-col gap-3 flex-1">
               {[
-                'Tap the QR or NFC sticker at the counter',
-                'Enter name and mobile — takes ten seconds',
-                'See their stamp card right in the browser',
-                'Staff add stamps each visit',
-                'Redeem the reward when the card is full',
-              ].map(item => (
-                <li key={item} className="flex items-start gap-2.5 text-sm font-medium text-gray-800 leading-snug">
-                  <span className="mt-0.5 text-[#16A34A] font-black shrink-0 text-base">✓</span>
-                  {item}
+                'Tap the sign',
+                'Enter name + mobile',
+                'See stamp card',
+                'Staff add stamps',
+                'Redeem when full',
+              ].map((item, index) => (
+                <li key={item} className="flex items-start gap-3 text-base font-black text-gray-900 leading-snug">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-gray-900 bg-[#F4B84A] text-xs">
+                    {index + 1}
+                  </span>
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
+            <p className="mt-5 text-sm font-black text-gray-600">
+              No app. No password. Staff can look them up.
+            </p>
             <Link
               to="/venue/demo-cafe/join"
               className="frother-button bg-[#F4B84A] text-gray-900 mt-8 text-sm w-full"
@@ -128,34 +150,42 @@ export default function LandingPage() {
             </Link>
           </div>
 
-          {/* Business card — operational, admin, still friendly */}
+          {/* Venue card — operational, still friendly */}
           <div className="frother-card p-8 bg-white flex flex-col">
+            <p className="text-xs font-black text-gray-500 uppercase tracking-widest mb-3">
+              What the venue sees
+            </p>
             <span
               className="frother-public-kicker text-[10px] px-3 py-1 self-start"
               style={{ backgroundColor: '#16A34A', color: '#FFF8EA', borderColor: '#111827' }}
             >
-              Business
+              Venue side
             </span>
             <h3 className="font-black text-2xl text-gray-900 mt-4 leading-tight">
-              Business side
+              Venue side
             </h3>
             <p className="mt-1.5 text-sm font-semibold text-gray-500 leading-snug">
-              Staff and owners see what paper cards can't show.
+              The same simple reward, with better visibility.
             </p>
             <ul className="mt-5 flex flex-col gap-3 flex-1">
               {[
-                'Look up customers by name or mobile',
+                'Staff look up customers',
                 'Add stamps at the counter',
                 'See who is close to a reward',
-                'Spot quiet regulars before they drift away',
-                'Send better offers at the right time',
-              ].map(item => (
-                <li key={item} className="flex items-start gap-2.5 text-sm font-medium text-gray-800 leading-snug">
-                  <span className="mt-0.5 text-[#16A34A] font-black shrink-0 text-base">✓</span>
-                  {item}
+                'Spot quiet regulars',
+                'Send better offers later',
+              ].map((item, index) => (
+                <li key={item} className="flex items-start gap-3 text-base font-bold text-gray-800 leading-snug">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-gray-900 bg-[#16A34A] text-xs font-black text-[#FFF8EA]">
+                    {index + 1}
+                  </span>
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
+            <p className="mt-5 text-sm font-black text-gray-600">
+              Customers see the simple card. You see the useful bits.
+            </p>
             <Link
               to="/admin/demo-cafe"
               className="frother-button bg-[#16A34A] text-[#FFF8EA] mt-8 text-sm w-full"
@@ -174,8 +204,8 @@ export default function LandingPage() {
             {[
               ['1', 'Customer taps'],
               ['2', 'Staff stamps'],
-              ['3', 'Regulars come back'],
-              ['4', 'Venue sees who to nudge'],
+              ['3', 'Reward gets earned'],
+              ['4', 'Venue knows who to nudge'],
             ].map(([num, label], i, arr) => (
               <div key={num} className="flex flex-col sm:flex-row items-center">
                 <div className="flex flex-col items-center px-5 py-2">
