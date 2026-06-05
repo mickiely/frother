@@ -18,14 +18,14 @@ export default function LandingPage() {
               className="frother-button bg-[#F4B84A] text-gray-900 px-5 text-sm"
               style={{ minHeight: '42px' }}
             >
-              See customer demo
+              Open stamp card
             </Link>
             <Link
               to="/admin/demo-cafe"
               className="frother-button bg-white text-gray-900 px-4 text-sm hidden sm:inline-flex"
               style={{ minHeight: '42px' }}
             >
-              Venue demo
+              For venues
             </Link>
           </div>
         </div>
@@ -77,13 +77,13 @@ export default function LandingPage() {
               to="/venue/demo-cafe"
               className="frother-button bg-[#F4B84A] text-gray-900 px-7 text-base"
             >
-              See customer demo
+              Open stamp card
             </Link>
             <Link
               to="/admin/demo-cafe"
               className="frother-button bg-[#FFF8EA] text-gray-900 px-7 text-base"
             >
-              Venue demo
+              For venues
             </Link>
           </div>
         </div>
@@ -105,14 +105,11 @@ export default function LandingPage() {
               Customer
             </span>
             <h2 className="mt-5 text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
-              I am a customer
+              Open your stamp card
             </h2>
-            <p className="mt-3 text-lg font-semibold text-gray-700 leading-relaxed">
-              See your stamp card.
-            </p>
-            <p className="mt-2 text-base font-medium text-gray-500 leading-relaxed">
-              Tap in, collect stamps, get a free one when your card is full.
-              No app to download.
+            <p className="mt-3 text-base font-medium text-gray-600 leading-relaxed">
+              Tap the sign at the counter. Your stamp card opens on your phone.
+              No app. No paper card. Staff can help.
             </p>
             <div className="mt-auto pt-8">
               <Link
@@ -133,10 +130,10 @@ export default function LandingPage() {
               Venue
             </span>
             <h2 className="mt-5 text-2xl font-black text-gray-900 leading-tight">
-              I run a venue
+              For cafes, pubs and restaurants
             </h2>
             <p className="mt-2 text-base font-medium text-gray-600 leading-relaxed">
-              See how staff and owners use Frother.
+              Staff add stamps. Owners can see rewards, regulars and quiet days.
             </p>
             <ul className="mt-5 flex flex-col gap-2.5">
               {[
@@ -219,7 +216,7 @@ export default function LandingPage() {
               to="/venue/demo-cafe"
               className="frother-button bg-[#F4B84A] text-gray-900 px-8 text-base"
             >
-              See customer demo
+              Open stamp card
             </Link>
             <Link
               to="/admin/demo-cafe"
