@@ -4,6 +4,7 @@ import PilotLeadForm from '../components/PilotLeadForm'
 export default function LandingPage() {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#F8F1E4' }}>
+
       {/* Nav */}
       <nav
         className="px-6 py-4 border-b-2 border-gray-900"
@@ -12,19 +13,19 @@ export default function LandingPage() {
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
           <FrotherLogo />
           <div className="flex items-center gap-2">
-            <a
-              href="#pilot-lead"
-              className="frother-button bg-[#16A34A] text-[#FFF8EA] px-4 text-sm hidden sm:inline-flex"
-              style={{ minHeight: '42px' }}
-            >
-              Start a pilot
-            </a>
             <Link
               to="/venue/demo-cafe"
               className="frother-button bg-[#F4B84A] text-gray-900 px-5 text-sm"
               style={{ minHeight: '42px' }}
             >
-              See demo
+              See customer demo
+            </Link>
+            <Link
+              to="/admin/demo-cafe"
+              className="frother-button bg-white text-gray-900 px-4 text-sm hidden sm:inline-flex"
+              style={{ minHeight: '42px' }}
+            >
+              Venue demo
             </Link>
           </div>
         </div>
@@ -72,158 +73,103 @@ export default function LandingPage() {
             No app. No paper card. Staff can help.
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
-            <a
-              href="#pilot-lead"
-              className="frother-button bg-[#16A34A] text-[#FFF8EA] px-7 text-base"
-            >
-              Start a pilot
-            </a>
             <Link
               to="/venue/demo-cafe"
-              className="frother-button bg-[#FFF8EA] text-gray-900 px-7 text-base"
+              className="frother-button bg-[#F4B84A] text-gray-900 px-7 text-base"
             >
-              See demo
+              See customer demo
             </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FOR CUSTOMERS ──────────────────────────────────── */}
-      <section className="px-4 pt-16 pb-6 max-w-5xl mx-auto">
-        <p className="text-sm font-black text-gray-500 uppercase tracking-wide">
-          Who sees what?
-        </p>
-        <p className="mt-1 text-base font-bold text-gray-600">
-          Customer side first. Staff and venue owner screens stay separate.
-        </p>
-        <span
-          className="frother-public-kicker mt-7"
-          style={{ fontSize: '0.7rem' }}
-        >
-          Customer side
-        </span>
-        <h2 className="mt-4 text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
-          Customer side
-        </h2>
-        <p className="mt-2 text-base font-semibold text-gray-600 max-w-lg leading-relaxed">
-          Like a paper stamp card, but harder to lose.
-        </p>
-
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            'Tap the counter sign',
-            'Enter your name and mobile',
-            'See your stamp card',
-            'Collect stamps when you buy',
-            'Show staff when your reward is ready',
-          ].map(item => (
-            <li
-              key={item}
-              className="frother-card p-5 flex items-start gap-4"
-              style={{ backgroundColor: '#FFFBF0' }}
-            >
-              <span
-                className="w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-[#16A34A] font-black border-2 border-gray-900 text-base bg-white"
-                style={{ boxShadow: '2px 2px 0 #111827' }}
-              >
-                ✓
-              </span>
-              <span className="text-base font-bold text-gray-900 leading-snug pt-0.5">
-                {item}
-              </span>
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-6">
-          <Link
-            to="/venue/demo-cafe/join"
-            className="frother-button bg-[#F4B84A] text-gray-900 px-8 text-base"
-          >
-            Try customer view
-          </Link>
-        </div>
-      </section>
-
-      {/* ── FOR STAFF ──────────────────────────────────────── */}
-      <section className="px-4 pt-6 pb-4 max-w-5xl mx-auto">
-        <div className="frother-card p-6 sm:p-8 bg-white">
-          <span
-            className="frother-public-kicker"
-            style={{ backgroundColor: '#16A34A', color: '#FFF8EA', fontSize: '0.7rem' }}
-          >
-            Staff side
-          </span>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-black text-gray-900 leading-tight">
-            Staff side
-          </h2>
-          <p className="mt-1.5 text-base font-semibold text-gray-600 leading-relaxed">
-            The counter stays simple.
-          </p>
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-            {[
-              'Find a customer by name or mobile',
-              'Add a stamp',
-              'Redeem a reward',
-              'Help anyone who gets stuck',
-            ].map(item => (
-              <li key={item} className="flex items-start gap-2.5 text-base font-medium text-gray-800 leading-snug">
-                <span className="mt-0.5 text-[#16A34A] font-black shrink-0 text-lg">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-7">
-            <Link
-              to="/staff/demo-cafe"
-              className="frother-button bg-[#16A34A] text-[#FFF8EA] px-7 text-base"
-            >
-              View staff demo
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── FOR VENUES ─────────────────────────────────────── */}
-      <section className="px-4 pt-4 pb-14 max-w-5xl mx-auto">
-        <div className="frother-card p-6 sm:p-8 bg-white">
-          <span
-            className="frother-public-kicker"
-            style={{ backgroundColor: '#111827', color: '#FFF8EA', fontSize: '0.7rem' }}
-          >
-            Venue side
-          </span>
-          <h2 className="mt-4 text-2xl sm:text-3xl font-black text-gray-900 leading-tight">
-            Venue side
-          </h2>
-          <p className="mt-1.5 text-base font-semibold text-gray-600 leading-relaxed max-w-xl">
-            The venue owner sees the useful bits without making customers do extra work.
-          </p>
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-            {[
-              'See who is coming back',
-              'See who has a reward ready',
-              'Spot quiet regulars',
-              'Update simple offers',
-              'Keep paper-card regulars moving to phone cards',
-            ].map(item => (
-              <li key={item} className="flex items-start gap-2.5 text-base font-medium text-gray-800 leading-snug">
-                <span className="mt-0.5 text-[#16A34A] font-black shrink-0 text-lg">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-7">
             <Link
               to="/admin/demo-cafe"
-              className="frother-button bg-[#111827] text-[#FFF8EA] px-7 text-base"
+              className="frother-button bg-[#FFF8EA] text-gray-900 px-7 text-base"
             >
-              View venue admin
+              Venue demo
             </Link>
           </div>
         </div>
       </section>
 
+      {/* ── TWO ENTRY POINT CARDS ──────────────────────────── */}
+      <section className="px-4 pt-12 pb-6 max-w-5xl mx-auto">
+        <div className="grid gap-5 lg:grid-cols-[3fr_2fr]">
+
+          {/* Customer card — big, warm, simple */}
+          <div
+            className="frother-card p-8 sm:p-10 flex flex-col"
+            style={{ backgroundColor: '#FFFBF0' }}
+          >
+            <span
+              className="frother-public-kicker self-start"
+              style={{ fontSize: '0.7rem' }}
+            >
+              Customer
+            </span>
+            <h2 className="mt-5 text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
+              I am a customer
+            </h2>
+            <p className="mt-3 text-lg font-semibold text-gray-700 leading-relaxed">
+              See your stamp card.
+            </p>
+            <p className="mt-2 text-base font-medium text-gray-500 leading-relaxed">
+              Tap in, collect stamps, get a free one when your card is full.
+              No app to download.
+            </p>
+            <div className="mt-auto pt-8">
+              <Link
+                to="/venue/demo-cafe"
+                className="frother-button bg-[#F4B84A] text-gray-900 px-8 text-lg w-full sm:w-auto"
+              >
+                Open stamp card
+              </Link>
+            </div>
+          </div>
+
+          {/* Venue card — compact, clearly business */}
+          <div className="frother-card p-7 bg-white flex flex-col">
+            <span
+              className="frother-public-kicker self-start"
+              style={{ backgroundColor: '#111827', color: '#FFF8EA', fontSize: '0.7rem' }}
+            >
+              Venue
+            </span>
+            <h2 className="mt-5 text-2xl font-black text-gray-900 leading-tight">
+              I run a venue
+            </h2>
+            <p className="mt-2 text-base font-medium text-gray-600 leading-relaxed">
+              See how staff and owners use Frother.
+            </p>
+            <ul className="mt-5 flex flex-col gap-2.5">
+              {[
+                'Staff find customers at the counter',
+                'Owners see who is coming back',
+                'No paper cards to manage',
+              ].map(item => (
+                <li key={item} className="flex items-start gap-2 text-sm font-medium text-gray-700 leading-snug">
+                  <span className="mt-0.5 text-[#16A34A] font-black shrink-0">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-auto pt-7 flex flex-col gap-2.5">
+              <Link
+                to="/admin/demo-cafe"
+                className="frother-button bg-[#111827] text-[#FFF8EA] px-6 text-base w-full"
+              >
+                View venue demo
+              </Link>
+              <a
+                href="#pilot-lead"
+                className="frother-button bg-[#16A34A] text-[#FFF8EA] px-6 text-sm w-full"
+              >
+                Start a pilot
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* Pilot lead form — venue owners only */}
       <PilotLeadForm />
 
       {/* Feature cards */}
@@ -273,10 +219,10 @@ export default function LandingPage() {
               to="/venue/demo-cafe"
               className="frother-button bg-[#F4B84A] text-gray-900 px-8 text-base"
             >
-              See demo
+              See customer demo
             </Link>
             <Link
-              to="/venue/demo-cafe/join"
+              to="/admin/demo-cafe"
               className="frother-button px-8 text-base"
               style={{
                 backgroundColor: 'transparent',
@@ -285,7 +231,7 @@ export default function LandingPage() {
                 color: '#FFF8EA',
               }}
             >
-              Try the join flow
+              View venue demo
             </Link>
           </div>
         </div>
