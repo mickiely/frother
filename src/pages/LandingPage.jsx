@@ -84,6 +84,105 @@ export default function LandingPage() {
 
       <PilotLeadForm />
 
+      {/* Two sides */}
+      <section className="px-4 py-14 max-w-5xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl font-black text-gray-900 text-center mb-2">
+          Two sides. One simple system.
+        </h2>
+        <p className="text-center text-base font-medium text-gray-600 mb-10">
+          Frother works for the customer walking in and the venue running the place.
+        </p>
+        <div className="grid gap-5 sm:grid-cols-2">
+          {/* Customer card */}
+          <div className="frother-card p-8 bg-white flex flex-col">
+            <span className="frother-public-kicker text-[10px] px-3 py-1 self-start">Customer</span>
+            <h3 className="font-black text-2xl text-gray-900 mt-4 leading-tight">
+              What customers see
+            </h3>
+            <ul className="mt-4 flex flex-col gap-2.5 flex-1">
+              {[
+                'Tap QR or NFC at the counter',
+                'Join in seconds — name and mobile only',
+                'Digital stamp card, right in their browser',
+                'Claim rewards and Froffers when they hit the goal',
+                'No app. No plastic card. No account drama.',
+              ].map(item => (
+                <li key={item} className="flex items-start gap-2 text-sm font-medium text-gray-700">
+                  <span className="mt-0.5 text-[#16A34A] font-black shrink-0">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <Link
+              to="/venue/demo-cafe"
+              className="frother-button bg-[#F4B84A] text-gray-900 mt-7 text-sm w-full"
+            >
+              Try customer view
+            </Link>
+          </div>
+
+          {/* Venue card */}
+          <div className="frother-card p-8 bg-white flex flex-col">
+            <span className="frother-public-kicker text-[10px] px-3 py-1 self-start">Venue</span>
+            <h3 className="font-black text-2xl text-gray-900 mt-4 leading-tight">
+              What the venue sees
+            </h3>
+            <ul className="mt-4 flex flex-col gap-2.5 flex-1">
+              {[
+                'Staff look up customers by name or mobile',
+                'Add stamps and redeem rewards from the staff dashboard',
+                'Admin sets reward rules and runs Froffers',
+                "Regulars Radar shows who's active, quiet, close to reward, or needs a nudge",
+                'Built for cafes, pubs, restaurants and takeaways',
+              ].map(item => (
+                <li key={item} className="flex items-start gap-2 text-sm font-medium text-gray-700">
+                  <span className="mt-0.5 text-[#16A34A] font-black shrink-0">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <Link
+              to="/admin/demo-cafe"
+              className="frother-button bg-[#16A34A] text-[#FFF8EA] mt-7 text-sm w-full"
+            >
+              View business demo
+            </Link>
+          </div>
+        </div>
+
+        {/* How it flows */}
+        <div className="mt-8 frother-card p-6 bg-white">
+          <p className="text-center text-xs font-black text-gray-500 uppercase tracking-widest mb-6">
+            How it flows
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center">
+            {[
+              ['1', 'Customer taps'],
+              ['2', 'Staff adds stamps'],
+              ['3', 'Regulars come back'],
+              ['4', 'Venue sees who to nudge'],
+            ].map(([num, label], i, arr) => (
+              <div key={num} className="flex flex-col sm:flex-row items-center">
+                <div className="flex flex-col items-center px-5 py-2">
+                  <span
+                    className="w-10 h-10 rounded-full flex items-center justify-center font-black text-gray-900 text-sm border-2 border-gray-900"
+                    style={{ backgroundColor: '#F4B84A', boxShadow: '3px 3px 0 #111827' }}
+                  >
+                    {num}
+                  </span>
+                  <span className="mt-2 text-sm font-bold text-gray-800 text-center leading-tight max-w-[90px]">
+                    {label}
+                  </span>
+                </div>
+                {i < arr.length - 1 && (
+                  <span className="text-gray-300 font-black text-2xl sm:mb-5 rotate-90 sm:rotate-0">→</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Feature cards */}
       <section className="px-4 py-12 max-w-5xl mx-auto" id="features">
         <div className="grid gap-5 sm:grid-cols-3">
