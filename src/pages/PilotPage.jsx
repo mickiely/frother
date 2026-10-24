@@ -75,7 +75,10 @@ function CustomerCard({ venue, user }) {
     }
     const key = getOrCreateGuestKey(venue.id)
     const guest = await getGuestCard(venue.id, key, true)
-    if (mounted.current) { setToken(key); setMember(guest); setRegistered(false) }
+    if (mounted.current) {
+      setToken(key); setMember(guest); setRegistered(false)
+      if (user && cardOf(guest)?.stamps >= venue.stamps_required) setShowClaim(true)
+    }
   }, [venue.id, user?.id])
   useEffect(() => {
     mounted.current = true
