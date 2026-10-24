@@ -5,7 +5,7 @@ const fixture=JSON.parse(fs.readFileSync(process.env.FROTHER_TEST_FIXTURE || '/t
 const url=process.env.VITE_SUPABASE_URL || 'https://togyppwnxwxfvmcbvbdt.supabase.co'
 const key=process.env.VITE_SUPABASE_PUBLISHABLE_KEY
 assert.ok(key,'Set VITE_SUPABASE_PUBLISHABLE_KEY to the public project key')
-const make=()=>createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}})
+const make=()=>createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},global:{fetch:(url,options)=>fetch(url,{...options,signal:AbortSignal.timeout(30000)})}})
 const customer=make(),secondDevice=make(),staff=make(),anon=make()
 const check=async query=>{const r=await query;if(r.error)throw r.error;return r.data}
 for(const [c,email] of [[customer,fixture.customerEmail],[secondDevice,fixture.customerEmail],[staff,fixture.staffEmail]]) await check(c.auth.signInWithPassword({email,password:fixture.password}))
@@ -31,7 +31,7 @@ m=await read(secondDevice);assert.equal(card(m).stamps,9);assert.equal(card(m).v
 console.log('PASS staff stamp award and retry idempotency across API requests')
 const redeemed=await Promise.all([1,2].map(()=>staff.rpc('frother_loyalty_action',{p_member:memberId,p_action:'redeem',p_amount:1,p_request:crypto.randomUUID(),p_expected_version:1})))
 assert.equal(redeemed.filter(r=>!r.error).length,1)
-assert.equal(redeemed.find(r=>r.error).error.code,'40001')
+assert.equal(redeemed.find(r=>r.error).error.code,'P0001')
 m=await read(secondDevice);assert.equal(card(m).stamps,0);assert.equal(card(m).rewards_redeemed,1)
 console.log('PASS simultaneous redemption requests: exactly one succeeds; saved customer balance updates')
 await check(customer.rpc('frother_update_consent',{p_member:memberId,p_email:true,p_sms:false}));m=await read(secondDevice);assert.equal(m.email_consent,true)

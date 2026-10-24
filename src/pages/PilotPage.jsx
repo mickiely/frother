@@ -8,6 +8,7 @@ export default function PilotPage({ staffMode = false }) {
   const [venue, setVenue] = useState(null)
   const [user, setUser] = useState(null)
   const userId = useRef(null)
+  const activeSlug = useRef(slug)
   const [initializing, setInitializing] = useState(true)
   const [member, setMember] = useState(null)
   const [staff, setStaff] = useState(null)
@@ -25,8 +26,11 @@ export default function PilotPage({ staffMode = false }) {
 
   useEffect(() => {
     let active = true
+    activeSlug.current = slug
     setInitializing(true)
     setVenue(null)
+    setMember(null); setStaff(null); setMembers([]); setSelectedId(null)
+    pendingAction.current = null
     setError('')
     async function load() {
       try {
@@ -55,7 +59,7 @@ export default function PilotPage({ staffMode = false }) {
       getMyMembership(venue.id, user.id), getMyStaffAccess(venue.id, user.id),
     ])
     const rows = staffMode && access ? await getPilotMembers(venue.id) : []
-    if (userId.current !== user.id) return
+    if (userId.current !== user.id || activeSlug.current !== venue.slug) return
     setMember(membership); setStaff(access); setMembers(rows)
   }, [venue, user, staffMode])
 
@@ -151,6 +155,7 @@ export default function PilotPage({ staffMode = false }) {
             <form onSubmit={authenticate} className="space-y-4">
               {!recovery && <Input label="Email" name="email" type="email" value={form.email} onChange={change} autoComplete="email" />}
               {(mode !== 'reset' || recovery) && <Input label="Password" name="password" type="password" minLength={mode === 'signup' || recovery ? 12 : 1} value={form.password} onChange={change} autoComplete={mode === 'signup' || recovery ? 'new-password' : 'current-password'} />}
+              {(mode === 'signup' || recovery) && <p className="text-sm text-gray-600">Use at least 12 characters.</p>}
               <button disabled={busy} className="frother-button w-full bg-gray-900 text-white disabled:opacity-50">{busy ? 'Please wait…' : recovery ? 'Save password' : mode === 'signup' ? 'Create account' : mode === 'reset' ? 'Send recovery email' : 'Sign in'}</button>
             </form>
             {!recovery && <div className="flex flex-wrap gap-4 text-sm font-bold">

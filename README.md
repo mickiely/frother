@@ -15,7 +15,7 @@ passes, location notifications, or POS integration are enabled.
 
 ### Setup and access
 
-1. Apply `supabase/migrations/20261024033051_frother_pilot_auth_and_loyalty.sql`
+1. Apply both files in `supabase/migrations` in timestamp order
    **once** to the existing Frother project (already applied during implementation).
    This adds prefixed pilot tables without changing legacy tables or functions.
 2. Set the two public build variables in `.env.example`. Never use a service-role key.

@@ -61,13 +61,13 @@ begin
   c:=public.frother_loyalty_action(m,'stamp',9,r,0);
   if c.stamps<>9 then raise exception 'FAIL idempotent stamp'; end if;
   begin perform public.frother_loyalty_action(m,'stamp',1,gen_random_uuid(),0); raise exception 'FAIL stale card award';
-  exception when serialization_failure then null; end;
+  exception when raise_exception then if sqlerrm not like 'Card changed.%' then raise; end if; end;
   c:=public.frother_loyalty_action(m,'redeem',1,redeem,1);
   if c.stamps<>0 or c.rewards_redeemed<>1 then raise exception 'FAIL redemption'; end if;
   c:=public.frother_loyalty_action(m,'redeem',1,redeem,1);
   if c.rewards_redeemed<>1 then raise exception 'FAIL idempotent redemption'; end if;
   begin perform public.frother_loyalty_action(m,'redeem',1,gen_random_uuid(),1); raise exception 'FAIL stale double redemption';
-  exception when serialization_failure then null; end;
+  exception when raise_exception then if sqlerrm not like 'Card changed.%' then raise; end if; end;
   begin perform public.frother_loyalty_action(m,'redeem',1,gen_random_uuid(),2); raise exception 'FAIL unearned redemption';
   exception when raise_exception then if sqlerrm not like 'No earned reward%' then raise; end if; end;
   begin perform public.frother_loyalty_action(m,'stamp',21,gen_random_uuid(),2); raise exception 'FAIL oversized award';
