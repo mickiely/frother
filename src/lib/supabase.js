@@ -9,3 +9,10 @@ export const supabase =
     : null
 
 export const isSupabaseConfigured = !!supabase
+
+// Guest card reads use a separate public client, never a staff/customer session.
+export const guestSupabase = supabaseUrl && supabaseAnonKey
+  ? createClient(supabaseUrl, supabaseAnonKey, {
+      auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false, storageKey: 'frother-guest-public' },
+    })
+  : null

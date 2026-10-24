@@ -4,7 +4,9 @@ do $$
 declare v1 uuid; v2 uuid; customer1 uuid:=gen_random_uuid(); customer2 uuid:=gen_random_uuid();
   staff1 uuid:=gen_random_uuid(); staff2 uuid:=gen_random_uuid();
 begin
-  insert into auth.users(id) values(customer1),(customer2),(staff1),(staff2);
+  insert into auth.users(id,email,email_confirmed_at) values
+    (customer1,customer1::text||'@example.invalid',now()),(customer2,customer2::text||'@example.invalid',now()),
+    (staff1,staff1::text||'@example.invalid',now()),(staff2,staff2::text||'@example.invalid',now());
   insert into public.frother_venues(slug,name) values('test-'||gen_random_uuid(),'Security test A') returning id into v1;
   insert into public.frother_venues(slug,name) values('test-'||gen_random_uuid(),'Security test B') returning id into v2;
   insert into public.frother_staff(venue_id,user_id,role) values(v1,staff1,'staff'),(v2,staff2,'owner');

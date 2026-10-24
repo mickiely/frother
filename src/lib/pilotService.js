@@ -1,4 +1,4 @@
-import { supabase } from './supabase'
+import { supabase, guestSupabase } from './supabase'
 
 export function client() {
   if (!supabase) throw new Error('The pilot is not connected yet. Please use the demonstration or contact the venue.')
@@ -37,6 +37,18 @@ export function joinPilot(venueId, form) {
 
 export function updateConsent(memberId, emailConsent, smsConsent) {
   return result(client().rpc('frother_update_consent', { p_member: memberId, p_email: emailConsent, p_sms: smsConsent }))
+}
+
+export function getGuestCard(venueId, token, create = false) {
+  if (!guestSupabase) throw new Error('The pilot is not connected yet.')
+  return result(guestSupabase.rpc('frother_guest_card', { p_venue: venueId, p_token: token, p_create: create }))
+}
+
+export function claimGuest(venueId, token, form) {
+  return result(client().rpc('frother_claim_guest', {
+    p_venue: venueId, p_token: token, p_name: form.name.trim(), p_phone: form.phone,
+    p_email_consent: form.emailConsent, p_sms_consent: form.smsConsent,
+  }))
 }
 
 export function cardOf(member) {

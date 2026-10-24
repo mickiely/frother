@@ -1,33 +1,51 @@
 # Frother
 
-## Connected pilot
+## Connected pilot — collect first, details at first reward
 
-The new `/pilot/:slug` customer page and `/pilot/:slug/staff` counter use the existing
-Frother Supabase project. The original `/venue`, `/staff`, and `/admin` routes remain
-an independent in-memory sample demonstration, even when Supabase is configured.
+- `/pilot/:slug` opens a saved guest card immediately, with **no upfront form or account**.
+- Staff use `/pilot/:slug/staff` with an individual account and venue permission.
+- Staff look up the visible card number and award stamps for eligible purchases.
+- At the reward threshold the card says **Complete details to claim**.
+- The customer verifies email/account access, provides name and mobile, and optionally
+  selects marketing preferences. The existing guest card and its stamps are linked
+  to that verified account. Staff can then redeem the reward once.
+- Registration is required for redemption; marketing consent is never required.
+- The first-tap page discloses the details requirement before purchases accumulate.
+- No Wallet passes, location reminders, automated campaigns, or POS integrations.
 
-The pilot supports email/password sign-in, account recovery, saved membership and
-balances, optional marketing preferences, individual venue staff permissions,
-staff-issued stamps, and atomic reward redemption. Rewards do not require marketing
-consent or a marketing profile. Mobile numbers are staff lookup information, not
-verified identity or account recovery credentials. No automated messages, Wallet
-passes, location notifications, or POS integration are enabled.
+### Guest privacy and recovery
+
+The browser generates a 256-bit private key and saves it in localStorage. The backend
+stores only its SHA-256 digest in a private table. The public guest RPC returns card
+state and a visible staff lookup number, not contact details or credentials. Requests
+carry the key in the POST body, never the URL. A guest key cannot award stamps.
+
+Customers can copy a private recovery key and restore it on another browser. Anyone
+with the key can open and register that guest card, so the interface tells customers
+to keep it private. The visible card number is **not** a recovery credential. Without
+saved browser data or the key, anonymous ownership cannot be reconstructed from a
+name/mobile. After verification, the old guest key stops opening the card and the
+customer uses email/password recovery. Existing registered and earned guest cards
+are preserved separately; combining them needs operator assistance.
+
+Guest-card creation is idempotent for a given key and limited to 200 new cards per
+forwarded client IP per day when request headers are present. No IP address is stored
+in plaintext. This is a pilot guard, not a complete public-launch abuse-control system.
 
 ### Setup and access
 
-1. Apply both files in `supabase/migrations` in timestamp order
-   **once** to the existing Frother project (already applied during implementation).
-   This adds prefixed pilot tables without changing legacy tables or functions.
-2. Set the two public build variables in `.env.example`. Never use a service-role key.
-3. Configure Supabase Auth Site URL and allowed redirect URLs for the production
-   domain and pilot paths. Confirm signup and recovery email delivery before inviting
-   real customers. Email signup requires confirmation with current project settings.
-4. `/pilot/pilot-cafe` is an explicitly labelled test venue. Its rewards have no
-   product value. Provision each real venue and staff account before enabling a pilot.
-5. Staff create and confirm an email account, then an operator grants access through
-   trusted SQL. There is no browser-side role assignment or default staff password.
+Apply the migrations in `supabase/migrations` in timestamp order once. They have
+already been applied to the existing Frother Supabase project. They add isolated
+prefixed pilot tables without changing legacy tables/functions. Set the public build
+variables in `.env.example`; never put a service-role key in browser code.
 
-Example operator provisioning (replace the email and venue slug with verified values):
+Configure Supabase Auth Site URL and allowed redirect URLs for the production and
+preview pilot paths. Verify signup confirmation and recovery delivery before inviting
+real customers. Email confirmation is enabled in the current project settings.
+
+`/pilot/pilot-cafe` is a labelled test venue; rewards have no product value. Provision
+real venues and verified staff accounts before use. Staff permissions are assigned
+by a trusted operator, with no default password or browser-side role assignment:
 
 ```sql
 insert into public.frother_staff(venue_id,user_id,role)
@@ -39,32 +57,27 @@ where v.slug='your-venue-slug'
 on conflict(venue_id,user_id) do update set role='owner',active=true;
 ```
 
-Only grant staff access to an account you have independently verified. Staff and
-owner roles can use the counter for their assigned venue. The pilot currently
-loads up to 500 members for staff lookup; larger venues need server pagination.
+Verify the owner independently before granting access. The pilot counter loads up to
+500 cards; larger venues need server pagination. Legacy RPC permissions still need
+separate review before using legacy flows with real customer data.
 
 ### Validation
 
 - `npm run build` compiles the complete app.
-- Run `supabase/tests/pilot-security.sql` through the SQL editor or authenticated
-  operator connection. Its synthetic users and venues roll back. It checks direct
-  write denial, cross-member and cross-venue access, retry idempotency, stale card
-  versions, earned reward checks, leftover stamps, consent, and audit events.
-- `tests/pilot-api.mjs` tests actual email/password sessions and API operations,
-  including simultaneous redemption. Provide a disposable fixture JSON through
-  `FROTHER_TEST_FIXTURE`, containing `slug`, `venueId`, `staffEmail`, `customerEmail`,
-  and `password`, plus the public `VITE_SUPABASE_PUBLISHABLE_KEY` environment value.
-  Accounts must be synthetic and confirmed; staff needs a membership in the test venue.
-- `tests/pilot-browser.mjs` exercises customer join, reload, a separate browser
-  context, staff stamps and redemption, consent, and staff denial. It requires
-  Playwright Chromium (`npx playwright install chromium`) and the same fixture.
-  Use a fresh venue/member for each test; the API suite mutates the test card.
-  Set `FROTHER_TEST_URL` to a local or deployed preview. Never commit fixture secrets.
+- `supabase/tests/pilot-security.sql` checks authenticated access, venue isolation,
+  no customer stamp writes, action idempotency, card versions, surplus stamps and consent.
+- `supabase/tests/guest-reward-flow.sql` checks guest opening/recovery, staff stamps,
+  the registration gate, email verification, same-card linking, token revocation,
+  optional consent, and safe redemption. Both SQL suites roll back all fixtures.
+- `tests/pilot-api.mjs` tests real guest/account/staff API requests with disposable
+  fixture accounts. Set `FROTHER_TEST_FIXTURE` and the public
+  `VITE_SUPABASE_PUBLISHABLE_KEY`. Never commit fixture credentials.
+- `tests/pilot-browser.mjs` exercises the guest screen, reload, staff stamps, reward
+  prompt, verified account linking and redemption. It needs Playwright Chromium,
+  a fresh disposable fixture, and `FROTHER_TEST_URL` (defaults to local Vite).
 
-The pre-existing live Netlify site was uploaded separately and its source differs
-from this repository. Review a preview before replacing that production deployment.
-The new pilot permissions do not harden legacy RPCs; those need a separate review
-before putting real customer data into legacy routes.
+The current production Netlify site was uploaded separately and differs from this
+repository. Review the updated preview before replacing production.
 
 ## Sample demonstration
 
