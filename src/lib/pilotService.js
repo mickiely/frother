@@ -51,6 +51,20 @@ export function claimGuest(venueId, token, form) {
   }))
 }
 
+export function getNfcTags(venueId) {
+  return result(client().from('frother_nfc_tags').select('*').eq('venue_id', venueId).order('created_at'))
+}
+export function createNfcTag(venueId, form) {
+  return result(client().from('frother_nfc_tags').insert({ venue_id: venueId, label: form.label.trim(), location: form.location.trim(), purpose: form.purpose }).select().single())
+}
+export function setNfcTagStatus(venueId, id, status) {
+  return result(client().from('frother_nfc_tags').update({ status }).eq('venue_id', venueId).eq('id', id).select().single())
+}
+export function resolveNfcTag(code) {
+  if (!guestSupabase) throw new Error('The venue link is not connected yet.')
+  return result(guestSupabase.rpc('frother_resolve_tag', { p_code: code }))
+}
+
 export function cardOf(member) {
   const cards = member?.frother_cards
   return (Array.isArray(cards) ? cards[0] : cards) || null

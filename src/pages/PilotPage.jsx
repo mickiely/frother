@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
+import LinkQr from '../components/LinkQr'
+import NfcRegistry from '../components/NfcRegistry'
 import { supabase } from '../lib/supabase'
 import { cardOf, claimGuest, client, getGuestCard, getMyMembership, getMyStaffAccess, getPilotMembers, getPilotVenue, loyaltyAction, updateConsent } from '../lib/pilotService'
 import { clearGuestKey, existingGuestKey, getOrCreateGuestKey, saveGuestKey } from '../lib/guestStorage'
@@ -108,6 +110,7 @@ function CustomerCard({ venue, user }) {
       <h2 className="font-black text-2xl">{registered ? `Hey, ${member.name}.` : 'Your stamp card is open.'}</h2>
       <Card venue={venue} member={member} />
       <div className="rounded-xl border-2 border-gray-900 bg-white p-4 text-center"><p className="text-xs font-black uppercase">Show staff your card number</p><p className="font-black text-xl tracking-wider mt-1">{member.card_code}</p></div>
+      <details className="border-2 rounded-xl p-3 text-center"><summary className="font-bold cursor-pointer">Show QR for staff</summary><LinkQr url={`${window.location.origin}/pilot/${venue.slug}/staff?card=${encodeURIComponent(member.card_code)}`} label="Staff lookup QR — no private recovery key" /><p className="text-xs">Staff scan this with their device camera to open your card in the counter. Staff sign-in is still required.</p></details>
       <p className="font-semibold text-sm">Staff confirm your purchase and add stamps. Tapping the sign never awards stamps.</p>
       <button disabled={busy} onClick={() => run(refresh)} className="frother-button w-full bg-green-700 text-white disabled:opacity-40">Refresh my stamps</button>
       {!registered && <>
@@ -192,10 +195,12 @@ function AccountPanel({ slug, claim = false, recovery = false, onRecovered }) {
 }
 
 function StaffCounter({ venue, user }) {
+  const [searchParams] = useSearchParams()
   const [staff, setStaff] = useState(null)
   const [members, setMembers] = useState([])
   const [selectedId, setSelectedId] = useState(null)
-  const [query, setQuery] = useState('')
+  const [query, setQuery] = useState(searchParams.get('card') || '')
+  const [quantity, setQuantity] = useState('1')
   const [loading, setLoading] = useState(true)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
@@ -214,6 +219,13 @@ function StaffCounter({ venue, user }) {
     refresh().catch(err => { if (mounted.current) setError(err.message) }).finally(() => { if (mounted.current) setLoading(false) })
     return () => { mounted.current = false }
   }, [refresh])
+  useEffect(() => {
+    const code = searchParams.get('card')
+    if (!code) return
+    setQuery(code)
+    const match = members.find(m => m.card_code === code)
+    if (match) setSelectedId(match.id)
+  }, [searchParams, members])
   async function run(task) {
     if (lock.current) return
     lock.current = true; setBusy(true); setError(''); setMessage('')
@@ -227,7 +239,7 @@ function StaffCounter({ venue, user }) {
       if (pending.current?.fingerprint !== fingerprint) pending.current = { fingerprint, id: crypto.randomUUID() }
       try {
         await loyaltyAction(selected, action, amount, pending.current.id)
-        pending.current = null; await refresh()
+        pending.current = null; setQuantity('1'); await refresh()
         setMessage(action === 'redeem' ? 'Reward redeemed. Remaining stamps are saved.' : `${amount} stamp${amount > 1 ? 's' : ''} saved.`)
       } catch (err) { if (err.code) { pending.current = null; await refresh().catch(() => {}) } throw err }
     })
@@ -244,11 +256,17 @@ function StaffCounter({ venue, user }) {
         {!members.length && <p>No cards yet. Customers open a card through the venue link.</p>}
       </section>
       {selected && <section className="frother-card p-5 space-y-4"><h2 className="font-black text-2xl">{selected.name}</h2><p className="font-bold">{selected.card_code}</p><Card venue={venue} member={selected} />
-        <p className="font-bold text-sm">Confirm the customer's displayed card number and eligible purchase before adding stamps.</p>
+        <p className="font-bold text-sm">Confirm this card and count the paid eligible coffees. One coffee = one stamp. Reward coffees do not earn stamps.</p>
         <div className="grid grid-cols-3 gap-2">{[1, 2, 3].map(n => <button key={n} disabled={busy} onClick={() => act('stamp', n)} className="frother-button bg-green-700 text-white disabled:opacity-40">Add {n}</button>)}</div>
+        <form className="space-y-3 border-t pt-4" onSubmit={e => { e.preventDefault(); const count = Number(quantity); if (Number.isInteger(count) && count >= 1 && count <= 20) act('stamp', count) }}>
+          <label className="block text-sm font-bold">More than 3? Eligible coffees on this card<input type="number" min="1" max="20" step="1" required className="frother-input p-3 mt-1" value={quantity} onChange={e => setQuantity(e.target.value)} /></label>
+          <button disabled={busy || !Number.isInteger(Number(quantity)) || Number(quantity) < 1 || Number(quantity) > 20} className="frother-button bg-gray-900 text-white w-full disabled:opacity-40">Confirm {quantity || '0'} stamps</button>
+        </form>
+        <p className="text-xs text-gray-600">Three paid coffees on one card: Add 3 once. For a split order, allocate only the agreed quantity to each card; do not give every card the whole order. This pilot does not reconcile orders with the till.</p>
         {!selected.profile_completed_at && <p className="rounded-xl p-3 bg-amber-50 text-sm font-bold">Keep awarding eligible stamps. Before the first redemption, the customer must complete their details and verify email on their phone.</p>}
         <button disabled={busy || !selected.profile_completed_at || (cardOf(selected)?.stamps || 0) < venue.stamps_required} onClick={() => act('redeem')} className="frother-button bg-yellow-300 text-gray-900 w-full disabled:opacity-40">Redeem one reward</button>
       </section>}
+      {staff.role === 'owner' && <NfcRegistry venue={venue} />}
     </>}
   </>
 }

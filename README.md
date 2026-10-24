@@ -13,6 +13,31 @@
 - The first-tap page discloses the details requirement before purchases accumulate.
 - No Wallet passes, location reminders, automated campaigns, or POS integrations.
 
+### Venue NFC registry and multi-coffee orders
+
+Owners manage a venue-scoped NFC registry from the staff counter: sticker label,
+location, customer/staff purpose, active/disabled status, stable programming URL,
+and QR backup. Staff can read their venue registry; only owners can create or
+change tags. `/tap/:tagCode` resolves an active tag to the customer page or
+sign-in-protected staff counter. Disabling the tag stops future resolutions.
+All customer tags for one venue open the same browser-saved customer card.
+
+Customer cards include a staff-lookup QR containing only the staff route and visible
+card number. Staff scan it with their device camera; login and venue permission
+still apply. No customer recovery key or staff credential appears in this QR.
+
+For multiple coffees: identify one card, count paid eligible coffees, and use
+Add 1/2/3 or enter 1–20 and confirm once. A quantity is one idempotent database
+action, not one NFC tap per item. Reward coffees do not earn stamps in this pilot.
+Splits are manual allocations (e.g. 2 stamps to A and 1 to B for a 3-coffee order).
+There is no till/POS reconciliation or automatic whole-order duplicate detection.
+Registration still gates the first reward; surplus stamps remain after redemption.
+
+Program tags after the route is published on `VITE_PUBLIC_APP_URL`. Preview Test
+links use the preview origin; production sticker URLs must use the production origin.
+Run `supabase/tests/nfc-registry.sql` to verify owner/staff permissions, venue isolation,
+public routing and disabled tags. Fixtures roll back.
+
 ### Guest privacy and recovery
 
 The browser generates a 256-bit private key and saves it in localStorage. The backend
