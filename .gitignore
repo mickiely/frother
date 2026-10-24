@@ -1,5 +1,7 @@
 node_modules
 dist
+supabase/.temp/
+.netlify/
 
 .env
 .env.*
