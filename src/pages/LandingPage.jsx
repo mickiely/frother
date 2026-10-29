@@ -14,14 +14,14 @@ export default function LandingPage() {
           <FrotherLogo />
           <div className="flex items-center gap-2">
             <Link
-              to="/venue/demo-cafe"
+              to="/demo"
               className="frother-button bg-[#F4B84A] text-gray-900 px-5 text-sm"
               style={{ minHeight: '42px' }}
             >
               See customer demo
             </Link>
             <Link
-              to="/admin/demo-cafe"
+              to="/demo"
               className="frother-button bg-white text-gray-900 px-4 text-sm hidden sm:inline-flex"
               style={{ minHeight: '42px' }}
             >
@@ -74,13 +74,13 @@ export default function LandingPage() {
           </p>
           <div className="mt-8 flex flex-col sm:flex-row gap-3">
             <Link
-              to="/venue/demo-cafe"
+              to="/demo"
               className="frother-button bg-[#F4B84A] text-gray-900 px-7 text-base"
             >
               See customer demo
             </Link>
             <Link
-              to="/staff/demo-cafe"
+              to="/demo"
               className="frother-button bg-[#FFF8EA] text-gray-900 px-7 text-base"
             >
               See staff demo
@@ -115,7 +115,7 @@ export default function LandingPage() {
             </p>
             <div className="mt-auto pt-6">
               <Link
-                to="/venue/demo-cafe"
+                to="/demo"
                 className="frother-button bg-[#F4B84A] text-gray-900 px-6 text-base w-full"
               >
                 See customer demo
@@ -145,7 +145,7 @@ export default function LandingPage() {
             </p>
             <div className="mt-auto pt-6">
               <Link
-                to="/staff/demo-cafe"
+                to="/demo"
                 className="frother-button text-gray-900 px-6 text-base w-full"
                 style={{ backgroundColor: '#F4B84A' }}
               >
@@ -185,7 +185,7 @@ export default function LandingPage() {
             </p>
             <div className="mt-auto pt-8">
               <Link
-                to="/venue/demo-cafe"
+                to="/demo"
                 className="frother-button bg-[#F4B84A] text-gray-900 px-8 text-lg w-full sm:w-auto"
               >
                 See customer demo
@@ -221,7 +221,7 @@ export default function LandingPage() {
             </ul>
             <div className="mt-auto pt-7 flex flex-col gap-2.5">
               <Link
-                to="/staff/demo-cafe"
+                to="/demo"
                 className="frother-button bg-[#111827] text-[#FFF8EA] px-6 text-base w-full"
               >
                 See staff demo
@@ -285,13 +285,13 @@ export default function LandingPage() {
           </p>
           <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
-              to="/venue/demo-cafe"
+              to="/demo"
               className="frother-button bg-[#F4B84A] text-gray-900 px-8 text-base"
             >
               See customer demo
             </Link>
             <Link
-              to="/staff/demo-cafe"
+              to="/demo"
               className="frother-button px-8 text-base"
               style={{
                 backgroundColor: 'transparent',
