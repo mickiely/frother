@@ -4,9 +4,7 @@ export default function VenueBrand({ venue, size = 'md' }) {
 
   return (
     <div className="flex items-center gap-3">
-      <div className={`${markSize} frother-logo-mark`} aria-hidden="true">
-        <span className="frother-logo-letter">F</span>
-      </div>
+      <img src="/frother-logo.png" alt="" aria-hidden="true" className={`${markSize} object-contain shrink-0`} width="64" height="64" />
       <div className="leading-none">
         <span className={`${textSize} frother-wordmark block`}>Frother</span>
         {venue?.name && (

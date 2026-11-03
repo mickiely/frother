@@ -348,15 +348,11 @@ function FeatureCard({ kicker, title, body }) {
 }
 
 function FrotherLogo({ small = false }) {
-  const markSize = small ? 'w-7 h-7' : 'w-9 h-9'
+  const markSize = small ? 'w-10 h-10' : 'w-14 h-14'
   const textSize = small ? 'text-lg' : 'text-2xl'
   return (
     <div className="flex items-center gap-2.5">
-      <div className={`${markSize} frother-logo-mark`} aria-hidden="true">
-        <span className="frother-logo-letter" style={{ fontSize: small ? '1rem' : '1.35rem' }}>
-          F
-        </span>
-      </div>
+      <img src="/frother-logo.png" alt="" aria-hidden="true" className={`${markSize} object-contain shrink-0`} width="64" height="64" />
       <span className={`${textSize} frother-wordmark`}>Frother</span>
     </div>
   )

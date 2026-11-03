@@ -2,12 +2,14 @@ import { useState } from 'react'
 
 export default function PilotLeadForm() {
   const [status, setStatus] = useState('idle')
+  const externalFormEndpoint = import.meta.env.VITE_PILOT_FORM_ENDPOINT
 
   async function handleSubmit(e) {
     e.preventDefault()
     setStatus('submitting')
 
-    const formData = new FormData(e.currentTarget)
+    const form = e.currentTarget
+    const formData = new FormData(form)
     try {
       const response = await fetch('/__forms.html', {
         method: 'POST',
@@ -16,7 +18,7 @@ export default function PilotLeadForm() {
       })
 
       if (!response.ok) throw new Error('Form submission failed')
-      e.currentTarget.reset()
+      form.reset()
       setStatus('success')
     } catch {
       setStatus('error')
@@ -49,7 +51,8 @@ export default function PilotLeadForm() {
             method="POST"
             data-netlify="true"
             netlify-honeypot="bot-field"
-            onSubmit={handleSubmit}
+            action={externalFormEndpoint || '/__forms.html'}
+            onSubmit={externalFormEndpoint ? undefined : handleSubmit}
             className="space-y-4"
           >
             <input type="hidden" name="form-name" value="frother-pilot" />

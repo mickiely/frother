@@ -49,7 +49,7 @@ export default function FrotherDemo() {
     <div className="max-w-5xl mx-auto">
       <Link to="/" className="underline font-bold">← FROTHER home</Link>
       <header className="frother-card bg-[#F4B84A] p-5 sm:p-8 mt-6">
-        <p className="text-xs font-black uppercase tracking-wider">Demo Café · Interactive demonstration</p>
+        <div className="flex items-center gap-3"><img src="/frother-logo.png" alt="Frother mascot" width="64" height="64" className="w-16 h-16 object-contain shrink-0" /><p className="text-xs font-black uppercase tracking-wider">Demo Café · Interactive demonstration</p></div>
         <h1 className="text-3xl sm:text-5xl font-black mt-3">Tap. Stamp. Froth on.</h1>
         <p className="mt-3 font-semibold">Try both sides of the counter. No account needed.</p>
         <p className="text-sm mt-2">Fictional customers only. Changes stay in this browser. No real purchases, rewards, calls or SMS.</p>
@@ -66,7 +66,7 @@ export default function FrotherDemo() {
             <input id="demo-search" type="search" value={query} onChange={e => setQuery(e.target.value)}
               placeholder="Try Alex or 0255500100" className="frother-input px-3 py-3" />
             <p className="text-xs text-gray-600 mt-3">Alex: collecting · Jordan: profile needed · Morgan: reward ready · Riley: one away.</p>
-            <ul className="mt-4 space-y-2" aria-label="Sample customers">
+            <ul className="mt-4 space-y-2 max-h-72 overflow-y-auto p-1 lg:max-h-none" aria-label="Sample customers">
               {matches.map(c => <li key={c.id}><button onClick={() => choose(c.id)} aria-pressed={selectedId === c.id}
                 className={`w-full text-left border-2 border-gray-900 rounded-xl p-3 ${selectedId === c.id ? 'bg-[#F4B84A]' : 'bg-[#FFF8EA]'}`}>
                 <span className="font-black block">{c.name} {c.lastName}</span>

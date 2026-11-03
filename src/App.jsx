@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import FrotherDemo from './pages/FrotherDemo'
 import LandingPage from './pages/LandingPage'
 import VenueHome from './pages/VenueHome'
