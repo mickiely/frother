@@ -20,13 +20,10 @@ export default function LandingPage() {
             >
               See customer demo
             </Link>
-            <Link
-              to="/demo"
+            <a href="#for-venues"
               className="frother-button bg-white text-gray-900 px-4 text-sm hidden sm:inline-flex"
               style={{ minHeight: '42px' }}
-            >
-              For venues
-            </Link>
+            >For venues</a>
           </div>
         </div>
       </nav>
@@ -80,7 +77,7 @@ export default function LandingPage() {
               See customer demo
             </Link>
             <Link
-              to="/demo"
+              to="/demo?view=staff"
               className="frother-button bg-[#FFF8EA] text-gray-900 px-7 text-base"
             >
               See staff demo
@@ -145,7 +142,7 @@ export default function LandingPage() {
             </p>
             <div className="mt-auto pt-6">
               <Link
-                to="/demo"
+                to="/demo?view=staff"
                 className="frother-button text-gray-900 px-6 text-base w-full"
                 style={{ backgroundColor: '#F4B84A' }}
               >
@@ -162,7 +159,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── TWO ENTRY POINT CARDS ──────────────────────────── */}
-      <section className="px-4 pt-10 pb-6 max-w-5xl mx-auto">
+      <section id="for-venues" className="px-4 pt-10 pb-6 max-w-5xl mx-auto scroll-mt-6">
         <div className="grid gap-5 lg:grid-cols-[3fr_2fr]">
 
           {/* Customer card — big, warm, simple */}
@@ -221,7 +218,7 @@ export default function LandingPage() {
             </ul>
             <div className="mt-auto pt-7 flex flex-col gap-2.5">
               <Link
-                to="/demo"
+                to="/demo?view=staff"
                 className="frother-button bg-[#111827] text-[#FFF8EA] px-6 text-base w-full"
               >
                 See staff demo
@@ -236,6 +233,18 @@ export default function LandingPage() {
           </div>
 
         </div>
+      </section>
+
+      <section className="px-4 py-10 max-w-5xl mx-auto" aria-labelledby="loyalty-loop-title">
+        <h2 id="loyalty-loop-title" className="text-3xl font-black mb-6">One loyalty loop. Three clear roles.</h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {[
+            ['Customer', 'Tap or scan → open your card → collect stamps → show staff your reward.'],
+            ['Café staff', 'Confirm the purchase → find the customer → add stamps → redeem earned rewards.'],
+            ['Business owner', 'Set the programme rules, manage staff access and understand return visits.'],
+          ].map(([title, text]) => <div key={title} className="frother-card p-6 bg-white"><h3 className="text-xl font-black">{title}</h3><p className="mt-3 text-gray-600">{text}</p></div>)}
+        </div>
+        <p className="mt-5 text-sm text-gray-600">Try the customer and staff journey with fictional sample customers. The public demo runs only on your device; it does not issue real rewards or connect to a venue account.</p>
       </section>
 
       {/* Pilot lead form — venue owners only */}
@@ -291,7 +300,7 @@ export default function LandingPage() {
               See customer demo
             </Link>
             <Link
-              to="/demo"
+              to="/demo?view=staff"
               className="frother-button px-8 text-base"
               style={{
                 backgroundColor: 'transparent',
