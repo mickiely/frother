@@ -1,359 +1,179 @@
-import { Link } from 'react-router-dom'
-import PilotLeadForm from '../components/PilotLeadForm'
-
-export default function LandingPage() {
-  return (
-    <div className="min-h-screen" style={{ backgroundColor: '#F8F1E4' }}>
-
-      {/* Nav */}
-      <nav
-        className="px-6 py-4 border-b-2 border-gray-900"
-        style={{ backgroundColor: '#F8F1E4' }}
-      >
-        <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
-          <FrotherLogo />
-          <div className="flex items-center gap-2">
-            <Link
-              to="/demo"
-              className="frother-button bg-[#F4B84A] text-gray-900 px-5 text-sm"
-              style={{ minHeight: '42px' }}
-            >
-              See customer demo
-            </Link>
-            <a href="#for-venues"
-              className="frother-button bg-white text-gray-900 px-4 text-sm hidden sm:inline-flex"
-              style={{ minHeight: '42px' }}
-            >For venues</a>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero */}
-      <section className="frother-public-hero">
-        <img
-          src="/frother-hero.jpg"
-          alt=""
-          aria-hidden="true"
-          className="frother-public-hero-image"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{
-            background: [
-              'linear-gradient(90deg,',
-              '  rgba(255,248,234,0.06) 0%,',
-              '  rgba(255,248,234,0.93) 24%,',
-              '  rgba(255,248,234,0.93) 76%,',
-              '  rgba(255,248,234,0.06) 100%',
-              '),',
-              'linear-gradient(180deg,',
-              '  rgba(255,248,234,0.6) 0%,',
-              '  rgba(255,248,234,0.2) 100%',
-              ')',
-            ].join(' '),
-          }}
-        />
-        <div className="frother-public-hero-content px-5">
-          <span className="frother-public-kicker">
-            Cafes · Pubs · Restaurants · Takeaways
-          </span>
-          <h1 className="mt-5 text-5xl sm:text-6xl lg:text-7xl font-black leading-none tracking-tight text-gray-900">
+import { Link } from "react-router-dom";
+import PilotLeadForm from "../components/PilotLeadForm";
+import "./frother-explainer.css";
+const mascot = "/frother-explainer-mascot.png";
+const customerSteps = [
+  { icon: "tap", title: "Spot it", text: "See the NFC tag or QR code at the counter." },
+  { icon: "phone", title: "Tap or scan", text: "Open the experience straight from your phone." },
+  { icon: "coffee", title: "Get your card", text: "A mobile loyalty card opens in the browser." },
+  { icon: "stamp", title: "Stack stamps", text: "Earn stamps on qualifying purchases." },
+  { icon: "repeat", title: "Froth on", text: "Unlock a reward, then come back for another." }
+];
+const staffSteps = [
+  { icon: "coffee", title: "Confirm purchase", text: "Check the order qualifies for a stamp." },
+  { icon: "phone", title: "Open stamper", text: "Use the staff-facing stamping interface." },
+  { icon: "shield", title: "Verify card", text: "Match the correct customer loyalty card." },
+  { icon: "stamp", title: "Award stamp", text: "Staff control when a stamp is added." },
+  { icon: "reward", title: "Redeem reward", text: "Verify the earned reward before redemption." }
+];
+const ownerSteps = [
+  { icon: "store", title: "Create programme", text: "Set up the caf\xE9 loyalty experience." },
+  { icon: "settings", title: "Set the rules", text: "Configure stamps and reward milestones." },
+  { icon: "team", title: "Manage staff", text: "Control who can access staff tools." },
+  { icon: "chart", title: "See activity", text: "Monitor participation and redemptions." },
+  { icon: "repeat", title: "Build retention", text: "Give customers a reason to return." }
+];
+const journey = [
+  { icon: "phone", label: "Customer" },
+  { icon: "tap", label: "NFC / QR" },
+  { icon: "coffee", label: "Digital card" },
+  { icon: "stamp", label: "Staff stamp" },
+  { icon: "reward", label: "Reward" },
+  { icon: "repeat", label: "Repeat visit" }
+];
+const mapNodes = [
+  {
+    title: "Customer Experience",
+    text: "Tap, card, stamps, reward",
+    icon: "phone",
+    position: "map-northwest",
+    tone: "yellow"
+  },
+  {
+    title: "Staff Operations",
+    text: "Verify, stamp, redeem",
+    icon: "stamp",
+    position: "map-north",
+    tone: "turquoise"
+  },
+  {
+    title: "Caf\xE9 Owner Dashboard",
+    text: "Setup, access, activity",
+    icon: "store",
+    position: "map-northeast",
+    tone: "orange"
+  },
+  {
+    title: "NFC / QR Access",
+    text: "Fast browser entry",
+    icon: "tap",
+    position: "map-west",
+    tone: "turquoise"
+  },
+  {
+    title: "Loyalty Rules",
+    text: "Qualifying buys + milestones",
+    icon: "settings",
+    position: "map-east",
+    tone: "yellow"
+  },
+  {
+    title: "Rewards & Redemptions",
+    text: "Earn, verify, redeem",
+    icon: "reward",
+    position: "map-southwest",
+    tone: "orange"
+  },
+  {
+    title: "Security & Fraud Prevention",
+    text: "Staff-controlled actions",
+    icon: "shield",
+    position: "map-south",
+    tone: "yellow"
+  },
+  {
+    title: "Analytics & Retention",
+    text: "Participation + return signals",
+    icon: "chart",
+    position: "map-southeast",
+    tone: "turquoise"
+  },
+  {
+    title: "Future Integrations",
+    text: "Planned / unverified",
+    icon: "link",
+    position: "map-future",
+    tone: "cream",
+    planned: true
+  }
+];
+function Icon({ name }) {
+  const common = {
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 2.4,
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  };
+  return <svg viewBox="0 0 24 24" aria-hidden="true" className="icon">{name === "phone" && <><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" {...common} /><path d="M10 18.5h4" {...common} /></>}{name === "stamp" && <><path d="M8.5 11.5c.7-1.1 1.1-2.5 1.1-4.3a2.4 2.4 0 0 1 4.8 0c0 1.8.4 3.2 1.1 4.3" {...common} /><path d="M6 11.5h12v4H6zM4.5 19.5h15" {...common} /></>}{name === "coffee" && <><path d="M4 7h13v8.5A3.5 3.5 0 0 1 13.5 19h-6A3.5 3.5 0 0 1 4 15.5V7Z" {...common} /><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17M7 3.5v1M11 3.5v1M15 3.5v1" {...common} /></>}{name === "store" && <><path d="M4 10v10h16V10M3 10l2-6h14l2 6" {...common} /><path d="M3 10a3 3 0 0 0 5 2 3 3 0 0 0 4 0 3 3 0 0 0 4 0 3 3 0 0 0 5-2M9 20v-5h6v5" {...common} /></>}{name === "settings" && <><circle cx="12" cy="12" r="3" {...common} /><path d="M12 2.8v3M12 18.2v3M21.2 12h-3M5.8 12h-3M18.5 5.5l-2.1 2.1M7.6 16.4l-2.1 2.1M18.5 18.5l-2.1-2.1M7.6 7.6 5.5 5.5" {...common} /></>}{name === "team" && <><circle cx="9" cy="8" r="3" {...common} /><circle cx="17" cy="9" r="2.2" {...common} /><path d="M3.5 20v-2.2A4.8 4.8 0 0 1 8.3 13h1.4a4.8 4.8 0 0 1 4.8 4.8V20M15 14h1.7a3.8 3.8 0 0 1 3.8 3.8V20" {...common} /></>}{name === "chart" && <><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" {...common} /><path d="m4 7 6-4 6 6 5-5" {...common} /></>}{name === "repeat" && <><path d="M18.5 7.5A8 8 0 0 0 5 6l-2 2M3 4v4h4M5.5 16.5A8 8 0 0 0 19 18l2-2M21 20v-4h-4" {...common} /></>}{name === "shield" && <><path d="M12 2.5 20 6v5.5c0 5-3.4 8.5-8 10-4.6-1.5-8-5-8-10V6l8-3.5Z" {...common} /><path d="m8.5 12 2.2 2.2 4.8-5" {...common} /></>}{name === "tap" && <><path d="M8 12V7.5a2 2 0 0 1 4 0V12M12 11V9.5a2 2 0 0 1 4 0V12M16 11a2 2 0 0 1 4 0v4.3c0 3.5-2.7 6.2-6.2 6.2h-1.2a6 6 0 0 1-4.8-2.4L4.5 15.7a2 2 0 0 1 3-2.7l.5.5" {...common} /><path d="M3.5 3.5a6 6 0 0 1 4-2M3.5 7.5a2.5 2.5 0 0 1 2-2" {...common} /></>}{name === "reward" && <><path d="M4 9h16v12H4zM2.5 5.5h19V9h-19zM12 5.5V21" {...common} /><path d="M12 5.5C9.2 5.5 7 4.7 7 2.8c0-2.4 4.2-1.1 5 2.7ZM12 5.5c2.8 0 5-.8 5-2.7 0-2.4-4.2-1.1-5 2.7Z" {...common} /></>}{name === "link" && <><path d="m9.5 14.5 5-5M7.5 17.5l-1 1a3.5 3.5 0 0 1-5-5l4-4a3.5 3.5 0 0 1 5 0M16.5 6.5l1-1a3.5 3.5 0 0 1 5 5l-4 4a3.5 3.5 0 0 1-5 0" {...common} /></>}</svg>;
+}
+function Eyebrow({ children }) {
+  return <div className="eyebrow">{children}</div>;
+}
+function StepCard({
+  index,
+  icon,
+  title,
+  text
+}) {
+  return <div className="step-card"><div className="step-topline"><span className="step-number">{String(index + 1).padStart(2, "0")}</span><span className="step-icon"><Icon name={icon} /></span></div><div className="step-title">{title}</div><div className="step-text">{text}</div></div>;
+}
+function Swimlane({
+  number,
+  title,
+  subtitle,
+  steps,
+  tone
+}) {
+  return <section className={`swimlane ${tone}`}><div className="lane-heading"><span className="lane-number">{number}</span><div><div className="lane-title" role="heading" aria-level={3}>{title}</div><div className="lane-subtitle">{subtitle}</div></div></div><div className="steps">{steps.map((step, index) => <StepCard key={step.title} index={index} {...step} />)}</div></section>;
+}
+function JourneyDiagram() {
+  return <section className="journey-section"><div className="section-heading split-heading"><div><Eyebrow>The 30-second loop</Eyebrow><div className="section-title" role="heading" aria-level={2}>
+            From flat white to full circle.
+          </div></div><div className="no-app-badge">No mandatory app download</div></div><div className="journey">{journey.map((item, index) => <div className="journey-part" key={item.label}><div className="journey-node"><span className="journey-icon"><Icon name={item.icon} /></span><span>{item.label}</span></div>{index < journey.length - 1 && <span className="journey-arrow">→</span>}</div>)}</div><div className="feature-strip"><span>NFC + QR access</span><span>Mobile-first</span><span>Staff-controlled stamps</span><span>Configurable rewards</span><span>Lightweight onboarding</span></div></section>;
+}
+function MindMap() {
+  return <section className="mindmap-section" id="system-map"><div className="section-heading map-heading"><div><Eyebrow>Second visual · System mind map</Eyebrow><div className="section-title" role="heading" aria-level={2}>
+            One loyalty loop. Nine connected ideas.
+          </div></div><div className="legend" aria-label="Mind map legend"><span><i className="solid-sample" /> Core product concept</span><span><i className="dashed-sample" /> Planned or unverified</span></div></div><div className="mindmap"><svg className="map-lines" viewBox="0 0 1200 720" preserveAspectRatio="none" aria-hidden="true"><path d="M600 360 190 138M600 360 600 112M600 360 1010 138M600 360 165 360M600 360 1035 360M600 360 210 585M600 360 600 610M600 360 990 585" /><path className="planned-line" d="M600 360 1040 675" /></svg><div className="map-centre"><img src={mascot} alt="" /><div>FROTHER</div><span>Tap · Stamp · Return</span></div>{mapNodes.map((node) => <div
+    key={node.title}
+    className={`map-node ${node.position} ${node.tone}${node.planned ? " planned" : ""}`}
+  ><span className="map-node-icon"><Icon name={node.icon} /></span><div><div className="map-node-title">{node.title}</div><div className="map-node-text">{node.text}</div></div></div>)}</div></section>;
+}
+function LandingPage() {
+  return <main className="frother-explainer"><header className="topbar"><div className="wordmark"><img src={mascot} alt="" /><span>FROTHER</span></div><div className="topbar-meta"><a href="#for-venues">How it works</a><span className="dot" /><span>by ESO ES</span></div></header><section className="hero"><div className="hero-copy"><Eyebrow>Digital loyalty for local cafés</Eyebrow><div className="hero-title" role="heading" aria-level={1}>
             Tap in.<br />
-            Stack stamps.<br />
-            Froth on.
-          </h1>
-          <p className="mt-5 text-lg sm:text-xl font-black text-gray-900 leading-snug max-w-sm">
-            Tap your phone on the counter sign. Your stamp card opens.
-          </p>
-          <p className="mt-2 text-base font-semibold text-gray-600">
-            No app. No paper card. Staff can help.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
-            <Link
-              to="/demo"
-              className="frother-button bg-[#F4B84A] text-gray-900 px-7 text-base"
-            >
-              See customer demo
-            </Link>
-            <Link
-              to="/demo?view=staff"
-              className="frother-button bg-[#FFF8EA] text-gray-900 px-7 text-base"
-            >
-              See staff demo
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TWO TAPS. TWO JOBS. ──────────────────────────────── */}
-      <section className="px-4 pt-14 pb-2 max-w-5xl mx-auto">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">
-            Two taps. Two jobs.
-          </h2>
-        </div>
-
-        <div className="grid gap-5 sm:grid-cols-2">
-
-          {/* Customer tap */}
-          <div
-            className="frother-card p-7 flex flex-col"
-            style={{ backgroundColor: '#FFFBF0' }}
-          >
-            <span className="frother-public-kicker self-start" style={{ fontSize: '0.7rem' }}>
-              Customer tap
-            </span>
-            <h3 className="mt-4 text-2xl font-black text-gray-900 leading-tight">
-              Customer tap
-            </h3>
-            <p className="mt-3 text-base font-medium text-gray-600 leading-relaxed">
-              Customers tap the front counter sign. Their stamp card opens on their phone. No app. No paper card.
-            </p>
-            <div className="mt-auto pt-6">
-              <Link
-                to="/demo"
-                className="frother-button bg-[#F4B84A] text-gray-900 px-6 text-base w-full"
-              >
-                See customer demo
-              </Link>
-            </div>
-          </div>
-
-          {/* Staff tap */}
-          <div
-            className="frother-card p-7 flex flex-col"
-            style={{ backgroundColor: '#111827' }}
-          >
-            <span
-              className="frother-public-kicker self-start"
-              style={{ backgroundColor: '#F4B84A', color: '#111827', fontSize: '0.7rem' }}
-            >
-              Staff tap
-            </span>
-            <h3 className="mt-4 text-2xl font-black leading-tight" style={{ color: '#FFF8EA' }}>
-              Staff tap
-            </h3>
-            <p className="mt-3 text-base font-medium leading-relaxed" style={{ color: 'rgba(255,248,234,0.7)' }}>
-              Staff add stamps from the counter side. One coffee, one stamp. Three coffees, three stamps.
-            </p>
-            <p className="mt-3 text-xs font-semibold" style={{ color: 'rgba(255,248,234,0.45)' }}>
-              Staff stamping is protected so customers cannot add their own stamps.
-            </p>
-            <div className="mt-auto pt-6">
-              <Link
-                to="/demo?view=staff"
-                className="frother-button text-gray-900 px-6 text-base w-full"
-                style={{ backgroundColor: '#F4B84A' }}
-              >
-                See staff demo
-              </Link>
-            </div>
-          </div>
-
-        </div>
-
-        <p className="text-center text-sm font-medium text-gray-400 mt-5">
-          POS connection can come later. The pilot works without it.
-        </p>
-      </section>
-
-      {/* ── TWO ENTRY POINT CARDS ──────────────────────────── */}
-      <section id="for-venues" className="px-4 pt-10 pb-6 max-w-5xl mx-auto scroll-mt-6">
-        <div className="grid gap-5 lg:grid-cols-[3fr_2fr]">
-
-          {/* Customer card — big, warm, simple */}
-          <div
-            className="frother-card p-8 sm:p-10 flex flex-col"
-            style={{ backgroundColor: '#FFFBF0' }}
-          >
-            <span
-              className="frother-public-kicker self-start"
-              style={{ fontSize: '0.7rem' }}
-            >
-              Customer
-            </span>
-            <h2 className="mt-5 text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
-              Open your stamp card
-            </h2>
-            <p className="mt-3 text-base font-medium text-gray-600 leading-relaxed">
-              Tap the sign at the counter. Your stamp card opens on your phone.
-              No app. No paper card. Staff can help.
-            </p>
-            <div className="mt-auto pt-8">
-              <Link
-                to="/demo"
-                className="frother-button bg-[#F4B84A] text-gray-900 px-8 text-lg w-full sm:w-auto"
-              >
-                See customer demo
-              </Link>
-            </div>
-          </div>
-
-          {/* Venue card — compact, clearly business */}
-          <div className="frother-card p-7 bg-white flex flex-col">
-            <span
-              className="frother-public-kicker self-start"
-              style={{ backgroundColor: '#111827', color: '#FFF8EA', fontSize: '0.7rem' }}
-            >
-              Venue
-            </span>
-            <h2 className="mt-5 text-2xl font-black text-gray-900 leading-tight">
-              For cafes, pubs and restaurants
-            </h2>
-            <p className="mt-2 text-base font-medium text-gray-600 leading-relaxed">
-              Each venue gets a branded tap sign. Customers tap their phone, join once, and keep collecting stamps.
-            </p>
-            <ul className="mt-5 flex flex-col gap-2.5">
-              {[
-                'Staff find customers at the counter',
-                'Owners see who is coming back',
-                'No paper cards to manage',
-              ].map(item => (
-                <li key={item} className="flex items-start gap-2 text-sm font-medium text-gray-700 leading-snug">
-                  <span className="mt-0.5 text-[#16A34A] font-black shrink-0">✓</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-auto pt-7 flex flex-col gap-2.5">
-              <Link
-                to="/demo?view=staff"
-                className="frother-button bg-[#111827] text-[#FFF8EA] px-6 text-base w-full"
-              >
-                See staff demo
-              </Link>
-              <a
-                href="#pilot-lead"
-                className="frother-button bg-[#16A34A] text-[#FFF8EA] px-6 text-sm w-full"
-              >
-                Start a pilot
-              </a>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <section className="px-4 py-10 max-w-5xl mx-auto" aria-labelledby="loyalty-loop-title">
-        <h2 id="loyalty-loop-title" className="text-3xl font-black mb-6">One loyalty loop. Three clear roles.</h2>
-        <div className="grid gap-4 sm:grid-cols-3">
-          {[
-            ['Customer', 'Tap or scan → open your card → collect stamps → show staff your reward.'],
-            ['Café staff', 'Confirm the purchase → find the customer → add stamps → redeem earned rewards.'],
-            ['Business owner', 'Set the programme rules, manage staff access and understand return visits.'],
-          ].map(([title, text]) => <div key={title} className="frother-card p-6 bg-white"><h3 className="text-xl font-black">{title}</h3><p className="mt-3 text-gray-600">{text}</p></div>)}
-        </div>
-        <p className="mt-5 text-sm text-gray-600">Try the customer and staff journey with fictional sample customers. The public demo runs only on your device; it does not issue real rewards or connect to a venue account.</p>
-      </section>
-
-      {/* Pilot lead form — venue owners only */}
-      <PilotLeadForm />
-
-      {/* Feature cards */}
-      <section className="px-4 py-12 max-w-5xl mx-auto" id="features">
-        <div className="grid gap-5 sm:grid-cols-3">
-          <FeatureCard
-            kicker="Loyalty"
-            title="Tap-to-join loyalty"
-            body="Customers tap or scan at the counter, join with name and mobile, and start collecting stamps."
-          />
-          <FeatureCard
-            kicker="Specials"
-            title="Froffers"
-            body="Turn quiet times into simple offers that bring people back."
-          />
-          <FeatureCard
-            kicker="Insights"
-            title="Regulars Radar"
-            body="See who is close to a reward, who has gone quiet, and who needs a nudge."
-          />
-        </div>
-      </section>
-
-      {/* Pilot pricing */}
-      <section className="px-4 pb-16 max-w-5xl mx-auto">
-        <div
-          className="frother-card p-8 text-center"
-          style={{ backgroundColor: '#111827' }}
-        >
-          <span className="frother-public-kicker">Frother Pilot</span>
-          <h2
-            className="mt-5 text-3xl lg:text-4xl font-black leading-tight"
-            style={{ color: '#FFF8EA' }}
-          >
-            $499 setup. $99/month for pilot venues.
-          </h2>
-          <p
-            className="mt-3 text-sm font-medium leading-relaxed max-w-md mx-auto"
-            style={{ color: 'rgba(255,248,234,0.65)' }}
-          >
-            Includes a branded rewards page, QR and NFC setup, staff view,
-            venue admin view, Froffers, Regulars Radar, basic staff training and first
-            month support.
-          </p>
-          <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              to="/demo"
-              className="frother-button bg-[#F4B84A] text-gray-900 px-8 text-base"
-            >
-              See customer demo
-            </Link>
-            <Link
-              to="/demo?view=staff"
-              className="frother-button px-8 text-base"
-              style={{
-                backgroundColor: 'transparent',
-                borderColor: 'rgba(255,248,234,0.5)',
-                boxShadow: '4px 4px 0 rgba(255,248,234,0.15)',
-                color: '#FFF8EA',
-              }}
-            >
-              See staff demo
-            </Link>
-            <a
-              href="#pilot-lead"
-              className="frother-button bg-[#16A34A] text-[#FFF8EA] px-8 text-base"
-            >
-              Start a pilot
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer
-        className="border-t-2 border-gray-900/20 px-6 py-6"
-        style={{ backgroundColor: '#F8F1E4' }}
-      >
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <FrotherLogo small />
-          <p className="text-sm font-semibold text-gray-400">
-            Cafes · Pubs · Restaurants · Takeaways
-          </p>
-        </div>
-      </footer>
-    </div>
-  )
+            Stack stamps.<br /><span>Froth on.</span></div><div className="hero-intro">
+            NFC and QR-powered loyalty that moves from counter to customer in seconds—not another
+            app clogging up their home screen.
+          </div><div className="explainer-actions"><Link to="/demo" className="explainer-button primary">Try customer demo ↗</Link><Link to="/demo?view=staff" className="explainer-button">Try staff demo ↗</Link><a href="#pilot-lead" className="explainer-text-link">For your venue →</a></div><p className="demo-note">Interactive demo · Fictional customers · No signup needed</p><div className="hero-chips"><span>Tap</span><span>Stamp</span><span>Reward</span><span>Return</span></div></div><div className="hero-visual"><div className="sunburst" /><div className="mascot-disc"><img src={mascot} alt="FROTHER smiling coffee mascot" /></div><div className="float-card float-nfc"><Icon name="tap" /><span>NFC / QR</span><small>Tap here</small></div><div className="float-card float-stamp"><Icon name="stamp" /><span>+1 stamp</span><small>Nice one!</small></div><div className="coffee-scribble" aria-hidden="true">GOOD<br />COFFEE.<br />GOOD LOOP.</div></div></section><JourneyDiagram /><section className="lanes-section" id="for-venues"><div className="section-heading lanes-heading"><div><Eyebrow>Three connected swimlanes</Eyebrow><div className="section-title" role="heading" aria-level={2}>
+              Everyone knows their next move.
+            </div></div><div className="mini-note">One shared loop, three clear roles.</div></div><Swimlane
+    number="01"
+    title="Customer"
+    subtitle="Tap. Collect. Come back."
+    steps={customerSteps}
+    tone="customer"
+  /><Swimlane
+    number="02"
+    title="Café staff"
+    subtitle="Check. Stamp. Keep it moving."
+    steps={staffSteps}
+    tone="staff"
+  /><Swimlane
+    number="03"
+    title="Business owner"
+    subtitle="Configure. Observe. Retain."
+    steps={ownerSteps}
+    tone="owner"
+  /><div className="threshold-card"><div className="threshold-stamps" aria-label="Three purchase threshold">{[1, 2, 3].map((stamp) => <span key={stamp}><Icon name="coffee" /></span>)}<i>3</i></div><div className="threshold-copy"><div className="status-pill">Intended journey · not yet verified</div><div className="threshold-title">Three purchases → a fuller customer account</div><div className="threshold-text">
+              FROTHER is intended to keep entry lightweight, then invite a customer to create a
+              fuller account after their third qualifying purchase. This threshold is a proposed
+              journey and should not be read as confirmed live functionality.
+            </div></div></div></section><MindMap /><section className="explainer-pilot"><div className="explainer-pilot-intro"><Eyebrow>Put it on your counter</Eyebrow><h2 className="section-title">Your regulars.<br />Your loyalty loop.</h2><p>Explore the demo, then talk to us about a pilot for your café, pub or restaurant.</p><p className="pilot-price">Pilot offer: $499 setup · $99/month</p><div className="explainer-actions"><Link to="/demo" className="explainer-button primary">Try the demo ↗</Link><a href="#pilot-lead" className="explainer-button">Request pilot setup ↓</a></div></div><PilotLeadForm /></section><footer><div className="footer-lockup"><img src={mascot} alt="" /><div><strong>FROTHER</strong><span>A digital loyalty platform by ESO ES</span></div></div><div className="footer-note">
+          Product explainer · Proposed workflow · No claim of production readiness
+        </div></footer></main>;
 }
-
-function FeatureCard({ kicker, title, body }) {
-  return (
-    <div className="frother-card p-6 bg-white">
-      <span className="frother-public-kicker text-[10px] px-3 py-1">{kicker}</span>
-      <h3 className="font-black text-xl text-gray-900 leading-tight mt-4">{title}</h3>
-      <p className="text-sm text-gray-600 font-medium leading-relaxed mt-2">{body}</p>
-    </div>
-  )
-}
-
-function FrotherLogo({ small = false }) {
-  const markSize = small ? 'w-10 h-10' : 'w-14 h-14'
-  const textSize = small ? 'text-lg' : 'text-2xl'
-  return (
-    <div className="flex items-center gap-2.5">
-      <img src="/frother-logo.png" alt="" aria-hidden="true" className={`${markSize} object-contain shrink-0`} width="64" height="64" />
-      <span className={`${textSize} frother-wordmark`}>Frother</span>
-    </div>
-  )
-}
+export {
+  LandingPage as default
+};
